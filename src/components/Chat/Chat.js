@@ -5,15 +5,17 @@ import './Chat.scss';
 import ChatHeader from '../ChatHeader/ChatHeader';
 import ChatMessages from '../ChatMessages/ChatMessages';
 import contactImageContext from './contactImageContext';
+import AddMessageInput from '../AddMessageInput/AddMessageInput';
 
 function Chat() {
   return (
-    <contactImageContext.Provider value={faker.image.avatar()}>
-      <div className="chat">
+    <div className="chat">
+      <contactImageContext.Provider value={faker.image.avatar()}>
         <ChatHeader />
         <ChatMessages />
-      </div>
-    </contactImageContext.Provider>
+      </contactImageContext.Provider>
+      <AddMessageInput />
+    </div>
   );
 }
 

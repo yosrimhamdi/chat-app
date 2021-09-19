@@ -1,0 +1,14 @@
+@import '@assets/mixins';
+
+.add-message-input {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 0.5em;
+
+  &__input {
+    @include input;
+    border-radius: 15px;
+    padding: 1em;
+  }
+}

@@ -1,18 +1,15 @@
+@import '@assets/mixins';
+
 .search-message {
-  background-color: var(--grey);
-  border-radius: 200px;
   margin-bottom: 1.5em;
   position: relative;
 
   &__input {
-    border: none;
-    outline: none;
-    background-color: inherit;
+    @include input;
     padding: 0.75em 0;
-    width: 100%;
-    display: block;
     border-radius: inherit;
     padding-left: 34px;
+    border-radius: 200px;
 
     &::placeholder {
       font-size: 0.9rem;

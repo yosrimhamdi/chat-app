@@ -4,3 +4,11 @@
   margin-bottom: 0.2em;
   width: fit-content;
 }
+
+@mixin input {
+  display: block;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: var(--grey);
+}
