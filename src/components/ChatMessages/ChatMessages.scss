@@ -1,0 +1,23 @@
+.chat-messages {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+
+  .me,
+  .him {
+    border-radius: 10px;
+    padding: 0.5em;
+    margin-bottom: 0.2em;
+    width: fit-content;
+  }
+
+  .me {
+    background-color: var(--blue);
+    color: white;
+    align-self: flex-end;
+  }
+
+  .him {
+    background-color: var(--grey);
+  }
+}
