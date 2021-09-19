@@ -1,0 +1,28 @@
+.search-message {
+  background-color: #f3f3f5;
+  border-radius: 200px;
+  margin-bottom: 1.5em;
+  position: relative;
+
+  &__input {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    padding: 0.75em 0;
+    width: 100%;
+    display: block;
+    border-radius: inherit;
+    padding-left: 34px;
+
+    &::placeholder {
+      font-size: 0.9rem;
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+  }
+}
