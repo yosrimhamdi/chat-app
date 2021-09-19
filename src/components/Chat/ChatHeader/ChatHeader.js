@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import faker from 'faker';
 
 import './ChatHeader.scss';
-import contactImageContext from '../Chat/contactImageContext';
+import contactImageContext from '../contactImageContext';
 
 function ChatHeader() {
   const contactImage = useContext(contactImageContext);

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import './ReceivedMessage.scss';
-import contactImageContext from '../Chat/contactImageContext';
+import contactImageContext from '../contactImageContext';
 
 function ReceivedMessage({ message }) {
   const contactImage = useContext(contactImageContext);
