@@ -1,5 +1,5 @@
-@import '@assets/typography';
-@import '@assets/reset';
+@forward '@assets/typography';
+@forward '@assets/reset';
 
 .app {
   display: flex;

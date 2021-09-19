@@ -1,4 +1,4 @@
-@import '@assets/mixins';
+@use '@assets/mixins';
 
 .add-message-input {
   width: 100%;
@@ -7,7 +7,7 @@
   padding: 0.5em;
 
   &__input {
-    @include input;
+    @include mixins.input;
     border-radius: 15px;
     padding: 1em;
   }

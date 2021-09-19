@@ -1,11 +1,11 @@
-@import '@assets/mixins';
+@use '@assets/mixins';
 
 .search-message {
   margin-bottom: 1.5em;
   position: relative;
 
   &__input {
-    @include input;
+    @include mixins.input;
     padding: 0.75em 0;
     border-radius: inherit;
     padding-left: 34px;

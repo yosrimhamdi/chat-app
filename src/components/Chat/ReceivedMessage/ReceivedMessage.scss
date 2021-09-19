@@ -1,4 +1,4 @@
-@import '@assets/mixins';
+@use '@assets/mixins';
 
 .received-message {
   display: flex;
@@ -13,7 +13,7 @@
   }
 
   &__message {
-    @include message;
+    @include mixins.message;
     background-color: #e4e6eb;
   }
 }
