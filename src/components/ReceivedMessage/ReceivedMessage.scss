@@ -1,3 +1,5 @@
+@import '@assets/mixin';
+
 .received-message {
   display: flex;
   align-items: center;
@@ -11,11 +13,7 @@
   }
 
   &__message {
+    @include message;
     background-color: #e4e6eb;
-    // should be a mixin
-    border-radius: 18px;
-    padding: 0.5em 1em;
-    margin-bottom: 0.2em;
-    width: fit-content;
   }
 }
