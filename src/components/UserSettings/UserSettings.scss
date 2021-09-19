@@ -1,0 +1,37 @@
+.user-settings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 1em;
+  }
+
+  &__chat-text {
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+
+  &__user-image-chat-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icons {
+    display: flex;
+
+    i {
+      background-color: #f5f5f5;
+      padding: 0.6em;
+      border-radius: 50%;
+
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
+    }
+  }
+}
