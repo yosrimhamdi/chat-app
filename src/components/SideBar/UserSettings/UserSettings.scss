@@ -1,3 +1,5 @@
+@use '@assets/breakpoints'  as *;
+
 .user-settings {
   display: flex;
   align-items: center;
@@ -23,7 +25,11 @@
   }
 
   &__icons {
-    display: flex;
+    display: none;
+
+    @include breakpoint(small) {
+      display: flex;
+    }
 
     i {
       background-color: var(--grey);
