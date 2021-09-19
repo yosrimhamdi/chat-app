@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import faker from 'faker';
 
 import './ChatHeader.scss';
+import contactImageContext from '../Chat/contactImageContext';
 
-function ChatHeader({ contactImage }) {
+function ChatHeader() {
+  const contactImage = useContext(contactImageContext);
+
   return (
     <div className="chat-header">
       <div className="chat-header__contact-info">
