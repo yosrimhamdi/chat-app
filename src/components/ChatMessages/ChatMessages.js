@@ -1,20 +1,45 @@
 import React from 'react';
 
 import './ChatMessages.scss';
+import ChatMessage from '../ChatMessage/ChatMessage';
 
-function ChatMessages() {
+function ChatMessages({ contactImage }) {
   return (
     <div className="chat-messages">
-      <p className="me">introuction, analyse lexical et syntaxique?</p>
-      <p className="me">cad 3?</p>
-      <p className="him">mon ami</p>
-      <p className="him">ça va ?</p>
-      <p className="me">Salut mon ami cv et toi?</p>
-      <p className="him">ça va... Les vacances se passent bien ?</p>
-      <p className="me">Oui il nous reste un mois</p>
-      <p className="him">La rentrée cest quand ?</p>
-      <p className="me">Je pense c le 11 octobre</p>
-      <p className="him">Daccord mon ami</p>
+      <ChatMessage
+        contactImage={contactImage}
+        message="introuction, analyse lexical et syntaxique?"
+      />
+      <ChatMessage contactImage={contactImage} message="cad 3?" />
+      <ChatMessage contactImage={contactImage} message="ça va ?" received />
+      <ChatMessage
+        contactImage={contactImage}
+        message="Salut mon ami cv et toi?"
+      />
+      <ChatMessage
+        contactImage={contactImage}
+        message="ça va... Les vacances se passent bien ?"
+        received
+      />
+      <ChatMessage
+        contactImage={contactImage}
+        message="Oui il nous reste un mois"
+      />
+      <ChatMessage contactImage={contactImage} message="😀" />
+      <ChatMessage
+        contactImage={contactImage}
+        message="La rentrée cest quand ?"
+        received
+      />
+      <ChatMessage
+        contactImage={contactImage}
+        message="Je pense c le 11 octobre"
+      />
+      <ChatMessage
+        contactImage={contactImage}
+        message="Daccord mon ami"
+        received
+      />
     </div>
   );
 }

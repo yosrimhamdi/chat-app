@@ -3,12 +3,12 @@ import faker from 'faker';
 
 import './ChatHeader.scss';
 
-function ChatHeader() {
+function ChatHeader({ contactImage }) {
   return (
     <div className="chat-header">
       <div className="chat-header__contact-info">
         <img
-          src={faker.image.avatar()}
+          src={contactImage}
           alt="contact image"
           className="chat-header__contact-photo"
         />
