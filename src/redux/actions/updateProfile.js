@@ -2,7 +2,7 @@ import md5 from 'md5';
 import { getAuth, updateProfile as update } from 'firebase/auth';
 
 import { UPDATE_PROFILE } from '@types';
-import writeUserData from './writeUserData';
+import writeUserData from '../../functions/writeUserData';
 
 const updateProfile = (username, email) => {
   return async (dispatch) => {

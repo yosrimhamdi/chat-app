@@ -1,6 +1,6 @@
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
-import firebaseApp from '../../firebase';
+import firebaseApp from '../firebase';
 
 const writeUserData = async () => {
   const auth = getAuth();
