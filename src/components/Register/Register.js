@@ -18,8 +18,8 @@ import validate from './validate.js';
 import registerUser from '@actions/registerUser';
 
 function Register({ handleSubmit, registerUser }) {
-  const onFormSubmit = () => {
-    registerUser({ email: 'yosri@mhamdi.co', password: 'pass1234' });
+  const onFormSubmit = (formValues) => {
+    registerUser(formValues);
   };
 
   return (

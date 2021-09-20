@@ -1,26 +1,26 @@
-import firebase from '../../firebase';
-
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-const registerUser =
-  ({ email, password }) =>
-  async () => {
-    console.log(email, password);
-    const auth = getAuth(firebase);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+import firebase from '../../firebase';
+import { REGISTER_USER } from '@types';
 
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
+const registerUser = ({ email, password }) => {
+  return async (dispatch) => {
+    const auth = getAuth(firebase);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      dispatch({
+        type: REGISTER_USER,
+        payload: userCredential.user,
       });
+    } catch (e) {
+      console.log(e);
+    }
   };
+};
 
 export default registerUser;
