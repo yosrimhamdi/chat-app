@@ -73,4 +73,5 @@ function Register({ handleSubmit, registerUser }) {
 }
 
 const WrappedForm = reduxForm({ form: 'registerForm', validate })(Register);
+
 export default connect(null, { registerUser })(WrappedForm);
