@@ -2,6 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 import firebase from '../../firebase';
 import { REGISTER_USER } from '@types';
+import { reset } from 'redux-form';
 
 const registerUser = ({ email, password }) => {
   return async (dispatch) => {
@@ -20,6 +21,8 @@ const registerUser = ({ email, password }) => {
     } catch (e) {
       console.log(e);
     }
+
+    dispatch(reset('registerForm'));
   };
 };
 
