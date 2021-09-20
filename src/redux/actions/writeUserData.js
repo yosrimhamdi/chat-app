@@ -4,8 +4,8 @@ import firebaseApp from '../../firebase';
 
 const writeUserData = async () => {
   const auth = getAuth();
-  const { uid, displayName, photoURL } = auth.currentUser;
   const db = getDatabase(firebaseApp);
+  const { uid, displayName, photoURL } = auth.currentUser;
 
   try {
     await set(ref(db, 'users/' + uid), {
