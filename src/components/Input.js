@@ -2,9 +2,9 @@ import React from 'react';
 import { Form } from 'semantic-ui-react';
 
 function Input({ input, meta, ...others }) {
-  const { error, submitFailed, active } = meta;
+  const { error, touched, active } = meta;
 
-  if (error && submitFailed && !active) {
+  if (error && touched && !active) {
     return (
       <Form.Input
         fluid
