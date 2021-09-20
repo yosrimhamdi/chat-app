@@ -2,7 +2,7 @@ import firebaseApp from '../../firebase';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { reset } from 'redux-form';
 
-import { AUTH_LOADING, SIGN_IN } from '@types';
+import { AUTH_LOADING, LOG_IN } from '@types';
 
 const login = ({ email, password }) => {
   return async (dispatch) => {
@@ -13,7 +13,7 @@ const login = ({ email, password }) => {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
       dispatch({
-        type: SIGN_IN,
+        type: LOG_IN,
         payload: user,
       });
     } catch (e) {
