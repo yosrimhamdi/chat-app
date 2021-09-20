@@ -13,7 +13,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 
 import './Register.scss';
-import Input from '../../Input';
+import Input from '../Input';
 import validate from './validate.js';
 import registerUser from '@actions/registerUser';
 
