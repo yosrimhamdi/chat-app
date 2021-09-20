@@ -3,9 +3,9 @@ import { toastr } from 'react-redux-toastr';
 
 import firebaseApp from '../../firebase';
 import { REGISTER, AUTH_LOADING } from '@types';
-import updateProfile from './updateUserProfile';
+import updateProfile from './updateProfile';
 
-const registerUser = ({ email, password, username }) => {
+const register = ({ email, password, username }) => {
   return async (dispatch) => {
     dispatch({ type: AUTH_LOADING, payload: true });
 
@@ -31,4 +31,4 @@ const registerUser = ({ email, password, username }) => {
   };
 };
 
-export default registerUser;
+export default register;

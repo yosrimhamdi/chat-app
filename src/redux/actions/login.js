@@ -4,7 +4,7 @@ import { reset } from 'redux-form';
 
 import { AUTH_LOADING, SIGN_IN } from '@types';
 
-const loginUser = ({ email, password }) => {
+const login = ({ email, password }) => {
   return async (dispatch) => {
     try {
       dispatch({ type: AUTH_LOADING, payload: true });
@@ -24,4 +24,4 @@ const loginUser = ({ email, password }) => {
     dispatch(reset('loginForm'));
   };
 };
-export default loginUser;
+export default login;

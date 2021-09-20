@@ -15,11 +15,11 @@ import { connect } from 'react-redux';
 import './Register.scss';
 import Input from '../Input';
 import validate from './validate.js';
-import registerUser from '@actions/registerUser';
+import register from '@actions/register';
 
-function Register({ handleSubmit, registerUser, loading }) {
+function Register({ handleSubmit, register, loading }) {
   const onFormSubmit = (formValues) => {
-    registerUser(formValues);
+    register(formValues);
   };
 
   return (
@@ -84,4 +84,4 @@ const mapStateToProps = (state) => {
   return { loading: state.auth.loading };
 };
 
-export default connect(mapStateToProps, { registerUser })(WrappedForm);
+export default connect(mapStateToProps, { register })(WrappedForm);
