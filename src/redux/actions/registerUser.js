@@ -1,4 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { toastr } from 'react-redux-toastr';
 
 import firebase from '../../firebase';
 import { REGISTER_USER } from '@types';
@@ -19,7 +20,7 @@ const registerUser = ({ email, password }) => {
         payload: userCredential.user,
       });
     } catch (e) {
-      console.log(e);
+      toastr.error('Error', e.message);
     }
 
     dispatch(reset('registerForm'));
