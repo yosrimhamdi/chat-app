@@ -13,6 +13,7 @@ import { reduxForm, Field } from 'redux-form';
 
 import './Register.scss';
 import Input from '../../Input';
+import validate from './validate.js';
 
 function Register({ handleSubmit }) {
   const onFormSubmit = (formValues) => {
@@ -69,4 +70,4 @@ function Register({ handleSubmit }) {
   );
 }
 
-export default reduxForm({ form: 'registerForm' })(Register);
+export default reduxForm({ form: 'registerForm', validate })(Register);
