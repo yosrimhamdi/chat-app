@@ -1,8 +1,0 @@
-@use '@assets/mixins';
-
-.user-message {
-  @include mixins.message;
-  background-color: var(--blue);
-  color: white;
-  align-self: flex-end;
-}
