@@ -16,11 +16,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>
-      <ReduxToastr
-        transitionIn="fadeIn"
-        transitionOut="fadeOut"
-        timeOut={1000}
-      />
+      <ReduxToastr transitionIn="fadeIn" transitionOut="fadeOut" />
     </Router>
   );
 }

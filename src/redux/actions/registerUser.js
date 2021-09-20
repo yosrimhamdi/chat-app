@@ -3,24 +3,25 @@ import { toastr } from 'react-redux-toastr';
 
 import firebase from '../../firebase';
 import { REGISTER_USER, AUTH_LOADING } from '@types';
-import { reset } from 'redux-form';
+import updateProfile from './updateUserProfile';
 
-const registerUser = ({ email, password }) => {
+const registerUser = ({ email, password, username }) => {
   return async (dispatch) => {
     dispatch({ type: AUTH_LOADING, payload: true });
-    dispatch(reset('registerForm'));
 
     const auth = getAuth(firebase);
     try {
-      const userCredential = await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
+      dispatch(updateProfile(username, email));
+
       dispatch({
         type: REGISTER_USER,
-        payload: userCredential.user,
+        payload: user,
       });
     } catch (e) {
       toastr.error('Error', e.message);

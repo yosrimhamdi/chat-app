@@ -1,2 +1,3 @@
 export const REGISTER_USER = 'REGISTER_USER';
 export const AUTH_LOADING = 'AUTH_LOADING';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
