@@ -3,6 +3,7 @@ import { toastr } from 'react-redux-toastr';
 import { getAuth, updateProfile as update } from 'firebase/auth';
 
 import { UPDATE_PROFILE } from '@types';
+import writeUserData from './writeUserData';
 
 const updateProfile = (username, email) => {
   return async (dispatch) => {
@@ -21,6 +22,8 @@ const updateProfile = (username, email) => {
     } catch (e) {
       toastr.error('Error', e.message);
     }
+
+    writeUserData();
   };
 };
 
