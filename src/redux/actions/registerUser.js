@@ -1,11 +1,12 @@
-// Import the functions you need from the SDKs you need
+import firebase from '../../firebase';
+
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const registerUser =
   ({ email, password }) =>
   async () => {
     console.log(email, password);
-    const auth = getAuth();
+    const auth = getAuth(firebase);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in

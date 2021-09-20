@@ -10,5 +10,4 @@ var firebaseConfig = {
   databaseURL: 'https://chat-app-41bde-default-rtdb.firebaseio.com/',
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export default initializeApp(firebaseConfig);
