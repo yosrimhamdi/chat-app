@@ -12,8 +12,6 @@ const writeUserData = async () => {
       displayName,
       photoURL,
     });
-
-    console.log('user saved');
   } catch (e) {
     console.log(e);
   }
