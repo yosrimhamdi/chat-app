@@ -25,8 +25,8 @@ function Register({ handleSubmit, registerUser, loading }) {
   return (
     <Grid textAlign="center" verticalAlign="middle" className="register">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" icon color="orange" textAlign="center">
-          <Icon name="puzzle piece" color="orange" />
+        <Header as="h1" icon color="violet" textAlign="center">
+          <Icon name="puzzle piece" color="violet" />
           Register for DevChat
         </Header>
         <Form size="large" onSubmit={handleSubmit(onFormSubmit)}>
@@ -60,7 +60,7 @@ function Register({ handleSubmit, registerUser, loading }) {
               component={Input}
             />
             <Button
-              color="orange"
+              color="violet"
               disabled={loading}
               className={loading ? 'loading' : ''}
               fluid
