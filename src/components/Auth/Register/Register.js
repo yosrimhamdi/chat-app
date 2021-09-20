@@ -10,14 +10,16 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
 
 import './Register.scss';
 import Input from '../../Input';
 import validate from './validate.js';
+import registerUser from '@actions/registerUser';
 
-function Register({ handleSubmit }) {
-  const onFormSubmit = (formValues) => {
-    console.log(formValues);
+function Register({ handleSubmit, registerUser }) {
+  const onFormSubmit = () => {
+    registerUser({ email: 'yosri@mhamdi.co', password: 'pass1234' });
   };
 
   return (
@@ -70,4 +72,5 @@ function Register({ handleSubmit }) {
   );
 }
 
-export default reduxForm({ form: 'registerForm', validate })(Register);
+const WrappedForm = reduxForm({ form: 'registerForm', validate })(Register);
+export default connect(null, { registerUser })(WrappedForm);

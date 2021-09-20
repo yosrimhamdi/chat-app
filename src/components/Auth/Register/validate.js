@@ -19,7 +19,8 @@ const validate = ({ username, email, password, passwordConfirmation }) => {
     errors.passwordConfirmation = 'password do not match';
   }
 
-  return errors;
+  // return errors;
+  return {};
 };
 
 export default validate;

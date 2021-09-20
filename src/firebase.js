@@ -1,9 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/storage';
-import 'firebase/database';
+import { initializeApp } from 'firebase/app';
 
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: 'AIzaSyALYgOj0fsj3hAiFFDDItLA1sMX2HlPfiw',
   authDomain: 'chat-app-41bde.firebaseapp.com',
   projectId: 'chat-app-41bde',
@@ -14,6 +11,4 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-export default firebase;
+const app = initializeApp(firebaseConfig);
