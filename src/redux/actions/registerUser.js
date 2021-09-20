@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { toastr } from 'react-redux-toastr';
 
 import firebase from '../../firebase';
-import { REGISTER_USER, AUTH_LOADING } from '@types';
+import { REGISTER, AUTH_LOADING } from '@types';
 import updateProfile from './updateUserProfile';
 
 const registerUser = ({ email, password, username }) => {
@@ -20,7 +20,7 @@ const registerUser = ({ email, password, username }) => {
       dispatch(updateProfile(username, email));
 
       dispatch({
-        type: REGISTER_USER,
+        type: REGISTER,
         payload: user,
       });
     } catch (e) {
