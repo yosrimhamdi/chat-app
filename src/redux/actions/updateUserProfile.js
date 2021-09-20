@@ -11,7 +11,7 @@ const updateProfile = (username, email) => {
 
       await update(auth.currentUser, {
         displayName: username,
-        photoURL: `http://gravatar.com/avatar/${md5(email)}?d=indenticon`,
+        photoURL: `//0.gravatar.com/avatar/${md5(email)}?s=200`,
       });
 
       dispatch({
