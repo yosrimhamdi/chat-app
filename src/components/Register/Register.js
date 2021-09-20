@@ -17,7 +17,7 @@ import Input from '../Input';
 import validate from './validate.js';
 import registerUser from '@actions/registerUser';
 
-function Register({ handleSubmit, registerUser }) {
+function Register({ handleSubmit, registerUser, loading }) {
   const onFormSubmit = (formValues) => {
     registerUser(formValues);
   };
@@ -59,7 +59,13 @@ function Register({ handleSubmit, registerUser }) {
               placeholder="Password Confirmation"
               component={Input}
             />
-            <Button color="orange" fluid size="large">
+            <Button
+              color="orange"
+              disabled={loading}
+              className={loading ? 'loading' : ''}
+              fluid
+              size="large"
+            >
               Submit
             </Button>
           </Segment>
@@ -74,4 +80,8 @@ function Register({ handleSubmit, registerUser }) {
 
 const WrappedForm = reduxForm({ form: 'registerForm', validate })(Register);
 
-export default connect(null, { registerUser })(WrappedForm);
+const mapStateToProps = (state) => {
+  return { loading: state.auth.loading };
+};
+
+export default connect(mapStateToProps, { registerUser })(WrappedForm);
