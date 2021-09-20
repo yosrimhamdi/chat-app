@@ -9,13 +9,14 @@ import {
   Message,
   Icon,
 } from 'semantic-ui-react';
+import { reduxForm, Field } from 'redux-form';
 
 import './Register.scss';
+import Input from '../../Input';
 
-function Register() {
-  const onInputChange = (e) => {
-    console.log(e);
-    console.log(e.target.value);
+function Register({ handleSubmit }) {
+  const onFormSubmit = (formValues) => {
+    console.log(formValues);
   };
 
   return (
@@ -25,48 +26,36 @@ function Register() {
           <Icon name="puzzle piece" color="orange" />
           Register for DevChat
         </Header>
-        <Form size="large">
+        <Form size="large" onSubmit={handleSubmit(onFormSubmit)}>
           <Segment stacked>
-            <Form.Input
-              fluid
+            <Field
               name="username"
               icon="user"
-              iconPosition="left"
-              placeholder="Username"
-              onChange={onInputChange}
               type="text"
+              placeholder="Username"
+              component={Input}
             />
-
-            <Form.Input
-              fluid
+            <Field
               name="email"
               icon="mail"
-              iconPosition="left"
-              placeholder="Email Address"
-              onChange={onInputChange}
               type="email"
+              placeholder="Email Address"
+              component={Input}
             />
-
-            <Form.Input
-              fluid
+            <Field
               name="password"
               icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              onChange={onInputChange}
               type="password"
+              placeholder="Password"
+              component={Input}
             />
-
-            <Form.Input
-              fluid
+            <Field
               name="passwordConfirmation"
               icon="repeat"
-              iconPosition="left"
-              placeholder="Password Confirmation"
-              onChange={onInputChange}
               type="password"
+              placeholder="Password Confirmation"
+              component={Input}
             />
-
             <Button color="orange" fluid size="large">
               Submit
             </Button>
@@ -80,4 +69,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default reduxForm({ form: 'registerForm' })(Register);
