@@ -1,5 +1,4 @@
 import md5 from 'md5';
-import { toastr } from 'react-redux-toastr';
 import { getAuth, updateProfile as update } from 'firebase/auth';
 
 import { UPDATE_PROFILE } from '@types';
@@ -20,7 +19,7 @@ const updateProfile = (username, email) => {
         payload: auth.currentUser,
       });
     } catch (e) {
-      toastr.error('Error', e.message);
+      console.log(e);
     }
 
     writeUserData();

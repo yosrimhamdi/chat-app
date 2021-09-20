@@ -1,5 +1,4 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { toastr } from 'react-redux-toastr';
 
 import firebaseApp from '../../firebase';
 import { REGISTER, AUTH_LOADING } from '@types';
@@ -24,7 +23,7 @@ const register = ({ email, password, username }) => {
         payload: user,
       });
     } catch (e) {
-      toastr.error('Error', e.message);
+      console.log(e);
     }
 
     dispatch({ type: AUTH_LOADING, payload: false });
