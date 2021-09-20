@@ -1,4 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { reset } from 'redux-form';
 
 import firebaseApp from '../../firebase';
 import { REGISTER, AUTH_LOADING } from '@types';
@@ -27,6 +28,7 @@ const register = ({ email, password, username }) => {
     }
 
     dispatch({ type: AUTH_LOADING, payload: false });
+    dispatch(reset('registerForm'));
   };
 };
 
