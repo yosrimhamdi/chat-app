@@ -2,8 +2,8 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { toastr } from 'react-redux-toastr';
 
 import { AUTH_LOADING } from '@types';
-import updateProfile from './updateProfile';
-import writeUserData from '../../database/writeUserData';
+import updateProfile from '../../firebase/updateProfile';
+import writeUserData from '../../firebase/writeUserData';
 
 const tryRegister = formValues => async dispatch => {
   const { email, password, username } = formValues;
