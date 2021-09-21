@@ -3,18 +3,16 @@ import { toastr } from 'react-redux-toastr';
 
 import { SIGN_OUT } from '@types';
 
-const trySignOut = () => {
-  return async (dispatch) => {
+const trySignOut = () => async dispatch => {
+  try {
     const auth = getAuth();
-    try {
-      await signOut(auth);
+    await signOut(auth);
 
-      dispatch({ type: SIGN_OUT });
-      toastr.success('Success', 'Signed Out');
-    } catch (e) {
-      toastr.error('Error', e.message);
-    }
-  };
+    dispatch({ type: SIGN_OUT });
+    toastr.success('Success', 'Signed Out');
+  } catch (e) {
+    toastr.error('Error', e.message);
+  }
 };
 
 export default trySignOut;

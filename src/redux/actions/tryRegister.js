@@ -5,23 +5,23 @@ import { AUTH_LOADING } from '@types';
 import updateProfile from './updateProfile';
 import writeUserData from '../../database/writeUserData';
 
-const tryRegister = ({ email, password, username }) => {
-  return async (dispatch) => {
-    dispatch({ type: AUTH_LOADING, payload: true });
+const tryRegister = formValues => async dispatch => {
+  const { email, password, username } = formValues;
 
+  dispatch({ type: AUTH_LOADING, payload: true });
+
+  try {
     const auth = getAuth();
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
+    await createUserWithEmailAndPassword(auth, email, password);
 
-      toastr.success('Success', 'Registration Succeed');
-      updateProfile(username);
-      writeUserData();
-    } catch (e) {
-      toastr.error('Error', e.message);
-    }
+    toastr.success('Success', 'Registration Succeed');
+    updateProfile(username);
+    writeUserData();
+  } catch (e) {
+    toastr.error('Error', e.message);
+  }
 
-    dispatch({ type: AUTH_LOADING, payload: false });
-  };
+  dispatch({ type: AUTH_LOADING, payload: false });
 };
 
 export default tryRegister;
