@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   all: [],
 };
 
-const channels = (state = INITIAL_STATE, action) => {
+const channelsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_CHANNELS:
       return {
@@ -22,4 +22,4 @@ const channels = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default channels;
+export default channelsReducer;
