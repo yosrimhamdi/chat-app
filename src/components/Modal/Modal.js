@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
-import validate from './validate';
+import { connect } from 'react-redux';
 
 import ModalInput from './ModalInput';
+import validate from './validate';
+import createChannel from '@actions/createChannel';
 
-function Modals({ isModalOpen, setIsModalOpen, handleSubmit }) {
+function Modals({ isModalOpen, setIsModalOpen, handleSubmit, createChannel }) {
   if (!isModalOpen) {
     return null;
   }
 
   const onFormSubmit = formValues => {
-    console.log(formValues);
+    createChannel(formValues);
   };
 
   const modal = (
@@ -55,4 +57,8 @@ function Modals({ isModalOpen, setIsModalOpen, handleSubmit }) {
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
 }
 
-export default reduxForm({ form: 'createNewChannelForm', validate })(Modals);
+const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
+  Modals,
+);
+
+export default connect(null, { createChannel })(WrappedForm);
