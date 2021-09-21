@@ -3,7 +3,7 @@ import { toastr } from 'react-redux-toastr';
 
 import { AUTH_LOADING } from '@types';
 
-const tryLogin = ({ email, password }) => {
+const trySignIn = ({ email, password }) => {
   return async (dispatch) => {
     try {
       dispatch({ type: AUTH_LOADING, payload: true });
@@ -19,4 +19,4 @@ const tryLogin = ({ email, password }) => {
     dispatch({ type: AUTH_LOADING, payload: false });
   };
 };
-export default tryLogin;
+export default trySignIn;
