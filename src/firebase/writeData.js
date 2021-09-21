@@ -7,9 +7,7 @@ const writeUserData = async (collectionName, data) => {
 
   data.id = key;
 
-  await set(ref(db, collectionName + key), data);
-
-  return data;
+  return set(ref(db, collectionName + key), data);
 };
 
 export default writeUserData;

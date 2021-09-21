@@ -1,15 +1,14 @@
 import { toastr } from 'react-redux-toastr';
-
-import { CREATE_CHANNEL } from '@types';
-import writeData from '../../firebase/writeData';
 import { reset } from 'redux-form';
+
+import writeData from '../../firebase/writeData';
 
 const createChannel = formValues => async (dispatch, getState) => {
   const { channelName, channelDetails } = formValues;
   const user = getState().auth.user;
 
   try {
-    const channel = await writeData('channels/', {
+    await writeData('channels/', {
       name: channelName,
       details: channelDetails,
       createdBy: {
@@ -18,8 +17,6 @@ const createChannel = formValues => async (dispatch, getState) => {
         avatar: user.photoURL,
       },
     });
-
-    dispatch({ type: CREATE_CHANNEL, payload: channel });
 
     toastr.success('Success', 'Channel created.');
   } catch (e) {

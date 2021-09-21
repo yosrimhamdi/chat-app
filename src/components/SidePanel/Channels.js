@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
 import Modal from '../Modal/Modal';
+import onChannelChange from '@actions/onChannelChange';
 
-function Channels() {
+function Channels({ onChannelChange }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    onChannelChange();
+  }, [onChannelChange]);
 
   return (
     <Menu.Menu style={{ paddingBottom: '2em' }}>
@@ -19,4 +24,4 @@ function Channels() {
     </Menu.Menu>
   );
 }
-export default Channels;
+export default connect(null, { onChannelChange })(Channels);

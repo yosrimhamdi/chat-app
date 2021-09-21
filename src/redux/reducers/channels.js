@@ -1,9 +1,9 @@
-import { CREATE_CHANNEL } from '@types';
+import { FETCH_CHANNELS } from '@types';
 
 const channels = (state = [], action) => {
   switch (action.type) {
-    case CREATE_CHANNEL: {
-      return [...state, action.payload];
+    case FETCH_CHANNELS: {
+      return action.payload;
     }
     default:
       return state;
