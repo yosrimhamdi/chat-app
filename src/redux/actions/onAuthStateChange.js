@@ -10,10 +10,11 @@ const onAuthStateChange = () => dispatch => {
   onAuthStateChanged(auth, user => {
     if (user) {
       dispatch({ type: SIGN_IN, payload: user });
-      dispatch({ type: AUTH_LOADING, payload: false });
 
       history.push('/');
     }
+
+    dispatch({ type: AUTH_LOADING, payload: false });
   });
 };
 export default onAuthStateChange;

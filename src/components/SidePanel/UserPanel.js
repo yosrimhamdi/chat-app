@@ -1,7 +1,10 @@
 import React from 'react';
 import { Grid, Header, Icon, Dropdown } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-const UserPanel = () => {
+import trySignOut from '@actions/trySignOut';
+
+function UserPanel({ trySignOut }) {
   const dropdownOptions = [
     {
       key: 'user',
@@ -18,7 +21,7 @@ const UserPanel = () => {
     },
     {
       key: 'signout',
-      text: <span>Sign Out</span>,
+      text: <span onClick={trySignOut}>Sign Out</span>,
     },
   ];
 
@@ -40,6 +43,6 @@ const UserPanel = () => {
       </Grid.Column>
     </Grid>
   );
-};
+}
 
-export default UserPanel;
+export default connect(null, { trySignOut })(UserPanel);
