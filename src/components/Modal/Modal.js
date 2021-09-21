@@ -15,6 +15,7 @@ function Modals({ isModalOpen, setIsModalOpen, handleSubmit, createChannel }) {
 
   const onFormSubmit = formValues => {
     createChannel(formValues);
+    setIsModalOpen(false);
   };
 
   const modal = (
