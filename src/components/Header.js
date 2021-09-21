@@ -5,12 +5,12 @@ import { Input, Menu, Button } from 'semantic-ui-react';
 
 import trySignOut from '@actions/trySignOut';
 
-function Header({ trySignOut, isLoggedIn }) {
+function Header({ trySignOut, isLoggedIn, loading }) {
   let cta = <Menu.Item name="logout" onClick={trySignOut} />;
 
   if (!isLoggedIn) {
     cta = (
-      <Button>
+      <Button disabled={loading} className={loading ? 'loading' : ''}>
         <Link to="/login">Login</Link>
       </Button>
     );
@@ -31,8 +31,8 @@ function Header({ trySignOut, isLoggedIn }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return { isLoggedIn: state.auth.isLoggedIn };
+const mapStateToProps = state => {
+  return { isLoggedIn: state.auth.isLoggedIn, loading: state.auth.loading };
 };
 
 export default connect(mapStateToProps, { trySignOut })(Header);

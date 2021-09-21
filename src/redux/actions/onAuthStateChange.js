@@ -1,23 +1,30 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import history from '../../history';
 
-import { SIGN_IN } from '@types';
+import { SIGN_IN, AUTH_LOADING } from '@types';
 
-const onAuthStateChange = () => {
-  return (dispatch) => {
-    const auth = getAuth();
+const onAuthStateChange = () => dispatch => {
+  dispatch({
+    type: AUTH_LOADING,
+    payload: true,
+  });
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch({
-          type: SIGN_IN,
-          payload: user,
-        });
+  const auth = getAuth();
 
-        history.push('/');
-      }
-    });
-  };
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      dispatch({
+        type: SIGN_IN,
+        payload: user,
+      });
+
+      dispatch({
+        type: AUTH_LOADING,
+        payload: false,
+      });
+
+      history.push('/');
+    }
+  });
 };
-
 export default onAuthStateChange;
