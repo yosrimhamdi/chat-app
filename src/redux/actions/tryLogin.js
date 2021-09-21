@@ -1,9 +1,9 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { reset } from 'redux-form';
 
-import { AUTH_LOADING, LOGIN } from '@types';
+import { AUTH_LOADING, TRY_LOGIN } from '@types';
 
-const login = ({ email, password }) => {
+const tryLogin = ({ email, password }) => {
   return async (dispatch) => {
     try {
       dispatch({ type: AUTH_LOADING, payload: true });
@@ -12,7 +12,7 @@ const login = ({ email, password }) => {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
       dispatch({
-        type: LOGIN,
+        type: TRY_LOGIN,
         payload: user,
       });
     } catch (e) {
@@ -23,4 +23,4 @@ const login = ({ email, password }) => {
     dispatch(reset('loginForm'));
   };
 };
-export default login;
+export default tryLogin;

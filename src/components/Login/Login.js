@@ -14,11 +14,11 @@ import { connect } from 'react-redux';
 
 import Input from '../Input';
 import validate from './validate.js';
-import login from '@actions/login';
+import tryLogin from '@actions/tryLogin';
 
-function Register({ handleSubmit, login, loading }) {
+function Register({ handleSubmit, tryLogin, loading }) {
   const onFormSubmit = (formValues) => {
-    login(formValues);
+    tryLogin(formValues);
   };
 
   return (
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => {
   return { loading: state.auth.loading };
 };
 
-export default connect(mapStateToProps, { login })(WrappedForm);
+export default connect(mapStateToProps, { tryLogin })(WrappedForm);
