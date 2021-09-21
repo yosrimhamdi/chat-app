@@ -1,4 +1,3 @@
-import firebaseApp from '../../firebase';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { reset } from 'redux-form';
 
@@ -9,7 +8,7 @@ const login = ({ email, password }) => {
     try {
       dispatch({ type: AUTH_LOADING, payload: true });
 
-      const auth = getAuth(firebaseApp);
+      const auth = getAuth();
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
       dispatch({

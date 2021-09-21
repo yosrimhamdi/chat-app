@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { reset } from 'redux-form';
+import { toastr } from 'react-redux-toastr';
 
-import firebaseApp from '../../firebase';
 import { REGISTER, AUTH_LOADING } from '@types';
 import updateProfile from './updateProfile';
 
@@ -9,7 +9,7 @@ const register = ({ email, password, username }) => {
   return async (dispatch) => {
     dispatch({ type: AUTH_LOADING, payload: true });
 
-    const auth = getAuth(firebaseApp);
+    const auth = getAuth();
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
@@ -18,12 +18,14 @@ const register = ({ email, password, username }) => {
       );
 
       dispatch(updateProfile(username, email));
+      toastr.success('Success', 'user registered');
 
       dispatch({
         type: REGISTER,
         payload: user,
       });
     } catch (e) {
+      toastr.error('Success', e.message);
       console.log(e);
     }
 
