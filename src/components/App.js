@@ -9,7 +9,7 @@ import Home from './Home/Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import tryAutoLogin from '@actions/tryAutoLogin';
-import Menu from './Menu';
+import Header from './Header';
 import GuestRoute from './GuestRoute';
 
 function App({ tryAutoLogin }) {
@@ -19,7 +19,7 @@ function App({ tryAutoLogin }) {
 
   return (
     <Router>
-      <Menu />
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <GuestRoute path="/login" component={Login} />
