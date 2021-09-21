@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import Toastr from 'react-redux-toastr';
 import { connect } from 'react-redux';
 
@@ -11,6 +11,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import onAuthStateChange from '@actions/onAuthStateChange';
 import GuestRoute from '../Routes/GuestRoute';
+import ProtectedRoute from '../Routes/ProtectedRoute';
 import history from '../../history';
 
 function App({ onAuthStateChange }) {
@@ -22,7 +23,7 @@ function App({ onAuthStateChange }) {
     <Router history={history}>
       <div className="app">
         <Switch>
-          <Route exact path="/" component={Home} />
+          <ProtectedRoute exact path="/" component={Home} />
           <GuestRoute path="/login" component={Login} />
           <GuestRoute path="/register" component={Register} />
         </Switch>

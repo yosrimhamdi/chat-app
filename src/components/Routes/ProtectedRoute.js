@@ -7,10 +7,10 @@ function ProtectedRoute({ isLoggedIn, component, ...rest }) {
     return <Route component={component} {...rest} />;
   }
 
-  return <Redirect to="/" />;
+  return <Redirect to="/login" />;
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { isLoggedIn: state.auth.isLoggedIn };
 };
 

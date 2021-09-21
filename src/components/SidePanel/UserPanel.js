@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 
 import trySignOut from '@actions/trySignOut';
 
-function UserPanel({ trySignOut }) {
+function UserPanel({ trySignOut, user }) {
   const dropdownOptions = [
     {
       key: 'user',
       text: (
         <span>
-          Signed in as <strong>User</strong>
+          Signed in as <strong>{user.displayName}</strong>
         </span>
       ),
       disabled: true,
@@ -45,4 +45,8 @@ function UserPanel({ trySignOut }) {
   );
 }
 
-export default connect(null, { trySignOut })(UserPanel);
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, { trySignOut })(UserPanel);
