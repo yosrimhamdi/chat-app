@@ -1,4 +1,4 @@
-import { REGISTER, AUTH_LOADING, LOGIN } from '@types';
+import { REGISTER, AUTH_LOADING, LOGIN, SIGN_OUT } from '@types';
 
 const INITIAL_STATE = {
   user: null,
@@ -11,8 +11,15 @@ const auth = (state = INITIAL_STATE, action) => {
     case REGISTER:
     case LOGIN:
       return {
+        ...state,
         user: action.payload,
         isSignedIn: true,
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        user: null,
+        isSignedIn: false,
       };
     case AUTH_LOADING:
       return {
