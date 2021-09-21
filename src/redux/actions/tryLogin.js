@@ -3,6 +3,7 @@ import { reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
 
 import { AUTH_LOADING, TRY_LOGIN } from '@types';
+import history from '../../history';
 
 const tryLogin = ({ email, password }) => {
   return async (dispatch) => {
@@ -17,6 +18,8 @@ const tryLogin = ({ email, password }) => {
         type: TRY_LOGIN,
         payload: user,
       });
+
+      history.push('/');
     } catch (e) {
       console.log(e);
     }

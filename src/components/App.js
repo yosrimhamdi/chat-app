@@ -11,6 +11,7 @@ import Register from './Register/Register';
 import tryAutoLogin from '@actions/tryAutoLogin';
 import Header from './Header';
 import GuestRoute from './Routes/GuestRoute';
+import history from '../history';
 
 function App({ tryAutoLogin }) {
   useEffect(() => {
@@ -18,7 +19,7 @@ function App({ tryAutoLogin }) {
   }, []);
 
   return (
-    <Router>
+    <Router history={history}>
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
