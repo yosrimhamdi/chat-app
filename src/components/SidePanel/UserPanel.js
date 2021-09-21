@@ -35,7 +35,10 @@ function UserPanel({ trySignOut, user }) {
           </Header>
         </Grid.Row>
         <Header style={{ padding: '0.25em' }} as="h4" inverted>
-          <Dropdown trigger={<span>User</span>} options={dropdownOptions} />
+          <Dropdown
+            trigger={<span>{user.displayName}</span>}
+            options={dropdownOptions}
+          />
         </Header>
       </Grid.Column>
     </Grid>
