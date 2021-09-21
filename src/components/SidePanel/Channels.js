@@ -7,6 +7,7 @@ import onChannelChange from '@actions/onChannelChange';
 
 function Channels({ onChannelChange }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     onChannelChange();
   }, [onChannelChange]);
