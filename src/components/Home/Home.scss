@@ -1,6 +1,10 @@
 .home {
   border: 1px solid red;
   height: 100%;
+
+  &__message {
+    margin-left: 320px;
+  }
 }
 
 .ui.grid {

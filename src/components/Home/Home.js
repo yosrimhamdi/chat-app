@@ -12,7 +12,7 @@ function Home() {
     <Grid columns="equal" className="home">
       <ColorPanel />
       <SidePanel />
-      <Grid.Column style={{ marginLeft: 320 }}>
+      <Grid.Column className="home__message">
         <Messages />
       </Grid.Column>
       <Grid.Column width={4}>
