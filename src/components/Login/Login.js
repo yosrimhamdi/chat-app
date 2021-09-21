@@ -17,12 +17,12 @@ import validate from './validate.js';
 import trySignIn from '@actions/trySignIn';
 
 function Register({ handleSubmit, trySignIn, loading }) {
-  const onFormSubmit = (formValues) => {
+  const onFormSubmit = formValues => {
     trySignIn(formValues);
   };
 
   return (
-    <Grid textAlign="center" verticalAlign="middle" className="register">
+    <Grid textAlign="center" verticalAlign="middle" style={{ height: '100%' }}>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h1" icon color="violet" textAlign="center">
           <Icon name="code branch" color="violet" />
@@ -65,7 +65,7 @@ function Register({ handleSubmit, trySignIn, loading }) {
 
 const WrappedForm = reduxForm({ form: 'loginForm', validate })(Register);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { loading: state.auth.loading };
 };
 

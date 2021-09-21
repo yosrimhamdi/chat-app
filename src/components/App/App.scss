@@ -1,0 +1,6 @@
+@forward '@assets/variables';
+
+.app {
+  height: 100vh;
+  background-color: var(--bg-grey);
+}

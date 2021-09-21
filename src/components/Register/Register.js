@@ -12,18 +12,17 @@ import {
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 
-import './Register.scss';
 import Input from '../Input';
 import validate from './validate.js';
 import tryRegister from '@actions/tryRegister';
 
 function Register({ handleSubmit, tryRegister, loading }) {
-  const onFormSubmit = (formValues) => {
+  const onFormSubmit = formValues => {
     tryRegister(formValues);
   };
 
   return (
-    <Grid textAlign="center" verticalAlign="middle" className="register">
+    <Grid textAlign="center" verticalAlign="middle" style={{ height: '100%' }}>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h1" icon color="violet" textAlign="center">
           <Icon name="puzzle piece" color="violet" />
@@ -80,7 +79,7 @@ function Register({ handleSubmit, tryRegister, loading }) {
 
 const WrappedForm = reduxForm({ form: 'registerForm', validate })(Register);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { loading: state.auth.loading };
 };
 
