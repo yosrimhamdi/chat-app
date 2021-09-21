@@ -26,7 +26,7 @@ const createChannel = formValues => async (dispatch, getState) => {
     console.log(e);
   }
 
-  reset('createNewChannelForm');
+  dispatch(reset('createNewChannelForm'));
 };
 
 export default createChannel;
