@@ -2,11 +2,11 @@ const validate = ({ channelName, channelDetails }) => {
   const errors = {};
 
   if (!channelName) {
-    errors.name = 'no name';
+    errors.channelName = 'no name';
   }
 
   if (!channelDetails) {
-    errors.details = 'no details';
+    errors.channelDetails = 'no details';
   }
 
   return errors;
