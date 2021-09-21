@@ -1,39 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Form, Input, Button, Icon } from 'semantic-ui-react';
+import { Modal, Form, Button, Icon } from 'semantic-ui-react';
+import { Field, reduxForm } from 'redux-form';
 
-function Modals({ isModalOpen, setIsModalOpen }) {
+import ModalInput from './ModalInput';
+
+function Modals({ isModalOpen, setIsModalOpen, handleSubmit }) {
   if (!isModalOpen) {
     return null;
   }
+
+  const onFormSubmit = formValues => {
+    console.log(formValues);
+  };
 
   const modal = (
     <Modal basic open={true} onClose={() => setIsModalOpen(false)}>
       <Modal.Header>Add a Channel</Modal.Header>
       <Modal.Content>
-        <Form>
+        <Form onSubmit={handleSubmit(onFormSubmit)}>
           <Form.Field>
-            <Input fluid label="Name of Channel" name="channelName" />
+            <Field
+              label="Name of Channel"
+              name="channelName"
+              component={ModalInput}
+            />
           </Form.Field>
-
           <Form.Field>
-            <Input fluid label="About the Channel" name="channelDetails" />
+            <Field
+              label="About the Channel"
+              name="channelDetails"
+              component={ModalInput}
+            />
           </Form.Field>
+          <Modal.Actions style={{ textAlign: 'right' }}>
+            <Button color="green" type="submit">
+              <Icon name="checkmark" /> Add
+            </Button>
+            <Button color="red" inverted onClick={() => setIsModalOpen(false)}>
+              <Icon name="remove" /> Cancel
+            </Button>
+          </Modal.Actions>
         </Form>
       </Modal.Content>
-
-      <Modal.Actions>
-        <Button color="green" inverted>
-          <Icon name="checkmark" /> Add
-        </Button>
-        <Button color="red" inverted onClick={() => setIsModalOpen(false)}>
-          <Icon name="remove" /> Cancel
-        </Button>
-      </Modal.Actions>
     </Modal>
   );
 
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
 }
 
-export default Modals;
+export default reduxForm({ form: 'createNewChannelForm' })(Modals);
