@@ -17,11 +17,11 @@ function UserPanel({ trySignOut, user }) {
     },
     {
       key: 'avatar',
-      text: <span>Change Avatar</span>,
+      text: <div>Change Avatar</div>,
     },
     {
       key: 'signout',
-      text: <span onClick={trySignOut}>Sign Out</span>,
+      text: <div onClick={trySignOut}>Sign Out</div>,
     },
   ];
 
