@@ -10,6 +10,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import tryAutoLogin from '@actions/tryAutoLogin';
 import Menu from './Menu';
+import GuestRoute from './GuestRoute';
 
 function App({ tryAutoLogin }) {
   useEffect(() => {
@@ -21,8 +22,8 @@ function App({ tryAutoLogin }) {
       <Menu />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        <GuestRoute path="/login" component={Login} />
+        <GuestRoute path="/register" component={Register} />
       </Switch>
       <Toastr transitionIn="fadeIn" transitionOut="fadeOut" />
     </Router>

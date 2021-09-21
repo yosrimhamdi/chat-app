@@ -2,7 +2,7 @@ import { TRY_REGISTER, AUTH_LOADING, TRY_LOGIN, SIGN_OUT } from '@types';
 
 const INITIAL_STATE = {
   user: null,
-  isSignedIn: false,
+  isLoggedIn: false,
   loading: false,
 };
 
@@ -13,13 +13,13 @@ const auth = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: action.payload,
-        isSignedIn: true,
+        isLoggedIn: true,
       };
     case SIGN_OUT:
       return {
         ...state,
         user: null,
-        isSignedIn: false,
+        isLoggedIn: false,
       };
     case AUTH_LOADING:
       return {
