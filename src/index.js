@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import './firebase';
 import App from './components/App';
 import store from './redux/store';
-import './firebase';
 
 export default ReactDOM.render(
   <Provider store={store}>
