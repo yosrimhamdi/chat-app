@@ -7,11 +7,11 @@ const onChannelChange = () => dispatch => {
   const channelsRef = ref(db, 'channels/');
 
   onValue(channelsRef, snapshot => {
-    const channels = snapshot.val();
+    const channels = Object.values(snapshot.val() || []);
 
     dispatch({
       type: FETCH_CHANNELS,
-      payload: Object.values(channels),
+      payload: channels,
     });
   });
 };
