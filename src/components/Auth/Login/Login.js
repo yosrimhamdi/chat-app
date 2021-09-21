@@ -12,7 +12,7 @@ import {
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 
-import Input from '../Input';
+import AuthInput from '../AuthInput';
 import validate from './validate.js';
 import trySignIn from '@actions/trySignIn';
 
@@ -35,14 +35,14 @@ function Register({ handleSubmit, trySignIn, loading }) {
               icon="mail"
               type="email"
               placeholder="Email Address"
-              component={Input}
+              component={AuthInput}
             />
             <Field
               name="password"
               icon="lock"
               type="password"
               placeholder="Password"
-              component={Input}
+              component={AuthInput}
             />
             <Button
               color="violet"

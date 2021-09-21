@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'semantic-ui-react';
 
-function Input({ input, meta, ...rest }) {
+function AuthInput({ input, meta, ...rest }) {
   const { error, touched, active } = meta;
   let err;
 
@@ -17,4 +17,4 @@ function Input({ input, meta, ...rest }) {
   );
 }
 
-export default Input;
+export default AuthInput;
