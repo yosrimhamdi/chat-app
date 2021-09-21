@@ -37,7 +37,12 @@ function Modals({ isModalOpen, setIsModalOpen, handleSubmit }) {
             <Button color="green" type="submit">
               <Icon name="checkmark" /> Add
             </Button>
-            <Button color="red" inverted onClick={() => setIsModalOpen(false)}>
+            <Button
+              color="red"
+              type="button"
+              inverted
+              onClick={() => setIsModalOpen(false)}
+            >
               <Icon name="remove" /> Cancel
             </Button>
           </Modal.Actions>
