@@ -1,10 +1,22 @@
-import { FETCH_CHANNELS } from '@types';
+import { FETCH_CHANNELS, SELECT_CHANNEL } from '@types';
 
-const channels = (state = [], action) => {
+const INITIAL_STATE = {
+  selectedChannel: null,
+  all: [],
+};
+
+const channels = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_CHANNELS: {
-      return action.payload;
-    }
+    case FETCH_CHANNELS:
+      return {
+        ...state,
+        all: action.payload,
+      };
+    case SELECT_CHANNEL:
+      return {
+        ...state,
+        selectedChannel: action.payload,
+      };
     default:
       return state;
   }

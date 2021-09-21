@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
 import Modal from '../Modal/Modal';
+import Channel from './Channel';
 import onChannelChange from '@actions/onChannelChange';
 
 function Channels({ onChannelChange, channels }) {
@@ -12,13 +13,9 @@ function Channels({ onChannelChange, channels }) {
     onChannelChange();
   }, [onChannelChange]);
 
-  const renderedChannels = channels.map(({ id, name }) => {
-    return (
-      <Menu.Item key={id} name={name} style={{ opacity: 0.6 }}>
-        # {name}
-      </Menu.Item>
-    );
-  });
+  const renderedChannels = channels.all.map(channel => (
+    <Channel key={channel.id} channel={channel} />
+  ));
 
   return (
     <Menu.Menu style={{ paddingBottom: '2em' }}>
@@ -26,7 +23,7 @@ function Channels({ onChannelChange, channels }) {
         <span>
           <Icon name="exchange" /> CHANNELS
         </span>{' '}
-        ({channels.length})
+        ({channels.all.length})
         <Icon
           style={{ cursor: 'pointer' }}
           name="add"
