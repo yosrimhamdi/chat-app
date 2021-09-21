@@ -10,7 +10,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import tryAutoLogin from '@actions/tryAutoLogin';
 import Header from './Header';
-import GuestRoute from './GuestRoute';
+import GuestRoute from './Routes/GuestRoute';
 
 function App({ tryAutoLogin }) {
   useEffect(() => {
