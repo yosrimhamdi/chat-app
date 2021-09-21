@@ -13,7 +13,7 @@ import tryAutoLogin from '@actions/tryAutoLogin';
 function App({ tryAutoLogin }) {
   useEffect(() => {
     tryAutoLogin();
-  });
+  }, []);
 
   return (
     <Router>
