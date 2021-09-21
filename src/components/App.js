@@ -9,6 +9,7 @@ import Home from './Home/Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import tryAutoLogin from '@actions/tryAutoLogin';
+import Menu from './Menu';
 
 function App({ tryAutoLogin }) {
   useEffect(() => {
@@ -17,6 +18,7 @@ function App({ tryAutoLogin }) {
 
   return (
     <Router>
+      <Menu />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
