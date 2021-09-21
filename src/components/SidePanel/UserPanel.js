@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Header, Icon, Dropdown } from 'semantic-ui-react';
+import { Grid, Header, Icon, Dropdown, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import trySignOut from '@actions/trySignOut';
@@ -33,13 +33,18 @@ function UserPanel({ trySignOut, user }) {
             <Icon name="code" />
             <Header.Content>DevChat</Header.Content>
           </Header>
+          <Header style={{ padding: '0.25em' }} as="h4" inverted>
+            <Dropdown
+              trigger={
+                <span>
+                  <Image src={user.photoURL} spaced="right" avatar />
+                  <span>{user.displayName}</span>
+                </span>
+              }
+              options={dropdownOptions}
+            />
+          </Header>
         </Grid.Row>
-        <Header style={{ padding: '0.25em' }} as="h4" inverted>
-          <Dropdown
-            trigger={<span>{user.displayName}</span>}
-            options={dropdownOptions}
-          />
-        </Header>
       </Grid.Column>
     </Grid>
   );
