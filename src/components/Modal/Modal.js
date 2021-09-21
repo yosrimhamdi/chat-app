@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
+import validate from './validate';
 
 import ModalInput from './ModalInput';
 
@@ -54,4 +55,4 @@ function Modals({ isModalOpen, setIsModalOpen, handleSubmit }) {
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
 }
 
-export default reduxForm({ form: 'createNewChannelForm' })(Modals);
+export default reduxForm({ form: 'createNewChannelForm', validate })(Modals);
