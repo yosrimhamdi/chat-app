@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-import { TRY_LOGIN } from '@types';
+import { TRY_AUTO_LOGIN } from '@types';
 
 const tryAutoLogin = () => {
   return (dispatch) => {
@@ -9,7 +9,7 @@ const tryAutoLogin = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch({
-          type: TRY_LOGIN,
+          type: TRY_AUTO_LOGIN,
           payload: user,
         });
       }
