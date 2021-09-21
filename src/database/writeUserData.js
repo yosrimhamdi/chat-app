@@ -1,10 +1,10 @@
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
-import firebaseApp from '../firebase';
+import { toastr } from 'react-redux-toastr';
 
 const writeUserData = async () => {
   const auth = getAuth();
-  const db = getDatabase(firebaseApp);
+  const db = getDatabase();
   const { uid, displayName, photoURL } = auth.currentUser;
 
   try {
@@ -12,8 +12,10 @@ const writeUserData = async () => {
       displayName,
       photoURL,
     });
+
+    toastr.success('Success', 'User Wrote to database');
   } catch (e) {
-    console.log(e);
+    toastr.error('Success', e.message);
   }
 };
 

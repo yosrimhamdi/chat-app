@@ -18,15 +18,13 @@ const register = ({ email, password, username }) => {
       );
 
       dispatch(updateProfile(username, email));
-      toastr.success('Success', 'user registered');
-
+      toastr.success('Success', 'registration succeeded');
       dispatch({
         type: REGISTER,
         payload: user,
       });
     } catch (e) {
       toastr.error('Success', e.message);
-      console.log(e);
     }
 
     dispatch({ type: AUTH_LOADING, payload: false });
