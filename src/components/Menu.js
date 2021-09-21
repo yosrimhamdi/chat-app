@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import { Input, Menu as SemanticMenu } from 'semantic-ui-react';
 
 import trySignOut from '@actions/trySignOut';
+import { Link } from 'react-router-dom';
 
-function Menu({ trySignOut }) {
+function Menu({ trySignOut, isLoggedIn }) {
+  let cta = <SemanticMenu.Item name="logout" onClick={trySignOut} />;
+
+  if (!isLoggedIn) {
+    cta = <Link to="/login">Login</Link>;
+  }
+
   return (
     <SemanticMenu secondary>
       <SemanticMenu.Item name="home" />
@@ -14,10 +21,14 @@ function Menu({ trySignOut }) {
         <SemanticMenu.Item>
           <Input icon="search" placeholder="Search..." />
         </SemanticMenu.Item>
-        <SemanticMenu.Item name="logout" onClick={trySignOut} />
+        {cta}
       </SemanticMenu.Menu>
     </SemanticMenu>
   );
 }
 
-export default connect(null, { trySignOut })(Menu);
+const mapStateToProps = (state) => {
+  return { isLoggedIn: state.auth.isLoggedIn };
+};
+
+export default connect(mapStateToProps, { trySignOut })(Menu);

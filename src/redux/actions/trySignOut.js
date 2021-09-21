@@ -10,7 +10,7 @@ const trySignOut = () => {
       await signOut(auth);
 
       dispatch({ type: SIGN_OUT });
-      toastr.message('Success', 'Signed Out');
+      toastr.success('Success', 'Signed Out');
     } catch (e) {
       toastr.error('Error', e.message);
     }
