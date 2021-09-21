@@ -1,5 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { reset } from 'redux-form';
+import { toastr } from 'react-redux-toastr';
 
 import { AUTH_LOADING, TRY_LOGIN } from '@types';
 
@@ -11,6 +12,7 @@ const tryLogin = ({ email, password }) => {
       const auth = getAuth();
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
+      toastr.success('Success', ' Logged in');
       dispatch({
         type: TRY_LOGIN,
         payload: user,

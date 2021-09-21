@@ -1,15 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Menu as SemanticMenu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Input, Menu as SemanticMenu, Button } from 'semantic-ui-react';
 
 import trySignOut from '@actions/trySignOut';
-import { Link } from 'react-router-dom';
 
 function Menu({ trySignOut, isLoggedIn }) {
   let cta = <SemanticMenu.Item name="logout" onClick={trySignOut} />;
 
   if (!isLoggedIn) {
-    cta = <Link to="/login">Login</Link>;
+    cta = (
+      <Button>
+        <Link to="/login">Login</Link>
+      </Button>
+    );
   }
 
   return (
