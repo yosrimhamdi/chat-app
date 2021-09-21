@@ -12,8 +12,6 @@ function Channels({ onChannelChange, channels }) {
     onChannelChange();
   }, [onChannelChange]);
 
-  console.log(channels);
-
   const renderedChannels = channels.map(({ id, name }) => {
     return (
       <Menu.Item key={id} name={name} style={{ opacity: 0.6 }}>
