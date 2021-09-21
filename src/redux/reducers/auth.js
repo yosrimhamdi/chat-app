@@ -1,10 +1,4 @@
-import {
-  TRY_REGISTER,
-  AUTH_LOADING,
-  TRY_LOGIN,
-  SIGN_OUT,
-  TRY_AUTO_LOGIN,
-} from '@types';
+import { AUTH_LOADING, SIGN_OUT, SIGN_IN } from '@types';
 
 const INITIAL_STATE = {
   user: null,
@@ -14,9 +8,7 @@ const INITIAL_STATE = {
 
 const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TRY_REGISTER:
-    case TRY_AUTO_LOGIN:
-    case TRY_LOGIN:
+    case SIGN_IN:
       return {
         ...state,
         user: action.payload,

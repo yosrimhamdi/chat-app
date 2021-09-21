@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import Toastr from 'react-redux-toastr';
 import { connect } from 'react-redux';
 
@@ -8,14 +8,14 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import Home from './Home/Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
-import tryAutoLogin from '@actions/tryAutoLogin';
+import onAuthStateChange from '@actions/onAuthStateChange';
 import Header from './Header';
 import GuestRoute from './Routes/GuestRoute';
 import history from '../history';
 
-function App({ tryAutoLogin }) {
+function App({ onAuthStateChange }) {
   useEffect(() => {
-    tryAutoLogin();
+    onAuthStateChange();
   }, []);
 
   return (
@@ -31,4 +31,4 @@ function App({ tryAutoLogin }) {
   );
 }
 
-export default connect(null, { tryAutoLogin })(App);
+export default connect(null, { onAuthStateChange })(App);

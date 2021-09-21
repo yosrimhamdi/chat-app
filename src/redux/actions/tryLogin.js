@@ -1,9 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
 
-import { AUTH_LOADING, TRY_LOGIN } from '@types';
-import history from '../../history';
+import { AUTH_LOADING } from '@types';
 
 const tryLogin = ({ email, password }) => {
   return async (dispatch) => {
@@ -11,21 +9,14 @@ const tryLogin = ({ email, password }) => {
       dispatch({ type: AUTH_LOADING, payload: true });
 
       const auth = getAuth();
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       toastr.success('Success', ' Logged in');
-      dispatch({
-        type: TRY_LOGIN,
-        payload: user,
-      });
-
-      history.push('/');
     } catch (e) {
-      console.log(e);
+      toastr.error('Error', e.message);
     }
 
     dispatch({ type: AUTH_LOADING, payload: false });
-    dispatch(reset('loginForm'));
   };
 };
 export default tryLogin;
