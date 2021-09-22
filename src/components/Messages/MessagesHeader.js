@@ -5,15 +5,12 @@ import { connect } from 'react-redux';
 const MessagesHeader = ({ selectedChannel }) => {
   return (
     <Segment clearing>
-      {/* Channel Title */}
       <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
         <span>
           {selectedChannel.name} <Icon name={'star outline'} color="black" />
         </span>
         <Header.Subheader>2 Users</Header.Subheader>
       </Header>
-
-      {/* Channel Search Input */}
       <Header floated="right">
         <Input
           size="mini"
