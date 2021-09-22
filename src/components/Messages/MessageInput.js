@@ -1,7 +1,9 @@
 import React from 'react';
 import { Input, Button } from 'semantic-ui-react';
 
-const MessageInput = ({ input }) => {
+const MessageInput = ({ input, meta }) => {
+  const { error, submitFailed } = meta;
+
   return (
     <Input
       fluid
@@ -11,6 +13,7 @@ const MessageInput = ({ input }) => {
       labelPosition="left"
       placeholder="Write your message"
       {...input}
+      className={error && submitFailed ? 'error' : ''}
     />
   );
 };
