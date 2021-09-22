@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { toastr } from 'react-redux-toastr';
 
 import { AUTH_LOADING } from '@types';
-import updateUserProfile from '../../firebase/updateUserProfile';
+import updateUserProfile from '../../firebase/auth/updateUserProfile';
 import writeData from '../../firebase/database/writeData';
 
 const tryRegister = formValues => async dispatch => {
