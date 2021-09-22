@@ -14,11 +14,17 @@ import { connect } from 'react-redux';
 
 import AuthInput from '../AuthInput';
 import validate from './validate.js';
-import tryRegister from '@actions/tryRegister';
+import tryRegister from '../../../firebase/auth/tryRegister';
+import { AUTHENTICATING } from '@types';
+import setLoading from '@actions/setLoading';
 
-function Register({ handleSubmit, tryRegister, loading }) {
-  const onFormSubmit = formValues => {
-    tryRegister(formValues);
+function Register({ handleSubmit, isAuthenticating, setLoading }) {
+  const onFormSubmit = async formValues => {
+    setLoading(AUTHENTICATING, true);
+
+    await tryRegister(formValues);
+
+    setLoading(AUTHENTICATING, false);
   };
 
   return (
@@ -60,8 +66,8 @@ function Register({ handleSubmit, tryRegister, loading }) {
             />
             <Button
               color="violet"
-              disabled={loading}
-              className={loading ? 'loading' : ''}
+              disabled={isAuthenticating}
+              className={isAuthenticating ? 'loading' : ''}
               fluid
               size="large"
             >
@@ -80,7 +86,7 @@ function Register({ handleSubmit, tryRegister, loading }) {
 const WrappedForm = reduxForm({ form: 'registerForm', validate })(Register);
 
 const mapStateToProps = state => {
-  return { loading: state.auth.loading };
+  return { isAuthenticating: state.loading.isAuthenticating };
 };
 
-export default connect(mapStateToProps, { tryRegister })(WrappedForm);
+export default connect(mapStateToProps, { setLoading })(WrappedForm);

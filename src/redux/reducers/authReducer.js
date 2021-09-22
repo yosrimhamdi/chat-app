@@ -1,9 +1,8 @@
-import { AUTH_LOADING, SIGN_OUT, SIGN_IN } from '@types';
+import { SIGN_OUT, SIGN_IN } from '@types';
 
 const INITIAL_STATE = {
   user: null,
   isLoggedIn: false,
-  loading: false,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -19,11 +18,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         user: null,
         isLoggedIn: false,
-      };
-    case AUTH_LOADING:
-      return {
-        ...state,
-        loading: action.payload,
       };
     default:
       return state;

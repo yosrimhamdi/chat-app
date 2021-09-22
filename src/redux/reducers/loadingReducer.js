@@ -1,4 +1,4 @@
-import { SENDING_MESSAGE } from '@types';
+import { SENDING_MESSAGE, AUTHENTICATING } from '@types';
 
 const INITIAL_STATE = {
   isSendingMessage: false,
@@ -12,7 +12,11 @@ const loadingReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isSendingMessage: action.payload,
       };
-
+    case AUTHENTICATING:
+      return {
+        ...state,
+        isAuthenticating: action.payload,
+      };
     default:
       return state;
   }
