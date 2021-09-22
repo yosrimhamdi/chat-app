@@ -1,15 +1,11 @@
 import { getAuth, signOut } from 'firebase/auth';
-import { toastr } from 'react-redux-toastr';
+import catcher from '../../catcher';
 
 const trySignOut = async signOutActionCreator => {
-  try {
-    const auth = getAuth();
-    await signOut(auth);
+  const auth = getAuth();
+  await signOut(auth);
 
-    signOutActionCreator();
-  } catch (e) {
-    toastr.error('Error', e.message);
-  }
+  signOutActionCreator();
 };
 
-export default trySignOut;
+export default catcher(trySignOut);

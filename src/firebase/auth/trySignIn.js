@@ -1,14 +1,11 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { toastr } from 'react-redux-toastr';
+import catcher from '../../catcher';
 
 const trySignIn = async formValues => {
   const { email, password } = formValues;
 
-  try {
-    const auth = getAuth();
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (e) {
-    toastr.error('Error', e.message);
-  }
+  const auth = getAuth();
+  await signInWithEmailAndPassword(auth, email, password);
 };
-export default trySignIn;
+
+export default catcher(trySignIn);
