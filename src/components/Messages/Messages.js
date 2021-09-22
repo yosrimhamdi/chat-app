@@ -9,11 +9,9 @@ const Messages = () => {
   return (
     <div className="messages">
       <MessagesHeader />
-
       <Segment className="messages__messages-container">
         <Comment.Group></Comment.Group>
       </Segment>
-
       <MessageForm />
     </div>
   );
