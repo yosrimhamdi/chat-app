@@ -1,8 +1,9 @@
-import { SENDING_MESSAGE, AUTHENTICATING } from '@types';
+import { SENDING_MESSAGE, AUTHENTICATING, APP_MOUNTED } from '@types';
 
 const INITIAL_STATE = {
   isSendingMessage: false,
   isAuthenticating: false,
+  isInitialMount: true,
 };
 
 const loadingReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,11 @@ const loadingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isAuthenticating: action.payload,
+      };
+    case APP_MOUNTED:
+      return {
+        ...state,
+        isInitialMount: false,
       };
     default:
       return state;

@@ -14,10 +14,12 @@ import GuestRoute from '../Routes/GuestRoute';
 import ProtectedRoute from '../Routes/ProtectedRoute';
 import history from '../../history';
 import signIn from '@actions/signIn';
+import Spinner from '../Spinner/Spinner';
+import removeMountSpinner from '@actions/removeMountSpinner';
 
-function App({ signIn }) {
+function App({ signIn, isInitialMount, removeMountSpinner }) {
   useEffect(() => {
-    onAuthStateChanged(signIn);
+    onAuthStateChanged(signIn, isInitialMount, removeMountSpinner);
   }, []);
 
   return (
@@ -29,9 +31,14 @@ function App({ signIn }) {
           <GuestRoute path="/register" component={Register} />
         </Switch>
       </div>
+      <Spinner />
       <Toastr transitionIn="fadeIn" transitionOut="fadeOut" />
     </Router>
   );
 }
 
-export default connect(null, { signIn })(App);
+const mapStateToProps = state => ({
+  isInitialMount: state.loading.isInitialMount,
+});
+
+export default connect(mapStateToProps, { signIn, removeMountSpinner })(App);
