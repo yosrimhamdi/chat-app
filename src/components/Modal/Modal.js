@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import ModalInput from './ModalInput';
 import validate from './validate';
-import createChannel from '@actions/createChannel';
+import createChannel from '../../firebase/database/createChannel';
 
 function Modals({ isModalOpen, setIsModalOpen, handleSubmit, createChannel }) {
   if (!isModalOpen) {
