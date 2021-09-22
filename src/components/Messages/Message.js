@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './Message.scss';
+import MessageAuthor from './MessageAuthor';
 
-const Message = ({ message, authUser }) => {
+const Message = ({ message, authUser, prevMessage }) => {
   const { content, user } = message;
 
   if (authUser.uid === user.uid) {
@@ -18,7 +19,7 @@ const Message = ({ message, authUser }) => {
       <img className="message__user-photo" src={user.photoURL} />
       <div className="message__content-container">
         <p className="message__content">{content}</p>
-        <p className="message__user-name">{user.displayName}</p>
+        <MessageAuthor message={message} prevMessage={prevMessage} />
       </div>
     </div>
   );

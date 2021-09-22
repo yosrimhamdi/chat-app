@@ -19,9 +19,19 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
     return () => removeListener('messages/' + selectedChannelId + '/');
   }, [selectedChannelId]);
 
-  const renderedMessages = messages.map(message => (
-    <Message key={message.id} message={message} />
-  ));
+  const renderedMessages = [];
+
+  for (let i = 0; i < messages.length; i++) {
+    const message = messages[i];
+
+    renderedMessages[i] = (
+      <Message
+        key={message.id}
+        message={message}
+        prevMessage={messages[i - 1]}
+      />
+    );
+  }
 
   return (
     <div className="messages">
