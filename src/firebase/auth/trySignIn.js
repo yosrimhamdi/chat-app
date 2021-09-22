@@ -7,8 +7,6 @@ const trySignIn = async formValues => {
   try {
     const auth = getAuth();
     await signInWithEmailAndPassword(auth, email, password);
-
-    toastr.success('Success', ' Logged in');
   } catch (e) {
     toastr.error('Error', e.message);
   }

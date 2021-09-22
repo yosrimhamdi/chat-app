@@ -11,11 +11,7 @@ const tryRegister = async formValues => {
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password);
 
-    toastr.success('Success', 'Registration succeeded');
-
     const user = await updateUserProfile(username);
-
-    toastr.success('Success', 'Profile updated');
 
     const { displayName, photoURL } = user;
 
@@ -23,8 +19,6 @@ const tryRegister = async formValues => {
       displayName,
       photoURL,
     });
-
-    toastr.success('Success', 'User added to database');
   } catch (e) {
     toastr.error('Error', e.message);
   }

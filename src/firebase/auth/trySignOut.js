@@ -7,7 +7,6 @@ const trySignOut = async signOut => {
     await signOut(auth);
 
     signOut();
-    toastr.success('Success', 'Signed Out');
   } catch (e) {
     toastr.error('Error', e.message);
   }
