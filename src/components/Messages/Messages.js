@@ -20,16 +20,15 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
   }, [selectedChannelId]);
 
   const renderedMessages = messages.map(message => (
-    <Message key={message.id} />
+    <Message key={message.id} message={message} />
   ));
 
   return (
     <div className="messages">
       <MessagesHeader />
       <Segment className="messages__messages-container">
-        <Comment.Group></Comment.Group>
+        <Comment.Group>{renderedMessages}</Comment.Group>
       </Segment>
-      {renderedMessages}
       <MessageForm />
     </div>
   );
