@@ -7,12 +7,15 @@ import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import { FETCH_COMMENTS } from '../../redux/actions/types';
+import removeListener from '../../firebase/database/removeListener';
 
 const Messages = ({ onCollectionChange, selectedChannelId }) => {
   useEffect(() => {
     if (selectedChannelId) {
       onCollectionChange('messages/' + selectedChannelId + '/', FETCH_COMMENTS);
     }
+
+    return () => removeListener('messages/' + selectedChannelId + '/');
   }, [selectedChannelId]);
 
   return (
