@@ -1,12 +1,12 @@
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import { toastr } from 'react-redux-toastr';
 
-const trySignOut = async signOut => {
+const trySignOut = async signOutActionCreator => {
   try {
     const auth = getAuth();
     await signOut(auth);
 
-    signOut();
+    signOutActionCreator();
   } catch (e) {
     toastr.error('Error', e.message);
   }
