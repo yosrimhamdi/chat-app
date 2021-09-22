@@ -8,8 +8,9 @@ import MessageForm from './MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeListener from '../../firebase/database/removeListener';
 import fetchMessages from '@actions/fetchMessages';
+import Message from './Message';
 
-const Messages = ({ selectedChannelId, fetchMessages }) => {
+const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
   useEffect(() => {
     if (selectedChannelId) {
       onCollectionChange('messages/' + selectedChannelId + '/', fetchMessages);
@@ -18,22 +19,32 @@ const Messages = ({ selectedChannelId, fetchMessages }) => {
     return () => removeListener('messages/' + selectedChannelId + '/');
   }, [selectedChannelId]);
 
+  console.log(messages);
+
+  const renderedMessages = messages.map(message => (
+    <Message key={message.id} />
+  ));
+
+  console.log(renderedMessages);
+
   return (
     <div className="messages">
       <MessagesHeader />
       <Segment className="messages__messages-container">
         <Comment.Group></Comment.Group>
       </Segment>
+      {renderedMessages}
       <MessageForm />
     </div>
   );
 };
 
-const mapStateToProps = ({ channels }) => {
+const mapStateToProps = ({ channels, messages }) => {
   const { selectedChannel } = channels;
 
   return {
     selectedChannelId: selectedChannel ? selectedChannel.id : null,
+    messages,
   };
 };
 
