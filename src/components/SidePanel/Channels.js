@@ -5,12 +5,15 @@ import { Menu, Icon } from 'semantic-ui-react';
 import Modal from '../Modal/Modal';
 import Channel from './Channel';
 import onChannelChange from '@actions/onChannelChange';
+import removeListener from '../../firebase/database/removeListener';
 
 function Channels({ onChannelChange, channels }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     onChannelChange();
+
+    return () => removeListener('channels/');
   }, [onChannelChange]);
 
   const renderedChannels = channels.all.map(channel => (

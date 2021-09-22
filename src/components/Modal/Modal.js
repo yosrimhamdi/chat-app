@@ -13,8 +13,8 @@ function Modals({
   isModalOpen,
   setIsModalOpen,
   handleSubmit,
-  createChannel,
   clearForm,
+  user,
 }) {
   const clearModal = () => {
     setIsModalOpen(false);
@@ -26,7 +26,7 @@ function Modals({
   }
 
   const onFormSubmit = formValues => {
-    createChannel(formValues);
+    createChannel(formValues, user);
     clearModal();
   };
 
@@ -69,4 +69,8 @@ const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
   Modals,
 );
 
-export default connect(null, { createChannel, clearForm })(WrappedForm);
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, { clearForm })(WrappedForm);
