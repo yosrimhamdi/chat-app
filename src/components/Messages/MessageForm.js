@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import MessageInput from './MessageInput';
 import validate from './validate';
 import createMessage from '../../firebase/database/createMessage';
+import clearForm from '@actions/clearForm';
 
-const MessageForm = ({ handleSubmit, user, selectedChannelId }) => {
+const MessageForm = ({ handleSubmit, user, selectedChannelId, clearForm }) => {
   const onFormSubmit = ({ message }) => {
     createMessage(message, selectedChannelId, user);
+    clearForm('messageForm');
   };
 
   return (
@@ -45,4 +47,4 @@ const mapStateToProps = ({ auth, channels }) => {
 
 const WrappedForm = reduxForm({ form: 'messageForm', validate })(MessageForm);
 
-export default connect(mapStateToProps)(WrappedForm);
+export default connect(mapStateToProps, { clearForm })(WrappedForm);
