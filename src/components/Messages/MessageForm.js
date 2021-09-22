@@ -1,11 +1,14 @@
 import React from 'react';
 import { Segment, Button, Form } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
 import MessageInput from './MessageInput';
 
-const MessageForm = ({ handleSubmit }) => {
+const MessageForm = ({ handleSubmit, user, selectedChannelId }) => {
   const onFormSubmit = ({ message }) => {
     console.log(message);
+    console.log(user);
+    console.log(selectedChannelId);
   };
 
   return (
@@ -31,4 +34,15 @@ const MessageForm = ({ handleSubmit }) => {
   );
 };
 
-export default reduxForm({ form: 'messageForm' })(MessageForm);
+const mapStateToProps = ({ auth, channels }) => {
+  const { selectedChannel } = channels;
+
+  return {
+    user: auth.user,
+    selectedChannelId: selectedChannel ? selectedChannel.id : null,
+  };
+};
+
+const WrappedForm = reduxForm({ form: 'messageForm' })(MessageForm);
+
+export default connect(mapStateToProps)(WrappedForm);
