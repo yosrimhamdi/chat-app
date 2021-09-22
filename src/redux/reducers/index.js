@@ -5,6 +5,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr';
 import channels from './channelsReducer';
 import auth from './authReducer';
 import messages from './messagesReducer';
+import loading from './loadingReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   auth,
   channels,
   messages,
+  loading,
 });

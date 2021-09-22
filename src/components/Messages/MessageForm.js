@@ -6,11 +6,25 @@ import MessageInput from './MessageInput';
 import validate from './validate';
 import createMessage from '../../firebase/database/createMessage';
 import clearForm from '@actions/clearForm';
+import setLoading from '../../redux/actions/setLoading';
+import { SENDING_MESSAGE } from '@types';
 
-const MessageForm = ({ handleSubmit, user, selectedChannelId, clearForm }) => {
-  const onFormSubmit = ({ message }) => {
-    createMessage(message, selectedChannelId, user);
+const MessageForm = ({
+  handleSubmit,
+  user,
+  selectedChannelId,
+  clearForm,
+  setLoading,
+  isSendingMessage,
+}) => {
+  const onFormSubmit = async ({ message }) => {
+    setLoading(SENDING_MESSAGE, true);
+
     clearForm('messageForm');
+
+    await createMessage(message, selectedChannelId, user);
+
+    setLoading(SENDING_MESSAGE, false);
   };
 
   return (
@@ -23,6 +37,8 @@ const MessageForm = ({ handleSubmit, user, selectedChannelId, clearForm }) => {
             content="Add Reply"
             labelPosition="left"
             icon="edit"
+            disabled={isSendingMessage}
+            className={isSendingMessage ? 'loading' : ''}
           />
           <Button
             color="teal"
@@ -36,15 +52,16 @@ const MessageForm = ({ handleSubmit, user, selectedChannelId, clearForm }) => {
   );
 };
 
-const mapStateToProps = ({ auth, channels }) => {
+const mapStateToProps = ({ auth, channels, loading }) => {
   const { selectedChannel } = channels;
 
   return {
     user: auth.user,
     selectedChannelId: selectedChannel ? selectedChannel.id : null,
+    isSendingMessage: loading.isSendingMessage,
   };
 };
 
 const WrappedForm = reduxForm({ form: 'messageForm', validate })(MessageForm);
 
-export default connect(mapStateToProps, { clearForm })(WrappedForm);
+export default connect(mapStateToProps, { clearForm, setLoading })(WrappedForm);
