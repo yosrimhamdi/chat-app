@@ -3,7 +3,7 @@ import { Segment, Button, Input } from 'semantic-ui-react';
 
 const MessageForm = () => {
   return (
-    <Segment className="message__form">
+    <Segment className="messages__form">
       <Input
         fluid
         name="message"
