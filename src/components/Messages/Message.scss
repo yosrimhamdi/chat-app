@@ -1,6 +1,43 @@
 .message {
-  &__self {
-    border-left: 2px solid orange;
-    padding-left: 8px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2em;
+
+  &--left {
+    align-self: flex-end;
+  }
+
+  &__user-photo {
+    width: 33px;
+    height: 33px;
+    object-fit: cover;
+    margin-right: 0.5em;
+    border-radius: 50%;
+  }
+
+  &__user-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #7c7e83;
+    transform: translate(12px, -100%);
+  }
+
+  &__content-container {
+    position: relative;
+  }
+
+  &__content {
+    background-color: #e4e6eb;
+    padding: 0.6em 1em;
+    border-radius: 18px;
+    margin: 0;
+
+    &--blue {
+      color: white;
+      background-color: #0084ff;
+    }
   }
 }

@@ -27,7 +27,9 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
     <div className="messages">
       <MessagesHeader />
       <Segment className="messages__messages-container">
-        <Comment.Group>{renderedMessages}</Comment.Group>
+        <Comment.Group className="messages__messages-wrapper">
+          {renderedMessages}
+        </Comment.Group>
       </Segment>
       <MessageForm />
     </div>

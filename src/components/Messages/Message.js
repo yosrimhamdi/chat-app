@@ -1,27 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Comment } from 'semantic-ui-react';
-import moment from 'moment';
-import classnames from 'classnames';
 
 import './Message.scss';
 
 const Message = ({ message, authUser }) => {
-  const { content, user, createdAt } = message;
+  const { content, user } = message;
 
-  const className = classnames({
-    'message__self': authUser.uid === user.uid,
-  });
-
+  if (authUser.uid === user.uid) {
+    return (
+      <div className="message message--left">
+        <p className="message__content message__content--blue">{content}</p>
+      </div>
+    );
+  }
   return (
-    <Comment className="message">
-      <Comment.Avatar src={user.photoURL} />
-      <Comment.Content className={className}>
-        <Comment.Author as="a">{user.displayName}</Comment.Author>
-        <Comment.Metadata>{moment(createdAt).fromNow()}</Comment.Metadata>
-        <Comment.Text>{content}</Comment.Text>
-      </Comment.Content>
-    </Comment>
+    <div className="message">
+      <img className="message__user-photo" src={user.photoURL} />
+      <div className="message__content-container">
+        <p className="message__content">{content}</p>
+        <p className="message__user-name">{user.displayName}</p>
+      </div>
+    </div>
   );
 };
 

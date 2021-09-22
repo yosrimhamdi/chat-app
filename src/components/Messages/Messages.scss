@@ -6,4 +6,9 @@
   &__messages-container {
     flex-grow: 1;
   }
+
+  &__messages-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 }
