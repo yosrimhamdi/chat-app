@@ -1,7 +1,7 @@
 import { toastr } from 'react-redux-toastr';
 import { reset } from 'redux-form';
 
-import writeData from '../writeData';
+import writeData from './writeData';
 
 const createChannel = formValues => async (dispatch, getState) => {
   const { channelName, channelDetails } = formValues;
