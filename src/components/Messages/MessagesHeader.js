@@ -1,13 +1,14 @@
 import React from 'react';
 import { Header, Segment, Input, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-const MessagesHeader = () => {
+const MessagesHeader = ({ selectedChannel }) => {
   return (
     <Segment clearing>
       {/* Channel Title */}
       <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
         <span>
-          Channel
+          {selectedChannel.name}
           <Icon name={'star outline'} color="black" />
         </span>
         <Header.Subheader>2 Users</Header.Subheader>
@@ -26,4 +27,8 @@ const MessagesHeader = () => {
   );
 };
 
-export default MessagesHeader;
+const mapStateToProps = state => {
+  return { selectedChannel: state.channels.selectedChannel };
+};
+
+export default connect(mapStateToProps)(MessagesHeader);

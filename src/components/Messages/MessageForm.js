@@ -53,11 +53,9 @@ const MessageForm = ({
 };
 
 const mapStateToProps = ({ auth, channels, loading }) => {
-  const { selectedChannel } = channels;
-
   return {
     user: auth.user,
-    selectedChannelId: selectedChannel ? selectedChannel.id : null,
+    selectedChannelId: channels.selectedChannel.id,
     isSendingMessage: loading.isSendingMessage,
   };
 };

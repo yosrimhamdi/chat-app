@@ -1,7 +1,7 @@
 import { FETCH_CHANNELS, SELECT_CHANNEL } from '@types';
 
 const INITIAL_STATE = {
-  selectedChannel: null,
+  selectedChannel: {},
   all: [],
 };
 

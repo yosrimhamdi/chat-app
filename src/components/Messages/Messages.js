@@ -35,10 +35,8 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
 };
 
 const mapStateToProps = ({ channels, messages }) => {
-  const { selectedChannel } = channels;
-
   return {
-    selectedChannelId: selectedChannel ? selectedChannel.id : null,
+    selectedChannelId: channels.selectedChannel.id,
     messages,
   };
 };
