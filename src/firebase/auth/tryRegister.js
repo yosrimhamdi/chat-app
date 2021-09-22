@@ -1,7 +1,7 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import catcher from '../../catcher';
 
-import updateUserProfile from './updateUserProfile';
+import updateProfile from './updateProfile';
 import writeData from '../database/writeData';
 
 const tryRegister = async formValues => {
@@ -10,7 +10,7 @@ const tryRegister = async formValues => {
   const auth = getAuth();
   await createUserWithEmailAndPassword(auth, email, password);
 
-  const user = await updateUserProfile(username);
+  const user = await updateProfile(username);
 
   const { displayName, photoURL } = user;
 
