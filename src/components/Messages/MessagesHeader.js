@@ -7,7 +7,8 @@ const MessagesHeader = ({ selectedChannel }) => {
     <Segment clearing>
       <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
         <span>
-          {selectedChannel.name} <Icon name={'star outline'} color="black" />
+          {selectedChannel.name} Channel{' '}
+          <Icon name={'star outline'} color="black" />
         </span>
         <Header.Subheader>2 Users</Header.Subheader>
       </Header>
