@@ -1,8 +1,8 @@
-import { FETCH_COMMENTS } from '../actions/types';
+import { FETCH_MESSAGES } from '../actions/types';
 
 const messagesReducers = (state = [], action) => {
   switch (action.type) {
-    case FETCH_COMMENTS:
+    case FETCH_MESSAGES:
       return action.payload;
     default:
       return state;
