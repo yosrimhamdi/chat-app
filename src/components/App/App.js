@@ -9,7 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Home from '../Home/Home';
 import Login from '../Auth/Login/Login';
 import Register from '../Auth/Register/Register';
-import onAuthStateChange from '../../firebase/auth/onAuthStateChange';
+import onAuthStateChanged from '../../firebase/auth/onAuthStateChanged';
 import GuestRoute from '../Routes/GuestRoute';
 import ProtectedRoute from '../Routes/ProtectedRoute';
 import history from '../../history';
@@ -17,7 +17,7 @@ import signIn from '@actions/signIn';
 
 function App({ signIn }) {
   useEffect(() => {
-    onAuthStateChange(signIn);
+    onAuthStateChanged(signIn);
   }, []);
 
   return (
