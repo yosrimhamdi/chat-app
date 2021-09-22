@@ -1,10 +1,12 @@
-.message {
+.messages .message {
   width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 0.25em;
+}
 
+.message {
   &--left {
     align-self: flex-end;
   }
