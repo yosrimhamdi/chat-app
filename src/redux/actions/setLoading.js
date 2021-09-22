@@ -1,8 +1,6 @@
-const setLoading = (actionType, isLoading) => {
-  return {
-    type: actionType,
-    payload: isLoading,
-  };
-};
+const setLoading = (actionType, isLoading) => ({
+  type: actionType,
+  payload: isLoading,
+});
 
 export default setLoading;
