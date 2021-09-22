@@ -1,5 +1,6 @@
 import md5 from 'md5';
 import { getAuth, updateProfile } from 'firebase/auth';
+import catcher from '../../catcher';
 
 const updateUserProfile = async username => {
   const { currentUser } = getAuth();
@@ -16,4 +17,4 @@ const updateUserProfile = async username => {
   return currentUser;
 };
 
-export default updateUserProfile;
+export default catcher(updateUserProfile);
