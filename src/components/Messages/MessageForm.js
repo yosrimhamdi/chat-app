@@ -4,12 +4,11 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import MessageInput from './MessageInput';
 import validate from './validate';
+import createMessage from '../../firebase/database/createMessage';
 
 const MessageForm = ({ handleSubmit, user, selectedChannelId }) => {
   const onFormSubmit = ({ message }) => {
-    console.log(message);
-    console.log(user);
-    console.log(selectedChannelId);
+    createMessage(message, selectedChannelId, user);
   };
 
   return (
