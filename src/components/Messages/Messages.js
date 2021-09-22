@@ -19,13 +19,9 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
     return () => removeListener('messages/' + selectedChannelId + '/');
   }, [selectedChannelId]);
 
-  console.log(messages);
-
   const renderedMessages = messages.map(message => (
     <Message key={message.id} />
   ));
-
-  console.log(renderedMessages);
 
   return (
     <div className="messages">
