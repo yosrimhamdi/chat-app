@@ -2,9 +2,10 @@ import React from 'react';
 import { Grid, Header, Icon, Dropdown, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import trySignOut from '@actions/trySignOut';
+import trySignOut from '../../firebase/auth/trySignOut';
+import signOut from '@actions/signOut';
 
-function UserPanel({ trySignOut, user }) {
+function UserPanel({ signOut, user }) {
   const dropdownOptions = [
     {
       key: 'user',
@@ -21,7 +22,7 @@ function UserPanel({ trySignOut, user }) {
     },
     {
       key: 'signout',
-      text: <div onClick={trySignOut}>Sign Out</div>,
+      text: <div onClick={() => trySignOut(signOut)}>Sign Out</div>,
     },
   ];
 
@@ -54,4 +55,4 @@ const mapStateToProps = state => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { trySignOut })(UserPanel);
+export default connect(mapStateToProps, { signOut })(UserPanel);

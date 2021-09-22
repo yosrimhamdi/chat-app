@@ -11,7 +11,7 @@ const channelsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         all: action.payload,
-        selectedChannel: action.payload[0],
+        selectedChannel: action.payload.length ? action.payload[0] : {},
       };
     case SELECT_CHANNEL:
       return {
