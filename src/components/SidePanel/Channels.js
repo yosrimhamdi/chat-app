@@ -5,14 +5,14 @@ import { Menu, Icon } from 'semantic-ui-react';
 import Modal from '../Modal/Modal';
 import Channel from './Channel';
 import removeListener from '../../firebase/database/removeListener';
-import { FETCH_CHANNELS } from '@types';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
+import fetchChannels from '@actions/fetchChannels';
 
-function Channels({ onCollectionChange, channels }) {
+function Channels({ channels, fetchChannels }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    onCollectionChange('channels/', FETCH_CHANNELS);
+    onCollectionChange('channels/', fetchChannels);
 
     return () => removeListener('channels/');
   }, [onCollectionChange]);
@@ -44,4 +44,4 @@ const mapStateToProps = state => ({
   channels: state.channels,
 });
 
-export default connect(mapStateToProps, { onCollectionChange })(Channels);
+export default connect(mapStateToProps, { fetchChannels })(Channels);

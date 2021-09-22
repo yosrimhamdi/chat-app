@@ -6,13 +6,13 @@ import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
-import { FETCH_COMMENTS } from '../../redux/actions/types';
 import removeListener from '../../firebase/database/removeListener';
+import fetchMessages from '@actions/fetchMessages';
 
-const Messages = ({ onCollectionChange, selectedChannelId }) => {
+const Messages = ({ selectedChannelId, fetchMessages }) => {
   useEffect(() => {
     if (selectedChannelId) {
-      onCollectionChange('messages/' + selectedChannelId + '/', FETCH_COMMENTS);
+      onCollectionChange('messages/' + selectedChannelId + '/', fetchMessages);
     }
 
     return () => removeListener('messages/' + selectedChannelId + '/');
@@ -37,4 +37,4 @@ const mapStateToProps = ({ channels }) => {
   };
 };
 
-export default connect(mapStateToProps, { onCollectionChange })(Messages);
+export default connect(mapStateToProps, { fetchMessages })(Messages);

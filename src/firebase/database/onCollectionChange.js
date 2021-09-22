@@ -1,16 +1,13 @@
 import { getDatabase, ref, onValue } from 'firebase/database';
 
-const onCollectionChange = (collectionName, actionType) => dispatch => {
+const onCollectionChange = (collectionName, actionCreator) => {
   const db = getDatabase();
   const channelsRef = ref(db, collectionName);
 
   onValue(channelsRef, snapshot => {
     const documents = Object.values(snapshot.val() || []);
 
-    dispatch({
-      type: actionType,
-      payload: documents,
-    });
+    actionCreator(documents);
   });
 };
 
