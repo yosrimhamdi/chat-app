@@ -7,15 +7,27 @@ import { connect } from 'react-redux';
 import ModalInput from './ModalInput';
 import validate from './validate';
 import createChannel from '../../firebase/database/createChannel';
+import clearForm from '@actions/clearForm';
 
-function Modals({ isModalOpen, setIsModalOpen, handleSubmit, createChannel }) {
+function Modals({
+  isModalOpen,
+  setIsModalOpen,
+  handleSubmit,
+  createChannel,
+  clearForm,
+}) {
+  const clearModal = () => {
+    setIsModalOpen(false);
+    clearForm('createNewChannelForm');
+  };
+
   if (!isModalOpen) {
     return null;
   }
 
   const onFormSubmit = formValues => {
     createChannel(formValues);
-    setIsModalOpen(false);
+    clearModal();
   };
 
   const modal = (
@@ -41,12 +53,7 @@ function Modals({ isModalOpen, setIsModalOpen, handleSubmit, createChannel }) {
             <Button color="green" type="submit">
               <Icon name="checkmark" /> Add
             </Button>
-            <Button
-              color="red"
-              type="button"
-              inverted
-              onClick={() => setIsModalOpen(false)}
-            >
+            <Button color="red" type="button" inverted onClick={clearModal}>
               <Icon name="remove" /> Cancel
             </Button>
           </Modal.Actions>
@@ -62,4 +69,4 @@ const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
   Modals,
 );
 
-export default connect(null, { createChannel })(WrappedForm);
+export default connect(null, { createChannel, clearForm })(WrappedForm);

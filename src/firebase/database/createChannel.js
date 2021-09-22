@@ -1,11 +1,9 @@
 import { toastr } from 'react-redux-toastr';
-import { reset } from 'redux-form';
 
 import writeData from './writeData';
 
-const createChannel = formValues => async (dispatch, getState) => {
+const createChannel = async (formValues, user) => {
   const { channelName, channelDetails } = formValues;
-  const user = getState().auth.user;
 
   try {
     await writeData('channels/', {
@@ -22,8 +20,6 @@ const createChannel = formValues => async (dispatch, getState) => {
   } catch (e) {
     console.log(e);
   }
-
-  dispatch(reset('createNewChannelForm'));
 };
 
 export default createChannel;
