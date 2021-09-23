@@ -15,7 +15,7 @@ function Modals({ isModalOpen, closeModal }) {
 
   const modal = (
     <Modal basic open={true} onClose={closeModal}>
-      <Modal.Header>Add a Channel</Modal.Header>
+      <Modal.Header>Select An Image File</Modal.Header>
       <Modal.Content>
         <Form onSubmit={onFormSubmit}>
           <Form.Field>
