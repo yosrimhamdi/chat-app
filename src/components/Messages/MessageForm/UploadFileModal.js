@@ -1,42 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Form, Button, Icon, Input } from 'semantic-ui-react';
+import { Modal, Button, Icon, Input } from 'semantic-ui-react';
 
 function Modals({ isModalOpen, closeModal }) {
   if (!isModalOpen) {
     return null;
   }
 
-  const onFormSubmit = e => {
-    e.preventDefault();
-    console.log(e);
-    closeModal();
+  const onFileChange = e => {
+    console.log(e.target.files[0]);
   };
 
   const modal = (
     <Modal basic open={true} onClose={closeModal}>
       <Modal.Header>Select An Image File</Modal.Header>
       <Modal.Content>
-        <Form onSubmit={onFormSubmit}>
-          <Form.Field>
-            <Input
-              name="file"
-              type="file"
-              label="File type; jpg, png"
-              accept="images/*"
-              fluid
-            />
-          </Form.Field>
-          <Modal.Actions style={{ textAlign: 'right' }}>
-            <Button inverted color="green" type="submit">
-              <Icon name="checkmark" /> Add
-            </Button>
-            <Button color="red" type="button" inverted onClick={closeModal}>
-              <Icon name="remove" /> Cancel
-            </Button>
-          </Modal.Actions>
-        </Form>
+        <Input
+          name="file"
+          type="file"
+          label="File type; jpg, png"
+          accept="images/*"
+          fluid
+          onChange={onFileChange}
+        />
       </Modal.Content>
+      <Modal.Actions>
+        <Button inverted color="green">
+          <Icon name="checkmark" /> Add
+        </Button>
+        <Button color="red" type="button" inverted onClick={closeModal}>
+          <Icon name="remove" /> Cancel
+        </Button>
+      </Modal.Actions>
     </Modal>
   );
 
