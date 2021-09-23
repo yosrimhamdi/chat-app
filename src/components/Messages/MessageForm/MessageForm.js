@@ -8,7 +8,7 @@ import createMessage from '../../../firebase/database/createMessage';
 import clearForm from '@actions/clearForm';
 import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
-import UploadFileModal from './UploadFileModal';
+import UploadFileModal from '../../Modals/UploadFileModal/UploadFileModal';
 
 const MessageForm = ({
   handleSubmit,

@@ -4,18 +4,18 @@ import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import ModalInput from './AddChannelModalInput';
+import Input from './Input';
 import validate from './validate';
 import createChannel from '../../../firebase/database/createChannel';
 import clearForm from '@actions/clearForm';
 
-function AddChannelModal({
+const AddChannelModal = ({
   isModalOpen,
   setIsModalOpen,
   handleSubmit,
   clearForm,
   user,
-}) {
+}) => {
   const clearModal = () => {
     setIsModalOpen(false);
     clearForm('createNewChannelForm');
@@ -39,14 +39,14 @@ function AddChannelModal({
             <Field
               label="Name of Channel"
               name="channelName"
-              component={ModalInput}
+              component={Input}
             />
           </Form.Field>
           <Form.Field>
             <Field
               label="About the Channel"
               name="channelDetails"
-              component={ModalInput}
+              component={Input}
             />
           </Form.Field>
           <Modal.Actions style={{ textAlign: 'right' }}>
@@ -63,7 +63,7 @@ function AddChannelModal({
   );
 
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
-}
+};
 
 const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
   AddChannelModal,

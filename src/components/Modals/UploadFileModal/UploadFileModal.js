@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Button, Icon, Input } from 'semantic-ui-react';
 
-function Modals({ isModalOpen, closeModal }) {
+function UploadFileModal({ isModalOpen, closeModal }) {
   if (!isModalOpen) {
     return null;
   }
@@ -38,4 +38,4 @@ function Modals({ isModalOpen, closeModal }) {
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
 }
 
-export default Modals;
+export default UploadFileModal;
