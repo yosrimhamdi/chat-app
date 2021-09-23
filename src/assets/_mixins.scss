@@ -1,0 +1,21 @@
+@mixin message {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.25em;
+}
+
+@mixin messageContent {
+  background-color: #e4e6eb;
+  padding: 0.6em 1em;
+  border-radius: 18px;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+@mixin imageMessage {
+  width: 150px;
+  margin: 1.2em 0 3em;
+  border-radius: 10px;
+}

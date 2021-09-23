@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MessageAuthor = ({ message, prevMessage = { user: {} } }) => {
+const MessageAuthor = ({ className, message, prevMessage = { user: {} } }) => {
   const { uid, displayName } = message.user;
 
   if (uid == prevMessage.user.uid) {
@@ -9,7 +9,7 @@ const MessageAuthor = ({ message, prevMessage = { user: {} } }) => {
 
   const firstName = displayName.split(' ')[0];
 
-  return <p className="message__user-name">{firstName}</p>;
+  return <p className={className}>{firstName}</p>;
 };
 
 export default MessageAuthor;

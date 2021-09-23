@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Button, Icon, Input } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
-function UploadFileModal({ isModalOpen, closeModal }) {
+import uploadFile from '../../../firebase/storage/uploadFile';
+import createImageMessage from '../../../firebase/database/createImageMessage';
+
+function UploadFileModal({ isModalOpen, closeModal, selectedChannelId, user }) {
+  const [file, setFile] = useState(null);
+
   if (!isModalOpen) {
     return null;
   }
 
-  const onFileChange = e => {
-    console.log(e.target.files[0]);
+  const onButtonClick = async () => {
+    if (file) {
+      const imageURL = await uploadFile(file, selectedChannelId);
+
+      createImageMessage(imageURL, selectedChannelId, user);
+    } else {
+      console.log('please select a file');
+    }
   };
 
   const modal = (
@@ -21,11 +33,11 @@ function UploadFileModal({ isModalOpen, closeModal }) {
           label="File type; jpg, png"
           accept="images/*"
           fluid
-          onChange={onFileChange}
+          onChange={(e) => setFile(e.target.files[0])}
         />
       </Modal.Content>
       <Modal.Actions>
-        <Button inverted color="green">
+        <Button onClick={onButtonClick} inverted color="green">
           <Icon name="checkmark" /> Add
         </Button>
         <Button color="red" type="button" inverted onClick={closeModal}>
@@ -38,4 +50,9 @@ function UploadFileModal({ isModalOpen, closeModal }) {
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
 }
 
-export default UploadFileModal;
+const mapStateToProps = (state) => ({
+  selectedChannelId: state.channels.selectedChannel.id,
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps)(UploadFileModal);

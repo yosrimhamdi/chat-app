@@ -1,31 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './Message.scss';
-import MessageAuthor from './MessageAuthor';
+import UserMessage from './UserMessage';
+import GuestMessage from './GuestMessage';
 
 const Message = ({ message, authUser, prevMessage }) => {
-  const { content, user } = message;
+  const { user } = message;
 
   if (authUser.uid === user.uid) {
-    return (
-      <div className="message message--left">
-        <p className="message__content message__content--blue">{content}</p>
-      </div>
-    );
+    return <UserMessage message={message} />;
   }
-  return (
-    <div className="message">
-      <img className="message__user-photo" src={user.photoURL} />
-      <div className="message__content-container">
-        <p className="message__content">{content}</p>
-        <MessageAuthor message={message} prevMessage={prevMessage} />
-      </div>
-    </div>
-  );
+  return <GuestMessage message={message} prevMessage={prevMessage} />;
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { authUser: state.auth.user };
 };
 
