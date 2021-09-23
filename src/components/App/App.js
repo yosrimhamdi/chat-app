@@ -15,11 +15,11 @@ import ProtectedRoute from '../Routes/ProtectedRoute';
 import history from '../../history';
 import signIn from '@actions/signIn';
 import Spinner from '../Spinner/Spinner';
-import removeMountSpinner from '@actions/removeMountSpinner';
+import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
 
-function App({ signIn, isInitialMount, removeMountSpinner }) {
+function App({ signIn, isInitialMount, removeLoadingChatSpinner }) {
   useEffect(() => {
-    onAuthStateChanged(signIn, isInitialMount, removeMountSpinner);
+    onAuthStateChanged(signIn, isInitialMount, removeLoadingChatSpinner);
   }, []);
 
   return (
@@ -41,4 +41,6 @@ const mapStateToProps = state => ({
   isInitialMount: state.loading.isInitialMount,
 });
 
-export default connect(mapStateToProps, { signIn, removeMountSpinner })(App);
+export default connect(mapStateToProps, { signIn, removeLoadingChatSpinner })(
+  App,
+);

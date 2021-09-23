@@ -1,6 +1,10 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-const onAuthStateChange = (signIn, isInitialMount, removeMountSpinner) => {
+const onAuthStateChange = (
+  signIn,
+  isInitialMount,
+  removeLoadingChatSpinner,
+) => {
   const auth = getAuth();
   onAuthStateChanged(auth, user => {
     if (user) {
@@ -8,7 +12,7 @@ const onAuthStateChange = (signIn, isInitialMount, removeMountSpinner) => {
     }
 
     if (isInitialMount) {
-      removeMountSpinner();
+      removeLoadingChatSpinner();
     }
   });
 };
