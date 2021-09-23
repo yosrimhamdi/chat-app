@@ -27,6 +27,16 @@ function Register({ handleSubmit, isAuthenticating, setLoading }) {
     setLoading(AUTHENTICATING, false);
   };
 
+  const capitalize = username => {
+    username = username.split(' ');
+
+    username = username.map(
+      part => part.charAt(0).toUpperCase() + part.slice(1),
+    );
+
+    return username.join(' ');
+  };
+
   return (
     <Grid textAlign="center" verticalAlign="middle" style={{ height: '100%' }}>
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -42,6 +52,7 @@ function Register({ handleSubmit, isAuthenticating, setLoading }) {
               type="text"
               placeholder="Username"
               component={AuthInput}
+              normalize={capitalize}
             />
             <Field
               name="email"
