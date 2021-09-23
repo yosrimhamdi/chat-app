@@ -9,6 +9,7 @@
 
   &__image {
     @include imageMessage;
+    margin-left: 40px;
   }
 
   &__user-photo {
