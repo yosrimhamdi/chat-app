@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
-import MessageForm from './MessageForm';
+import MessageForm from './MessageForm/MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeListener from '../../firebase/database/removeListener';
 import fetchMessages from '@actions/fetchMessages';
-import Message from './Message';
+import Message from './Message/Message';
 
 const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
   useEffect(() => {

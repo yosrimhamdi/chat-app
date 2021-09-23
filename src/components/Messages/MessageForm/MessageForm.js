@@ -4,9 +4,9 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import MessageInput from './MessageInput';
 import validate from './validate';
-import createMessage from '../../firebase/database/createMessage';
+import createMessage from '../../../firebase/database/createMessage';
 import clearForm from '@actions/clearForm';
-import setLoading from '../../redux/actions/setLoading';
+import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
 import UploadFileModal from './UploadFileModal';
 
