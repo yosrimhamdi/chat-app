@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Segment, Button, Form } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import createMessage from '../../firebase/database/createMessage';
 import clearForm from '@actions/clearForm';
 import setLoading from '../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
+import UploadFileModal from './UploadFileModal';
 
 const MessageForm = ({
   handleSubmit,
@@ -17,6 +18,8 @@ const MessageForm = ({
   setLoading,
   isSendingMessage,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const onFormSubmit = async ({ message }) => {
     setLoading(SENDING_MESSAGE, true);
 
@@ -45,8 +48,14 @@ const MessageForm = ({
             content="Upload Media"
             labelPosition="right"
             icon="cloud upload"
+            type="button"
+            onClick={() => setIsModalOpen(true)}
           />
         </Button.Group>
+        <UploadFileModal
+          isModalOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+        />
       </Form>
     </Segment>
   );
