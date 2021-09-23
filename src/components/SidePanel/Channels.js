@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
-import Modal from '../Modal/Modal';
+import Modal from './AddChannelModal/AddChannelModal';
 import Channel from './Channel';
 import removeListener from '../../firebase/database/removeListener';
 import onCollectionChange from '../../firebase/database/onCollectionChange';

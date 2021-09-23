@@ -4,12 +4,12 @@ import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import ModalInput from './ModalInput';
+import ModalInput from './AddChannelModalInput';
 import validate from './validate';
-import createChannel from '../../firebase/database/createChannel';
+import createChannel from '../../../firebase/database/createChannel';
 import clearForm from '@actions/clearForm';
 
-function Modals({
+function AddChannelModal({
   isModalOpen,
   setIsModalOpen,
   handleSubmit,
@@ -66,7 +66,7 @@ function Modals({
 }
 
 const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
-  Modals,
+  AddChannelModal,
 );
 
 const mapStateToProps = state => ({
