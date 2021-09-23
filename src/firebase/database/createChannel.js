@@ -1,25 +1,22 @@
 import { toastr } from 'react-redux-toastr';
 
 import writeData from './writeData';
+import catcher from '../../catcher';
 
 const createChannel = async (formValues, user) => {
   const { channelName, channelDetails } = formValues;
 
-  try {
-    await writeData('channels/', {
-      name: channelName,
-      details: channelDetails,
-      createdBy: {
-        userName: user.displayName,
-        email: user.email,
-        avatar: user.photoURL,
-      },
-    });
+  await writeData('channels/', {
+    name: channelName,
+    details: channelDetails,
+    createdBy: {
+      userName: user.displayName,
+      email: user.email,
+      avatar: user.photoURL,
+    },
+  });
 
-    toastr.success('Success', 'Channel created.');
-  } catch (e) {
-    console.log(e);
-  }
+  toastr.success('Success', 'Channel created.');
 };
 
-export default createChannel;
+export default catcher(createChannel);

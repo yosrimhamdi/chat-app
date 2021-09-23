@@ -1,21 +1,18 @@
 import writeData from './writeData';
+import catcher from '../../catcher';
 
 const createMessage = async (content, channelId, user) => {
   const { uid, photoURL, displayName } = user;
 
-  try {
-    await writeData('messages/' + channelId + '/', {
-      content,
-      createdAt: Date.now(),
-      user: {
-        uid,
-        photoURL,
-        displayName,
-      },
-    });
-  } catch (e) {
-    console.log(e);
-  }
+  await writeData('messages/' + channelId + '/', {
+    content,
+    createdAt: Date.now(),
+    user: {
+      uid,
+      photoURL,
+      displayName,
+    },
+  });
 };
 
-export default createMessage;
+export default catcher(createMessage);
