@@ -50,7 +50,7 @@ function Modals({
             />
           </Form.Field>
           <Modal.Actions style={{ textAlign: 'right' }}>
-            <Button color="green" type="submit">
+            <Button inverted color="green" type="submit">
               <Icon name="checkmark" /> Add
             </Button>
             <Button color="red" type="button" inverted onClick={clearModal}>
