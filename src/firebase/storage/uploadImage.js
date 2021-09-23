@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import catcher from '../../catcher';
 
-const uploadFile = async (file, channelId) => {
+const uploadImage = async (file, channelId) => {
   const mimetype = file.type.split('/')[1];
 
   const storage = getStorage();
@@ -17,4 +17,4 @@ const uploadFile = async (file, channelId) => {
   return await getDownloadURL(storageRef);
 };
 
-export default catcher(uploadFile);
+export default catcher(uploadImage);

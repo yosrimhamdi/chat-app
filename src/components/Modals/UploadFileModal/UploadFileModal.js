@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Modal, Button, Icon, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import uploadFile from '../../../firebase/storage/uploadFile';
+import uploadImage from '../../../firebase/storage/uploadImage';
 import createImageMessage from '../../../firebase/database/createImageMessage';
 
 function UploadFileModal({ isModalOpen, closeModal, selectedChannelId, user }) {
@@ -15,7 +15,7 @@ function UploadFileModal({ isModalOpen, closeModal, selectedChannelId, user }) {
 
   const onButtonClick = async () => {
     if (file) {
-      const imageURL = await uploadFile(file, selectedChannelId);
+      const imageURL = await uploadImage(file, selectedChannelId);
 
       createImageMessage(imageURL, selectedChannelId, user);
     } else {
