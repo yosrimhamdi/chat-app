@@ -8,7 +8,7 @@ import createMessage from '../../../firebase/database/createTextMessage';
 import clearForm from '@actions/clearForm';
 import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
-import UploadFileModal from '../../Modals/UploadFileModal/UploadFileModal';
+import UploadImageModal from '../../Modals/UploadImageModal/UploadImageModal';
 
 const MessageForm = ({
   handleSubmit,
@@ -52,7 +52,7 @@ const MessageForm = ({
             onClick={() => setIsModalOpen(true)}
           />
         </Button.Group>
-        <UploadFileModal
+        <UploadImageModal
           isModalOpen={isModalOpen}
           closeModal={() => setIsModalOpen(false)}
         />
