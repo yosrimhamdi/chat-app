@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Router, Switch } from 'react-router-dom';
 import Toastr from 'react-redux-toastr';
+import { connect } from 'react-redux';
 
 import './App.scss';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
@@ -12,11 +13,13 @@ import onAuthStateChanged from '../../firebase/auth/onAuthStateChanged';
 import GuestRoute from '../Routes/GuestRoute';
 import ProtectedRoute from '../Routes/ProtectedRoute';
 import history from '../../history';
+import signIn from '@actions/signIn';
 import Spinner from '../Spinner/Spinner';
+import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
 
-function App() {
+function App({ signIn, isInitialMount, removeLoadingChatSpinner }) {
   useEffect(() => {
-    onAuthStateChanged();
+    onAuthStateChanged(signIn, isInitialMount, removeLoadingChatSpinner);
   }, []);
 
   return (
@@ -34,4 +37,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isInitialMount: state.loading.isInitialMount,
+});
+
+export default connect(mapStateToProps, { signIn, removeLoadingChatSpinner })(
+  App,
+);
