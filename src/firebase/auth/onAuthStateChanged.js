@@ -1,17 +1,17 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
-const onAuthStateChange = (
-  signIn,
-  isInitialMount,
-  removeLoadingChatSpinner,
-) => {
+import { getState } from '../../redux/store';
+import signIn from '@actions/signIn';
+import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
+
+const onAuthStateChange = () => {
   const auth = getAuth();
   onAuthStateChanged(auth, user => {
     if (user) {
       signIn(user);
     }
 
-    if (isInitialMount) {
+    if (getState().loading.isInitialMount) {
       removeLoadingChatSpinner();
     }
   });

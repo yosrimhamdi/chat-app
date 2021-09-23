@@ -5,7 +5,13 @@ import reducers from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default createStore(
+const store = createStore(
   reducers,
-  composeEnhancers(applyMiddleware(reduxThunk))
+  composeEnhancers(applyMiddleware(reduxThunk)),
 );
+
+export const dispatch = store.dispatch;
+
+export const getState = store.getState;
+
+export default store;
