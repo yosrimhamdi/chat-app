@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Input, Modal, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -7,6 +7,8 @@ import validate from './validate';
 import uploadImage from '../../../firebase/storage/uploadImage';
 import createImageMessage from '../../../firebase/database/createImageMessage';
 import setFileToUpload from '../../../redux/actions/setFileToUpload';
+import setLoading from '@actions/setLoading';
+import { UPLOADING_FILE } from '@types';
 
 const UploadImageModal = ({
   isModalOpen,
@@ -15,9 +17,9 @@ const UploadImageModal = ({
   user,
   setFileToUpload,
   file,
+  setLoading,
+  isUploading,
 }) => {
-  const [loading, setLoading] = useState(false);
-
   if (!isModalOpen) {
     return null;
   }
@@ -32,13 +34,13 @@ const UploadImageModal = ({
     const valid = validate(file);
 
     if (valid) {
-      setLoading(true);
+      setLoading(UPLOADING_FILE, true);
 
       const imageURL = await uploadImage(file);
 
       await createImageMessage(imageURL, selectedChannelId, user);
 
-      setLoading(false);
+      setLoading(UPLOADING_FILE, false);
 
       closeModal();
     }
@@ -62,8 +64,8 @@ const UploadImageModal = ({
           inverted
           color="green"
           onClick={onSubmitButtonClick}
-          loading={loading}
-          className={loading ? 'loading' : ''}
+          loading={isUploading}
+          className={isUploading ? 'loading' : ''}
         >
           <Icon name="checkmark" /> Add
         </Button>
@@ -86,6 +88,9 @@ const mapStateToProps = (state) => ({
   selectedChannelId: state.channels.selectedChannel.id,
   user: state.auth.user,
   file: state.upload.file,
+  isUploading: state.loading.isUploading,
 });
 
-export default connect(mapStateToProps, { setFileToUpload })(UploadImageModal);
+export default connect(mapStateToProps, { setFileToUpload, setLoading })(
+  UploadImageModal
+);
