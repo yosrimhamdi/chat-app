@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Segment, Comment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
@@ -11,6 +11,8 @@ import fetchMessages from '@actions/fetchMessages';
 import Message from './Message/Message';
 
 const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
+  const messagesRef = useRef();
+
   useEffect(() => {
     if (selectedChannelId) {
       onCollectionChange('messages/' + selectedChannelId + '/', fetchMessages);
@@ -18,6 +20,10 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
 
     return () => removeListener('messages/' + selectedChannelId + '/');
   }, [selectedChannelId]);
+
+  useEffect(() => {
+    messagesRef.current.style.height = `${messagesRef.current.offsetHeight}px`;
+  }, []);
 
   const renderedMessages = [];
 
@@ -36,11 +42,9 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
   return (
     <div className="messages">
       <MessagesHeader />
-      <Segment className="messages__messages-container">
-        <Comment.Group className="messages__messages-wrapper">
-          {renderedMessages}
-        </Comment.Group>
-      </Segment>
+      <div className="messages__messages-container" ref={messagesRef}>
+        <div className="messages__messages-wrapper">{renderedMessages}</div>
+      </div>
       <MessageForm />
     </div>
   );
