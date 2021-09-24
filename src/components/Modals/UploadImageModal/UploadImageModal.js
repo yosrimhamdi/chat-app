@@ -1,65 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Form, Modal, Button, Icon } from 'semantic-ui-react';
+import { Input, Modal, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
 
-import FileInput from './FileInput';
 import validate from './validate';
-import clearForm from '@actions/clearForm';
 
-function UploadImageModal({
-  clearForm,
-  handleSubmit,
-  isModalOpen,
-  closeModal,
-}) {
+const UploadImageModal = ({ isModalOpen, closeModal }) => {
+  const [file, setFile] = useState();
+
   if (!isModalOpen) {
     return null;
   }
 
-  const onCancelClick = () => {
-    clearForm('uploadImageModal');
+  const onCancelButtonClick = () => {
     closeModal();
+
+    setFile(null);
   };
 
-  const onFormSubmit = (formValues) => {
-    console.log(formValues);
+  const onSubmitButtonClick = () => {
+    const valid = validate(file);
+
+    if (valid) {
+      console.log(file);
+    }
   };
 
   const modal = (
     <Modal basic open={true} onClose={closeModal}>
-      <Form onSubmit={handleSubmit(onFormSubmit)}>
-        <Modal.Header>Select An Image File</Modal.Header>
-        <Modal.Content>
-          <Field
-            name="file"
-            component={FileInput}
-            normalize={(files) => files[0]}
-          />
-        </Modal.Content>
-        <Modal.Actions>
-          <Button inverted color="green">
-            <Icon name="checkmark" /> Add
-          </Button>
-          <Button color="red" type="button" inverted onClick={onCancelClick}>
-            <Icon name="remove" /> Cancel
-          </Button>
-        </Modal.Actions>
-      </Form>
+      <Modal.Header>Select An Image File</Modal.Header>
+      <Modal.Content>
+        <Input
+          name="file"
+          type="file"
+          label="File type; jpg, png"
+          accept="image/*"
+          fluid
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+      </Modal.Content>
+      <Modal.Actions>
+        <Button inverted color="green" onClick={onSubmitButtonClick}>
+          <Icon name="checkmark" /> Add
+        </Button>
+        <Button
+          color="red"
+          type="button"
+          inverted
+          onClick={onCancelButtonClick}
+        >
+          <Icon name="remove" /> Cancel
+        </Button>
+      </Modal.Actions>
     </Modal>
   );
 
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
-}
+};
 
 const mapStateToProps = (state) => ({
   selectedChannelId: state.channels.selectedChannel.id,
   user: state.auth.user,
 });
 
-const WrappedForm = reduxForm({ form: 'uploadImageModal', validate })(
-  UploadImageModal
-);
-
-export default connect(mapStateToProps, { clearForm })(WrappedForm);
+export default connect(mapStateToProps)(UploadImageModal);
