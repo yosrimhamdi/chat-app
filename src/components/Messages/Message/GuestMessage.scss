@@ -3,6 +3,11 @@
 .guest-message {
   @include message;
 
+  &--spaced {
+    // border: 1px solid red;
+    margin-top: 1.8em;
+  }
+
   &__content {
     @include messageContent;
   }
