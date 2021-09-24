@@ -61,7 +61,7 @@ const UploadImageModal = ({
           color="green"
           onClick={onSubmitButtonClick}
           loading={loading}
-          className={loading ? 'loading' : ' '}
+          className={loading ? 'loading' : ''}
         >
           <Icon name="checkmark" /> Add
         </Button>
