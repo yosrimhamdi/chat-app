@@ -27,7 +27,7 @@ function Channels({ channels, fetchChannels }) {
         <span>
           <Icon name="exchange" /> CHANNELS
         </span>{' '}
-        ({channels.all.length})
+        {channels.all.length}
         <Icon
           style={{ cursor: 'pointer' }}
           name="add"
