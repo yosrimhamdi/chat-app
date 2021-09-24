@@ -9,6 +9,7 @@ import clearForm from '@actions/clearForm';
 import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
 import UploadImageModal from '../../Modals/UploadImageModal/UploadImageModal';
+import ProgressBar from '../../ProgressBar/ProgressBar';
 
 const MessageForm = ({
   handleSubmit,
@@ -57,6 +58,7 @@ const MessageForm = ({
           closeModal={() => setIsModalOpen(false)}
         />
       </Form>
+      <ProgressBar />
     </Segment>
   );
 };
