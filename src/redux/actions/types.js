@@ -13,7 +13,6 @@ export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const SENDING_MESSAGE = 'SENDING_MESSAGE';
 export const AUTHENTICATING = 'AUTHENTICATING';
 export const APP_MOUNTED = 'APP_MOUNTED';
-export const UPLOADING_FILE = 'UPLOADING_FILE';
 
 // Uploading Reducer
 export const SET_FILE_TO_UPLOAD = 'SET_FILE_TO_UPLOAD';

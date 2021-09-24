@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import validate from './validate';
 import uploadImage from '../../../firebase/storage/uploadImage';
 import setFileToUpload from '../../../redux/actions/setFileToUpload';
-import setLoading from '@actions/setLoading';
 import setPercent from '../../../redux/actions/setPercent';
 
 const UploadImageModal = ({
@@ -15,6 +14,7 @@ const UploadImageModal = ({
   selectedChannelId,
   setFileToUpload,
   file,
+  setPercent,
 }) => {
   if (!isModalOpen) {
     return null;
@@ -30,7 +30,7 @@ const UploadImageModal = ({
     const valid = validate(file);
 
     if (valid) {
-      uploadImage(file, selectedChannelId);
+      uploadImage(file, selectedChannelId, setPercent);
 
       clearModal();
     }
@@ -70,6 +70,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   setFileToUpload,
-  setLoading,
   setPercent,
 })(UploadImageModal);
