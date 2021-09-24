@@ -33,7 +33,7 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
       <Message
         key={message.id}
         message={message}
-        prevMessage={messages[i - 1]}
+        prevMessage={messages[i - 1] || { user: {} }}
       />
     );
   }

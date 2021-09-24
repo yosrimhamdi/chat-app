@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Segment, Input, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import NumUsers from './NumUsers';
 
 const MessagesHeader = ({ selectedChannel }) => {
   return (
@@ -9,7 +10,9 @@ const MessagesHeader = ({ selectedChannel }) => {
         <span>
           #{selectedChannel.name} <Icon name={'star outline'} color="black" />
         </span>
-        <Header.Subheader>2 Users</Header.Subheader>
+        <Header.Subheader>
+          <NumUsers />
+        </Header.Subheader>
       </Header>
       <Header floated="right">
         <Input
@@ -23,8 +26,8 @@ const MessagesHeader = ({ selectedChannel }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { selectedChannel: state.channels.selectedChannel };
-};
+const mapStateToProps = state => ({
+  selectedChannel: state.channels.selectedChannel,
+});
 
 export default connect(mapStateToProps)(MessagesHeader);
