@@ -17,12 +17,18 @@ import validate from './validate.js';
 import tryRegister from '../../../firebase/auth/tryRegister';
 import { AUTHENTICATING } from '@types';
 import setLoading from '@actions/setLoading';
+import updateProfile from '../../../firebase/auth/updateProfile';
+import writeUserData from '../../../firebase/database/writeUserData';
 
 function Register({ handleSubmit, isAuthenticating, setLoading }) {
-  const onFormSubmit = async formValues => {
+  const onFormSubmit = async ({ email, password, username }) => {
     setLoading(AUTHENTICATING, true);
 
-    await tryRegister(formValues);
+    await tryRegister(email, password);
+
+    updateProfile(username);
+
+    await writeUserData();
 
     setLoading(AUTHENTICATING, false);
   };

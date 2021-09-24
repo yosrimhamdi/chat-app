@@ -4,8 +4,9 @@ function catcher(fn) {
   return async function (...args) {
     try {
       return await fn(...args);
-    } catch (e) {
-      toastr.error('Error', e.message);
+    } catch ({ message }) {
+      console.log({ message });
+      toastr.error('Error', message);
     }
   };
 }
