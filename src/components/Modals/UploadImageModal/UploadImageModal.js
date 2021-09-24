@@ -6,14 +6,16 @@ import { connect } from 'react-redux';
 import validate from './validate';
 import uploadImage from '../../../firebase/storage/uploadImage';
 import createImageMessage from '../../../firebase/database/createImageMessage';
+import setFileToUpload from '../../../redux/actions/setFileToUpload';
 
 const UploadImageModal = ({
   isModalOpen,
   closeModal,
   selectedChannelId,
   user,
+  setFileToUpload,
+  file,
 }) => {
-  const [file, setFile] = useState();
   const [loading, setLoading] = useState(false);
 
   if (!isModalOpen) {
@@ -23,7 +25,7 @@ const UploadImageModal = ({
   const onCancelButtonClick = () => {
     closeModal();
 
-    setFile(null);
+    setFileToUpload(null);
   };
 
   const onSubmitButtonClick = async () => {
@@ -52,7 +54,7 @@ const UploadImageModal = ({
           label="File type; jpg, png"
           accept="image/*"
           fluid
-          onChange={(e) => setFile(e.target.files[0])}
+          onChange={(e) => setFileToUpload(e.target.files[0])}
         />
       </Modal.Content>
       <Modal.Actions>
@@ -83,6 +85,7 @@ const UploadImageModal = ({
 const mapStateToProps = (state) => ({
   selectedChannelId: state.channels.selectedChannel.id,
   user: state.auth.user,
+  file: state.upload.file,
 });
 
-export default connect(mapStateToProps)(UploadImageModal);
+export default connect(mapStateToProps, { setFileToUpload })(UploadImageModal);

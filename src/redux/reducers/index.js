@@ -6,6 +6,7 @@ import channels from './channelsReducer';
 import auth from './authReducer';
 import messages from './messagesReducer';
 import loading from './loadingReducer';
+import upload from './uploadReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   channels,
   messages,
   loading,
+  upload,
 });
