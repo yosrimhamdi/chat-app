@@ -18,6 +18,7 @@ const MessageForm = ({
   clearForm,
   setLoading,
   isSendingMessage,
+  isUploading,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,7 +43,7 @@ const MessageForm = ({
             labelPosition="left"
             icon="edit"
             disabled={isSendingMessage}
-            className={isSendingMessage ? 'loading' : ''}
+            loading={isSendingMessage}
           />
           <Button
             color="teal"
@@ -50,6 +51,8 @@ const MessageForm = ({
             labelPosition="right"
             icon="cloud upload"
             type="button"
+            loading={isUploading}
+            disabled={isUploading}
             onClick={() => setIsModalOpen(true)}
           />
         </Button.Group>
@@ -68,6 +71,7 @@ const mapStateToProps = ({ auth, channels, loading }) => {
     user: auth.user,
     selectedChannelId: channels.selectedChannel.id,
     isSendingMessage: loading.isSendingMessage,
+    isUploading: loading.isUploading,
   };
 };
 
