@@ -24,7 +24,7 @@ const UploadImageModal = ({
     return null;
   }
 
-  const onCancelButtonClick = () => {
+  const clearModal = () => {
     closeModal();
 
     setFileToUpload(null);
@@ -42,7 +42,7 @@ const UploadImageModal = ({
 
       setLoading(UPLOADING_FILE, false);
 
-      closeModal();
+      clearModal();
     }
   };
 
@@ -69,12 +69,7 @@ const UploadImageModal = ({
         >
           <Icon name="checkmark" /> Add
         </Button>
-        <Button
-          color="red"
-          type="button"
-          inverted
-          onClick={onCancelButtonClick}
-        >
+        <Button color="red" type="button" inverted onClick={clearModal}>
           <Icon name="remove" /> Cancel
         </Button>
       </Modal.Actions>
