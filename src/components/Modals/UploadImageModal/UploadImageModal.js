@@ -4,9 +4,17 @@ import { Input, Modal, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import validate from './validate';
+import uploadImage from '../../../firebase/storage/uploadImage';
+import createImageMessage from '../../../firebase/database/createImageMessage';
 
-const UploadImageModal = ({ isModalOpen, closeModal }) => {
+const UploadImageModal = ({
+  isModalOpen,
+  closeModal,
+  selectedChannelId,
+  user,
+}) => {
   const [file, setFile] = useState();
+  const [loading, setLoading] = useState(false);
 
   if (!isModalOpen) {
     return null;
@@ -18,11 +26,19 @@ const UploadImageModal = ({ isModalOpen, closeModal }) => {
     setFile(null);
   };
 
-  const onSubmitButtonClick = () => {
+  const onSubmitButtonClick = async () => {
     const valid = validate(file);
 
     if (valid) {
-      console.log(file);
+      setLoading(true);
+
+      const imageURL = await uploadImage(file);
+
+      await createImageMessage(imageURL, selectedChannelId, user);
+
+      setLoading(false);
+
+      closeModal();
     }
   };
 
@@ -40,7 +56,13 @@ const UploadImageModal = ({ isModalOpen, closeModal }) => {
         />
       </Modal.Content>
       <Modal.Actions>
-        <Button inverted color="green" onClick={onSubmitButtonClick}>
+        <Button
+          inverted
+          color="green"
+          onClick={onSubmitButtonClick}
+          loading={loading}
+          className={loading ? 'loading' : ' '}
+        >
           <Icon name="checkmark" /> Add
         </Button>
         <Button
