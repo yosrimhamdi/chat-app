@@ -28,7 +28,7 @@ const UploadImageModal = ({
     setFileToUpload(null);
   };
 
-  const onSubmitButtonClick = async () => {
+  const onSubmitButtonClick = () => {
     const valid = validate(file);
 
     if (valid) {

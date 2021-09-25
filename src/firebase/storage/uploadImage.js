@@ -24,20 +24,26 @@ const uploadImage = async (file, channelId, setPercent, setLoading) => {
   const UploadTask = uploadBytesResumable(storageRef, file);
   setLoading(UPLOADING_FILE, true);
 
-  UploadTask.on('state_changed', snapshot => {
+  UploadTask.on('state_changed', async snapshot => {
     const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
     setPercent(Math.round(percent));
 
     if (percent >= 100) {
-      setTimeout(async () => {
-        const imageURL = await getDownloadURL(storageRef);
+      while (true) {
+        try {
+          const imageURL = await getDownloadURL(storageRef);
 
-        await createImageMessage(imageURL, channelId, getAuth().currentUser);
+          await createImageMessage(imageURL, channelId, getAuth().currentUser);
 
-        setLoading(UPLOADING_FILE, false);
-        setPercent(0);
-      }, 2000);
+          setLoading(UPLOADING_FILE, false);
+          setPercent(0);
+
+          break;
+        } catch (e) {
+          console.log(e);
+        }
+      }
     }
   });
 };
