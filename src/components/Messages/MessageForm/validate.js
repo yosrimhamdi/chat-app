@@ -1,9 +1,11 @@
 const validate = ({ message }) => {
+  const errors = {};
+
   if (!message) {
-    return { message: 'no message' };
+    errors.message = 'no message';
   }
 
-  return {};
+  return errors;
 };
 
 export default validate;
