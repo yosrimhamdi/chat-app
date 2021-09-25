@@ -40,8 +40,8 @@ const uploadImage = async (file, channelId, setPercent, setLoading) => {
           setPercent(0);
 
           break;
-        } catch (e) {
-          console.log(e);
+        } catch {
+          //
         }
       }
     }
