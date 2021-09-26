@@ -33,12 +33,7 @@ function Channels({ channels, fetchChannels }) {
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedChannels}
-      <ModalContext.Provider
-        value={{
-          isModalOpen,
-          closeModal,
-        }}
-      >
+      <ModalContext.Provider value={{ isModalOpen, closeModal }}>
         <CreateChannelModal />
       </ModalContext.Provider>
     </Menu.Menu>
