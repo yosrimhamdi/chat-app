@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Field } from 'redux-form';
 
 import './CreateChannelModal.scss';
-import Input from './Input/Input';
 import Spinner from '../../Spinner2/Spinner';
 import classNames from 'classnames';
 import closeIcon from './close.svg';
@@ -16,6 +14,8 @@ const Modal = ({
   loading,
   invalid,
   title,
+  children,
+  buttonMessage,
 }) => {
   if (!isModalOpen) {
     return null;
@@ -47,16 +47,11 @@ const Modal = ({
               />
             </div>
           </div>
-          <Field label="Name of Channel" name="channelName" component={Input} />
-          <Field
-            label="About the Channel"
-            name="channelDetails"
-            component={Input}
-          />
+          {children}
         </div>
         <div className="create-post-modal__actions">
           <button className={buttonClassName} type="submit">
-            Create
+            {buttonMessage}
           </button>
         </div>
         <Spinner visible={loading} />

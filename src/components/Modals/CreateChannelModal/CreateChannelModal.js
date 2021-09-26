@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 
 import Modal from './Modal';
 import createChannel from '../../../firebase/database/createChannel';
 import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../../redux/actions/setLoading';
 import validate from './validate';
+import Input from './Input/Input';
 
 const CreateChannelModal = ({
   user,
@@ -31,7 +32,15 @@ const CreateChannelModal = ({
       isModalOpen={isModalOpen}
       loading={isCreatingChannel}
       title="Create new channel"
-    />
+      buttonMessage="Create"
+    >
+      <Field label="Name of Channel" name="channelName" component={Input} />
+      <Field
+        label="About the Channel"
+        name="channelDetails"
+        component={Input}
+      />
+    </Modal>
   );
 };
 
