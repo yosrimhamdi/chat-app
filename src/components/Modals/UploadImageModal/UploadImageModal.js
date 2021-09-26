@@ -33,7 +33,6 @@ const UploadImageModal = ({
     <Modal
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
-      loading={false}
       title="Upload an image"
       buttonMessage="Upload"
       invalid={invalid}
