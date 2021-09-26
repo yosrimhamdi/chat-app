@@ -1,9 +1,11 @@
 .image-message {
   width: 150px;
   margin: 0.25em 0;
+  margin-left: 40px;
 
   &--is-self {
     align-self: flex-end;
+    margin-left: 0;
   }
 
   &__image {

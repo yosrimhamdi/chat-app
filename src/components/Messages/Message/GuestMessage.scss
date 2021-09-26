@@ -11,11 +11,6 @@
     @include messageContent;
   }
 
-  &__image {
-    @include imageMessage;
-    margin-left: 40px;
-  }
-
   &__user-photo {
     width: 33px;
     height: 33px;

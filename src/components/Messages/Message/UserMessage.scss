@@ -4,11 +4,6 @@
   @include message;
   align-self: flex-end;
 
-  &__image {
-    @include imageMessage;
-    align-self: flex-end;
-  }
-
   &__content {
     @include messageContent;
     color: white;
