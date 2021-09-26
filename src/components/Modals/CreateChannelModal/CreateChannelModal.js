@@ -22,11 +22,6 @@ const CreateChannelModal = ({
   isCreatingChannel,
   invalid,
 }) => {
-  const buttonClassName = classNames({
-    'create-post-modal__button': true,
-    'create-post-modal__button--valid': !invalid,
-  });
-
   if (!isModalOpen) {
     return null;
   }
@@ -37,6 +32,11 @@ const CreateChannelModal = ({
     setLoading(CREATING_CHANNEL, false);
     closeModal();
   };
+
+  const buttonClassName = classNames({
+    'create-post-modal__button': true,
+    'create-post-modal__button--valid': !invalid,
+  });
 
   const modal = (
     <form
