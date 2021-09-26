@@ -1,7 +1,10 @@
+import { getAuth } from 'firebase/auth';
+
 import writeData from './writeData';
 import catcher from '../../catcher';
 
-const createMessage = async (content, channelId, user) => {
+const createTextMessage = async (content, channelId) => {
+  const { currentUser: user } = getAuth();
   const { uid, photoURL, displayName } = user;
 
   await writeData('messages/' + channelId + '/', {
@@ -16,4 +19,4 @@ const createMessage = async (content, channelId, user) => {
   });
 };
 
-export default catcher(createMessage);
+export default catcher(createTextMessage);

@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import MessageInput from './MessageInput';
 import validate from './validate';
-import createMessage from '../../../firebase/database/createTextMessage';
+import createTextMessage from '../../../firebase/database/createTextMessage';
 import clearForm from '@actions/clearForm';
 import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
@@ -15,7 +15,6 @@ import ModalContext from '../../Modals/ModalContext';
 
 const MessageForm = ({
   handleSubmit,
-  user,
   selectedChannelId,
   clearForm,
   setLoading,
@@ -29,7 +28,7 @@ const MessageForm = ({
 
     clearForm('messageForm');
 
-    await createMessage(message, selectedChannelId, user);
+    await createTextMessage(message, selectedChannelId);
 
     setLoading(SENDING_MESSAGE, false);
   };
@@ -67,9 +66,8 @@ const MessageForm = ({
   );
 };
 
-const mapStateToProps = ({ auth, channels, loading }) => {
+const mapStateToProps = ({ channels, loading }) => {
   return {
-    user: auth.user,
     selectedChannelId: channels.selectedChannel.id,
     isSendingMessage: loading.isSendingMessage,
     isUploading: loading.isUploading,
