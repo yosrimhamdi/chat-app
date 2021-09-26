@@ -14,7 +14,6 @@ import clearForm from '@actions/clearForm';
 const FORM_NAME = 'createChannelForm';
 
 const CreateChannelModal = ({
-  user,
   setLoading,
   isCreatingChannel,
   handleSubmit,
@@ -25,7 +24,7 @@ const CreateChannelModal = ({
 
   const onSubmit = async formValues => {
     setLoading(CREATING_CHANNEL, true);
-    await createChannel(formValues, user);
+    await createChannel(formValues);
     setLoading(CREATING_CHANNEL, false);
     clearForm(FORM_NAME);
     closeModal();
@@ -51,7 +50,6 @@ const CreateChannelModal = ({
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   isCreatingChannel: state.loading.isCreatingChannel,
 });
 
