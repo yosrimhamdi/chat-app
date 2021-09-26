@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
-import Modal from './Modal';
+import Modal from '../../Modal/Modal';
 import createChannel from '../../../firebase/database/createChannel';
 import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../../redux/actions/setLoading';
 import validate from './validate';
 import Input from './Input/Input';
-import ModalContext from './ModalContext';
+import ModalContext from '../../Modal/ModalContext';
 
 const CreateChannelModal = ({
   user,

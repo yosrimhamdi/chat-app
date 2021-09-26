@@ -7,8 +7,8 @@ import Channel from './Channel';
 import removeListener from '../../firebase/database/removeListener';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import fetchChannels from '@actions/fetchChannels';
-import ModalContext from '../Modals/CreateChannelModal/ModalContext';
-import useModal from '../Modals/CreateChannelModal/useModal';
+import ModalContext from '../Modal/ModalContext';
+import useModal from '../Modal/useModal';
 
 function Channels({ channels, fetchChannels }) {
   const [isModalOpen, openModal, closeModal] = useModal();
