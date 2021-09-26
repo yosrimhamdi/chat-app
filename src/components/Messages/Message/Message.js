@@ -3,17 +3,25 @@ import { connect } from 'react-redux';
 
 import UserMessage from './UserMessage';
 import GuestMessage from './GuestMessage';
+import ImageMessage from './ImageMessage';
 
 const Message = ({ message, authUser, prevMessage }) => {
-  const { user } = message;
+  const { user, type } = message;
 
-  if (authUser.uid === user.uid) {
+  const isSelf = authUser.uid == user.uid;
+
+  if (type == 'image') {
+    return <ImageMessage src={message.imageURL} isSelf={isSelf} />;
+  }
+
+  if (isSelf) {
     return <UserMessage message={message} />;
   }
+
   return <GuestMessage message={message} prevMessage={prevMessage} />;
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { authUser: state.auth.user };
 };
 

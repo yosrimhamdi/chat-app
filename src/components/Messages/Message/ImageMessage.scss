@@ -1,0 +1,14 @@
+.image-message {
+  width: 150px;
+  margin: 0.25em 0;
+
+  &--is-self {
+    align-self: flex-end;
+  }
+
+  &__image {
+    border-radius: 10px;
+    display: block;
+    width: 100%;
+  }
+}

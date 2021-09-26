@@ -5,11 +5,7 @@ import MessageAuthor from './MessageAuthor';
 import './GuestMessage.scss';
 
 const GuestMessage = ({ message, prevMessage }) => {
-  const { type, content, imageURL, user } = message;
-
-  if (type == 'image') {
-    return <img src={imageURL} alt="image" className="guest-message__image" />;
-  }
+  const { content, user } = message;
 
   const className = classnames({
     'guest-message': true,

@@ -3,11 +3,7 @@ import React from 'react';
 import './UserMessage.scss';
 
 const UserMessage = ({ message }) => {
-  const { type, content, imageURL } = message;
-
-  if (type == 'image') {
-    return <img src={imageURL} alt="image" className="user-message__image" />;
-  }
+  const { content } = message;
 
   return (
     <div className="user-message">
