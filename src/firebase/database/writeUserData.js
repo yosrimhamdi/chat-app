@@ -4,8 +4,7 @@ import catcher from '../../catcher';
 import writeData from './writeData';
 
 const writeUserData = async () => {
-  const { currentUser } = getAuth();
-  const { displayName, photoURL, email } = currentUser;
+  const { displayName, photoURL, email } = getAuth().currentUser;
 
   await writeData('users/', {
     displayName,
