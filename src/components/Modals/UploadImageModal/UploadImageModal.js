@@ -51,7 +51,6 @@ const WrappedForm = reduxForm({ form: 'uploadImageForm', validate })(
 
 const mapStateToProps = state => ({
   selectedChannelId: state.channels.selectedChannel.id,
-  file: state.upload.file,
 });
 
 export default connect(mapStateToProps, {
