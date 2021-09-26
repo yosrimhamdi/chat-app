@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import UserMessage from './UserMessage';
+import SelfMessage from './SelfMessage';
 import GuestMessage from './GuestMessage';
 import ImageMessage from './ImageMessage';
 
@@ -15,7 +15,7 @@ const Message = ({ message, authUser, prevMessage }) => {
   }
 
   if (isSelf) {
-    return <UserMessage message={message} />;
+    return <SelfMessage message={message} />;
   }
 
   return <GuestMessage message={message} prevMessage={prevMessage} />;

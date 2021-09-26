@@ -1,6 +1,6 @@
 @use '@assets/mixins' as *;
 
-.user-message {
+.self-message {
   @include message;
   align-self: flex-end;
 
