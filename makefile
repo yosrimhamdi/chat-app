@@ -7,4 +7,7 @@ deploy:
 	npm run build
 	firebase login
 	firebase deploy
+	$(MAKE) open
+
+open:
 	firebase hosting:channel:open live
