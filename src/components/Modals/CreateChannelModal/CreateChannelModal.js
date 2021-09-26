@@ -9,6 +9,9 @@ import setLoading from '../../../redux/actions/setLoading';
 import validate from './validate';
 import Input from './Input/Input';
 import ModalContext from '../../Modal/ModalContext';
+import clearForm from '@actions/clearForm';
+
+const FORM_NAME = 'createChannelForm';
 
 const CreateChannelModal = ({
   user,
@@ -16,6 +19,7 @@ const CreateChannelModal = ({
   isCreatingChannel,
   handleSubmit,
   invalid,
+  clearForm,
 }) => {
   const { closeModal } = useContext(ModalContext);
 
@@ -23,6 +27,7 @@ const CreateChannelModal = ({
     setLoading(CREATING_CHANNEL, true);
     await createChannel(formValues, user);
     setLoading(CREATING_CHANNEL, false);
+    clearForm(FORM_NAME);
     closeModal();
   };
 
@@ -50,8 +55,8 @@ const mapStateToProps = state => ({
   isCreatingChannel: state.loading.isCreatingChannel,
 });
 
-const WrappedForm = reduxForm({ form: 'createChannelForm', validate })(
+const WrappedForm = reduxForm({ form: FORM_NAME, validate })(
   CreateChannelModal,
 );
 
-export default connect(mapStateToProps, { setLoading })(WrappedForm);
+export default connect(mapStateToProps, { setLoading, clearForm })(WrappedForm);
