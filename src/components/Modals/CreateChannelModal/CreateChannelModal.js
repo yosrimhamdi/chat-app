@@ -71,7 +71,7 @@ const CreateChannelModal = ({
             Create
           </button>
         </div>
-        <Spinner visible={isCreatingChannel} onContent />
+        <Spinner visible={isCreatingChannel} />
       </div>
     </form>
   );
