@@ -14,7 +14,7 @@ import GuestRoute from '../Routes/GuestRoute';
 import ProtectedRoute from '../Routes/ProtectedRoute';
 import history from '../../history';
 import signIn from '@actions/signIn';
-import AppInitSpinner from '../AppInitSpinner/AppInitSpinner';
+import AppMountSpinner from '../AppMountSpinner/AppMountSpinner';
 import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
 
 function App({ signIn, removeLoadingChatSpinner }) {
@@ -31,7 +31,7 @@ function App({ signIn, removeLoadingChatSpinner }) {
           <GuestRoute path="/register" component={Register} />
         </Switch>
       </div>
-      <AppInitSpinner />
+      <AppMountSpinner />
       <Toastr transitionIn="fadeIn" transitionOut="fadeOut" />
     </Router>
   );

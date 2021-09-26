@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Loader, Dimmer } from 'semantic-ui-react';
 
-import './AppInitSpinner.scss';
+import './AppMountSpinner.scss';
 
 const Spinner = ({ isInitialMount }) => {
   if (!isInitialMount) {
