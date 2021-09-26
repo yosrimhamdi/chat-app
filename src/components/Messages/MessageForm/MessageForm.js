@@ -10,8 +10,8 @@ import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
 import UploadImageModal from '../../Modals/UploadImageModal/UploadImageModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
-import useModal from '../../Modal/useModal';
-import ModalContext from '../../Modal/ModalContext';
+import useModal from '../../Modals/useModal';
+import ModalContext from '../../Modals/ModalContext';
 
 const MessageForm = ({
   handleSubmit,

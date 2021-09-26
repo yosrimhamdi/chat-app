@@ -6,9 +6,9 @@ import validate from './validate';
 import uploadImage from '../../../firebase/storage/uploadImage';
 import setPercent from '../../../redux/actions/setPercent';
 import setLoading from '@actions/setLoading';
-import ModalContext from '../../Modal/ModalContext';
-import Modal from '../../Modal/Modal';
-import FileInput from '../../Input/FileInput';
+import ModalContext from '../ModalContext';
+import Modal from '../Modal';
+import FileInput from './FileInput';
 import clearForm from '@actions/clearForm';
 
 const FORM_NAME = 'uploadImageForm';
@@ -37,12 +37,7 @@ const UploadImageModal = ({
       buttonMessage="Upload"
       invalid={invalid}
     >
-      <Field
-        name="file"
-        label="Choose an Image"
-        normalize={file => file[0]}
-        component={FileInput}
-      />
+      <Field name="file" normalize={file => file[0]} component={FileInput} />
     </Modal>
   );
 };

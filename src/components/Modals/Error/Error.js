@@ -2,10 +2,8 @@ import React from 'react';
 
 import './Error.scss';
 
-const Error = ({ meta }) => {
-  const { error, visited, active } = meta;
-
-  if (error && visited & !active) {
+const Error = ({ condition, error }) => {
+  if (condition) {
     return <div className="error">{error}</div>;
   }
 
