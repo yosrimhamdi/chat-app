@@ -19,11 +19,7 @@ const UploadImageModal = ({
   clearForm,
   invalid,
 }) => {
-  const { isModalOpen, closeModal } = useContext(ModalContext);
-
-  if (!isModalOpen) {
-    return null;
-  }
+  const { closeModal } = useContext(ModalContext);
 
   const onSubmit = ({ file }) => {
     uploadImage(file, selectedChannelId, setPercent, setLoading);
