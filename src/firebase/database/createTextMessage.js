@@ -4,8 +4,7 @@ import writeData from './writeData';
 import catcher from '../../catcher';
 
 const createTextMessage = async (content, channelId) => {
-  const { currentUser: user } = getAuth();
-  const { uid, photoURL, displayName } = user;
+  const { uid, photoURL, displayName } = getAuth().currentUser;
 
   await writeData('messages/' + channelId + '/', {
     content,
