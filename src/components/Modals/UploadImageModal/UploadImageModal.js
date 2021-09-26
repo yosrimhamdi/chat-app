@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { Input, Modal, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -8,16 +8,17 @@ import uploadImage from '../../../firebase/storage/uploadImage';
 import setFileToUpload from '../../../redux/actions/setFileToUpload';
 import setPercent from '../../../redux/actions/setPercent';
 import setLoading from '@actions/setLoading';
+import ModalContext from '../../Modal/ModalContext';
 
 const UploadImageModal = ({
-  isModalOpen,
-  closeModal,
   selectedChannelId,
   setFileToUpload,
   file,
   setPercent,
   setLoading,
 }) => {
+  const { isModalOpen, closeModal } = useContext(ModalContext);
+
   if (!isModalOpen) {
     return null;
   }

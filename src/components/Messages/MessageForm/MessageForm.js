@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Segment, Button, Form } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
@@ -10,6 +10,8 @@ import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
 import UploadImageModal from '../../Modals/UploadImageModal/UploadImageModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
+import useModal from '../../Modal/useModal';
+import ModalContext from '../../Modal/ModalContext';
 
 const MessageForm = ({
   handleSubmit,
@@ -20,7 +22,7 @@ const MessageForm = ({
   isSendingMessage,
   isUploading,
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, openModal, closeModal] = useModal();
 
   const onFormSubmit = async ({ message }) => {
     setLoading(SENDING_MESSAGE, true);
@@ -53,13 +55,12 @@ const MessageForm = ({
             type="button"
             loading={isUploading}
             disabled={isUploading}
-            onClick={() => setIsModalOpen(true)}
+            onClick={openModal}
           />
         </Button.Group>
-        <UploadImageModal
-          isModalOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
-        />
+        <ModalContext.Provider value={{ isModalOpen, closeModal }}>
+          <UploadImageModal />
+        </ModalContext.Provider>
       </Form>
       <ProgressBar />
     </Segment>
