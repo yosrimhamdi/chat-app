@@ -2,9 +2,9 @@ const validate = ({ file }) => {
   const errors = {};
 
   if (!file) {
-    errors.message = 'No image selected';
+    errors.file = 'No image selected';
   } else if (!file.type.includes('image')) {
-    errors.message = 'Not an image';
+    errors.file = 'Not an image';
   }
 
   return errors;

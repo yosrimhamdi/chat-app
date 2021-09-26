@@ -26,6 +26,7 @@ const UploadImageModal = ({
   }
 
   const onSubmit = ({ file }) => {
+    console.log('submitted');
     uploadImage(file, selectedChannelId, setPercent, setLoading);
     clearForm('uploadImageForm');
     closeModal();
@@ -40,7 +41,12 @@ const UploadImageModal = ({
       buttonMessage="Upload"
       invalid={invalid}
     >
-      <Field name="file" normalize={file => file[0]} component={FileInput} />
+      <Field
+        name="file"
+        label="Choose an Image"
+        normalize={file => file[0]}
+        component={FileInput}
+      />
     </Modal>
   );
 };
