@@ -4,7 +4,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage';
-import { getAuth } from '@firebase/auth';
 import { v4 as uuidv4 } from 'uuid';
 
 import catcher from '../../catcher';
@@ -34,7 +33,7 @@ const uploadImage = async (file, channelId, setPercent, setLoading) => {
         try {
           const imageURL = await getDownloadURL(storageRef);
 
-          await createImageMessage(imageURL, channelId, getAuth().currentUser);
+          await createImageMessage(imageURL, channelId);
 
           setLoading(UPLOADING_FILE, false);
           setPercent(0);
