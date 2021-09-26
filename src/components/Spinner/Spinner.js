@@ -1,27 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
-import { Loader, Dimmer } from 'semantic-ui-react';
 
+import spinnerIcon from './spinner.svg';
 import './Spinner.scss';
 
-const Spinner = ({ isInitialMount }) => {
-  if (!isInitialMount) {
+const Spinner = ({ visible }) => {
+  if (!visible) {
     return null;
   }
 
-  return ReactDOM.createPortal(
-    <Dimmer active>
-      <Loader size="huge" content={'Preparing Chat...'} />
-    </Dimmer>,
-    document.getElementById('spinner'),
+  return (
+    <div className="spinner spinner--on-content">
+      <img src={spinnerIcon} className="spinner__circle" alt="loading..." />
+    </div>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    isInitialMount: state.loading.isInitialMount,
-  };
-};
-
-export default connect(mapStateToProps)(Spinner);
+export default Spinner;

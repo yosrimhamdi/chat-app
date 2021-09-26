@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import './Modal.scss';
-import Spinner from '../Spinner2/Spinner';
+import Spinner from '../Spinner/Spinner';
 import closeIcon from './close.svg';
 import ModalContext from './ModalContext';
 
