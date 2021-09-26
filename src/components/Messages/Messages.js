@@ -35,6 +35,10 @@ const Messages = ({
     }
   }, [containerHeight]);
 
+  useEffect(() => {
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+  });
+
   const renderedMessages = [];
 
   for (let i = 0; i < messages.length; i++) {
