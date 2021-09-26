@@ -18,7 +18,7 @@ const NumUsers = ({ messages }) => {
 };
 
 const mapStateToProps = state => ({
-  messages: state.messages,
+  messages: state.messages.all,
 });
 
 export default connect(mapStateToProps)(NumUsers);

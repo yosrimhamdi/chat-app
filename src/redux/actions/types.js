@@ -8,6 +8,7 @@ export const SELECT_CHANNEL = 'SELECT_CHANNEL';
 
 // Messages Reducer
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';
+export const SET_MESSAGES_DIV_HEIGHT = 'SET_MESSAGES_DIV_HEIGHT';
 
 // Loading Reducers
 export const SENDING_MESSAGE = 'SENDING_MESSAGE';

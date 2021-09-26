@@ -8,8 +8,15 @@ import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeListener from '../../firebase/database/removeListener';
 import fetchMessages from '@actions/fetchMessages';
 import Message from './Message/Message';
+import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
 
-const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
+const Messages = ({
+  selectedChannelId,
+  fetchMessages,
+  messages,
+  setMessagesDivHeight,
+  height,
+}) => {
   const messagesRef = useRef();
 
   useEffect(() => {
@@ -21,8 +28,13 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
   }, [selectedChannelId]);
 
   useEffect(() => {
-    messagesRef.current.style.height = `${messagesRef.current.offsetHeight}px`;
-  }, []);
+    console.log(height);
+    messagesRef.current.style.height = `${height}px`;
+
+    if (height == 'auto') {
+      setMessagesDivHeight(messagesRef.current.offsetHeight);
+    }
+  }, [height]);
 
   const renderedMessages = [];
 
@@ -52,8 +64,12 @@ const Messages = ({ selectedChannelId, fetchMessages, messages }) => {
 const mapStateToProps = ({ channels, messages }) => {
   return {
     selectedChannelId: channels.selectedChannel.id,
-    messages,
+    messages: messages.all,
+    height: messages.height,
   };
 };
 
-export default connect(mapStateToProps, { fetchMessages })(Messages);
+export default connect(mapStateToProps, {
+  fetchMessages,
+  setMessagesDivHeight,
+})(Messages);
