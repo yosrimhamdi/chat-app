@@ -2,7 +2,7 @@ import { FETCH_MESSAGES, SET_MESSAGES_DIV_HEIGHT } from '../actions/types';
 
 const INITIAL_STATE = {
   all: [],
-  height: 'auto',
+  containerHeight: 'auto',
 };
 
 const messagesReducers = (state = INITIAL_STATE, action) => {
@@ -15,7 +15,7 @@ const messagesReducers = (state = INITIAL_STATE, action) => {
     case SET_MESSAGES_DIV_HEIGHT:
       return {
         ...state,
-        height: action.payload,
+        containerHeight: action.payload,
       };
     default:
       return state;

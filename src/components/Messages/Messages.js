@@ -15,7 +15,7 @@ const Messages = ({
   fetchMessages,
   messages,
   setMessagesDivHeight,
-  height,
+  containerHeight,
 }) => {
   const messagesRef = useRef();
 
@@ -28,13 +28,12 @@ const Messages = ({
   }, [selectedChannelId]);
 
   useEffect(() => {
-    console.log(height);
-    messagesRef.current.style.height = `${height}px`;
+    messagesRef.current.style.height = `${containerHeight}px`;
 
-    if (height == 'auto') {
+    if (containerHeight == 'auto') {
       setMessagesDivHeight(messagesRef.current.offsetHeight);
     }
-  }, [height]);
+  }, [containerHeight]);
 
   const renderedMessages = [];
 
@@ -65,7 +64,7 @@ const mapStateToProps = ({ channels, messages }) => {
   return {
     selectedChannelId: channels.selectedChannel.id,
     messages: messages.all,
-    height: messages.height,
+    containerHeight: messages.containerHeight,
   };
 };
 
