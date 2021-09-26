@@ -26,7 +26,6 @@ const UploadImageModal = ({
   }
 
   const onSubmit = ({ file }) => {
-    console.log('submitted');
     uploadImage(file, selectedChannelId, setPercent, setLoading);
     clearForm('uploadImageForm');
     closeModal();
