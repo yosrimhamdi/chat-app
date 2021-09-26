@@ -9,15 +9,15 @@ import validate from './validate';
 import createChannel from '../../../firebase/database/createChannel';
 import clearForm from '@actions/clearForm';
 
-const AddChannelModal = ({
+const CreateChannelModal = ({
   isModalOpen,
-  setIsModalOpen,
+  closeModal,
   handleSubmit,
   clearForm,
   user,
 }) => {
   const clearModal = () => {
-    setIsModalOpen(false);
+    closeModal();
     clearForm('createNewChannelForm');
   };
 
@@ -31,7 +31,7 @@ const AddChannelModal = ({
   };
 
   const modal = (
-    <Modal basic open={true} onClose={() => setIsModalOpen(false)}>
+    <Modal basic open={true} onClose={closeModal}>
       <Modal.Header>Add a Channel</Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSubmit(onFormSubmit)}>
@@ -66,7 +66,7 @@ const AddChannelModal = ({
 };
 
 const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
-  AddChannelModal,
+  CreateChannelModal,
 );
 
 const mapStateToProps = state => ({

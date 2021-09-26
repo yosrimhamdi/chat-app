@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
-import Modal from '../Modals/AddChannelModal/AddChannelModal';
+import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal';
 import Channel from './Channel';
 import removeListener from '../../firebase/database/removeListener';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
@@ -35,7 +35,10 @@ function Channels({ channels, fetchChannels }) {
         />
       </Menu.Item>
       {renderedChannels}
-      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <CreateChannelModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+      />
     </Menu.Menu>
   );
 }
