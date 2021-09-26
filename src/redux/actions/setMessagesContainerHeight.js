@@ -1,7 +1,7 @@
-import { SET_MESSAGES_DIV_HEIGHT } from '@types';
+import { SET_MESSAGES_CONTAINER_HEIGHT } from '@types';
 
 const setMessagesDivHeight = height => ({
-  type: SET_MESSAGES_DIV_HEIGHT,
+  type: SET_MESSAGES_CONTAINER_HEIGHT,
   payload: height,
 });
 

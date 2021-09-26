@@ -1,4 +1,7 @@
-import { FETCH_MESSAGES, SET_MESSAGES_DIV_HEIGHT } from '../actions/types';
+import {
+  FETCH_MESSAGES,
+  SET_MESSAGES_CONTAINER_HEIGHT,
+} from '../actions/types';
 
 const INITIAL_STATE = {
   all: [],
@@ -12,7 +15,7 @@ const messagesReducers = (state = INITIAL_STATE, action) => {
         ...state,
         all: action.payload,
       };
-    case SET_MESSAGES_DIV_HEIGHT:
+    case SET_MESSAGES_CONTAINER_HEIGHT:
       return {
         ...state,
         containerHeight: action.payload,
