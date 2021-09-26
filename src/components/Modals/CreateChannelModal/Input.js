@@ -1,10 +1,14 @@
 import React from 'react';
-import { Input } from 'semantic-ui-react';
 
-function Inputs({ input, ...rest }) {
-  delete rest.meta;
+import Error from './Error/Error';
 
-  return <Input {...input} {...rest} />;
-}
+const Inputs = ({ input, meta, ...rest }) => {
+  return (
+    <div>
+      <input {...input} {...rest} />
+      <Error meta={meta} />
+    </div>
+  );
+};
 
 export default Inputs;

@@ -15,6 +15,7 @@ export const SENDING_MESSAGE = 'SENDING_MESSAGE';
 export const AUTHENTICATING = 'AUTHENTICATING';
 export const APP_MOUNTED = 'APP_MOUNTED';
 export const UPLOADING_FILE = 'UPLOADING_FILE';
+export const CREATING_CHANNEL = 'CREATING_CHANNEL';
 
 // Uploading Reducer
 export const SET_FILE_TO_UPLOAD = 'SET_FILE_TO_UPLOAD';

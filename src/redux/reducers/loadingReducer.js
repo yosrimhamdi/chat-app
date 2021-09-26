@@ -3,6 +3,7 @@ import {
   AUTHENTICATING,
   APP_MOUNTED,
   UPLOADING_FILE,
+  CREATING_CHANNEL,
 } from '@types';
 
 const INITIAL_STATE = {
@@ -10,6 +11,7 @@ const INITIAL_STATE = {
   isAuthenticating: false,
   isInitialMount: true,
   isUploading: false,
+  isCreatingChannel: false,
 };
 
 const loadingReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +20,11 @@ const loadingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSendingMessage: action.payload,
+      };
+    case CREATING_CHANNEL:
+      return {
+        ...state,
+        isCreatingChannel: action.payload,
       };
     case AUTHENTICATING:
       return {

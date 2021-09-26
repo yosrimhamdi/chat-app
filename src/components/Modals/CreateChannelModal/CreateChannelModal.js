@@ -1,65 +1,79 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Form, Button, Icon } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+import './CreateChannelModal.scss';
 import Input from './Input';
 import validate from './validate';
 import createChannel from '../../../firebase/database/createChannel';
-import clearForm from '@actions/clearForm';
+import Spinner from '../../Spinner2/Spinner';
+import setLoading from '@actions/setLoading';
+import { CREATING_CHANNEL } from '@types';
+import classNames from 'classnames';
+import closeIcon from './close.svg';
 
 const CreateChannelModal = ({
   isModalOpen,
   closeModal,
   handleSubmit,
-  clearForm,
   user,
+  setLoading,
+  isCreatingChannel,
+  invalid,
 }) => {
-  const clearModal = () => {
-    closeModal();
-    clearForm('createNewChannelForm');
-  };
+  const buttonClassName = classNames({
+    'create-post-modal__button': true,
+    'create-post-modal__button--valid': !invalid,
+  });
 
   if (!isModalOpen) {
     return null;
   }
 
-  const onFormSubmit = formValues => {
-    createChannel(formValues, user);
-    clearModal();
+  const onFormSubmit = async formValues => {
+    setLoading(CREATING_CHANNEL, true);
+    await createChannel(formValues, user);
+    setLoading(CREATING_CHANNEL, false);
+    closeModal();
   };
 
   const modal = (
-    <Modal basic open={true} onClose={closeModal}>
-      <Modal.Header>Add a Channel</Modal.Header>
-      <Modal.Content>
-        <Form onSubmit={handleSubmit(onFormSubmit)}>
-          <Form.Field>
-            <Field
-              label="Name of Channel"
-              name="channelName"
-              component={Input}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Field
-              label="About the Channel"
-              name="channelDetails"
-              component={Input}
-            />
-          </Form.Field>
-          <Modal.Actions style={{ textAlign: 'right' }}>
-            <Button inverted color="green" type="submit">
-              <Icon name="checkmark" /> Add
-            </Button>
-            <Button color="red" type="button" inverted onClick={clearModal}>
-              <Icon name="remove" /> Cancel
-            </Button>
-          </Modal.Actions>
-        </Form>
-      </Modal.Content>
-    </Modal>
+    <form
+      onSubmit={handleSubmit(onFormSubmit)}
+      className="create-post-modal"
+      onClick={closeModal}
+    >
+      <div
+        className="create-post-modal__wrapper"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="create-post-modal__content">
+          <div className="create-post-modal__header">
+            <h1 className="create-post-modal__title">Create new channel</h1>
+            <div onClick={closeModal}>
+              <img
+                src={closeIcon}
+                alt="close"
+                className="create-post-modal__close-icon"
+              />
+            </div>
+          </div>
+          <Field label="Name of Channel" name="channelName" component={Input} />
+          <Field
+            label="About the Channel"
+            name="channelDetails"
+            component={Input}
+          />
+        </div>
+        <div className="create-post-modal__actions">
+          <button className={buttonClassName} type="submit">
+            Create
+          </button>
+        </div>
+        <Spinner visible={isCreatingChannel} onContent />
+      </div>
+    </form>
   );
 
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
@@ -71,6 +85,7 @@ const WrappedForm = reduxForm({ form: 'createNewChannelForm', validate })(
 
 const mapStateToProps = state => ({
   user: state.auth.user,
+  isCreatingChannel: state.loading.isCreatingChannel,
 });
 
-export default connect(mapStateToProps, { clearForm })(WrappedForm);
+export default connect(mapStateToProps, { setLoading })(WrappedForm);
