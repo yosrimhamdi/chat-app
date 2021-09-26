@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import SelfMessage from './SelfMessage';
-import GuestMessage from './GuestMessage';
-import ImageMessage from './ImageMessage';
+import SelfMessage from './SelfMessage/SelfMessage';
+import GuestMessage from './GuestMessage/GuestMessage';
+import ImageMessage from './ImageMessage/ImageMessage';
 
 const Message = ({ message, authUser, prevMessage }) => {
   const { user, type } = message;

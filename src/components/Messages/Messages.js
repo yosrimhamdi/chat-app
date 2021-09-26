@@ -7,7 +7,7 @@ import MessageForm from './MessageForm/MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeListener from '../../firebase/database/removeListener';
 import fetchMessages from '@actions/fetchMessages';
-import Message from './Message/Message';
+import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
 
 const Messages = ({

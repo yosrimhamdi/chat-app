@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import MessageAuthor from './MessageAuthor';
+import MessageAuthor from '../MessageAuthor';
 import './GuestMessage.scss';
 
 const GuestMessage = ({ message, prevMessage }) => {
