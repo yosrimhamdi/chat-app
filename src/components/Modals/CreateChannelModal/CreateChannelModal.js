@@ -7,7 +7,7 @@ import createChannel from '../../../firebase/database/createChannel';
 import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../../redux/actions/setLoading';
 import validate from './validate';
-import Input from './Input/Input';
+import Input from '../../Input/Input';
 import ModalContext from '../../Modal/ModalContext';
 import clearForm from '@actions/clearForm';
 

@@ -8,7 +8,7 @@ import setPercent from '../../../redux/actions/setPercent';
 import setLoading from '@actions/setLoading';
 import ModalContext from '../../Modal/ModalContext';
 import Modal from '../../Modal/Modal';
-import FileInput from './FileInput';
+import FileInput from '../../Input/FileInput';
 import clearForm from '@actions/clearForm';
 
 const UploadImageModal = ({

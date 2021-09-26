@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Input.scss';
-import Error from '../Error/Error';
+import Error from './Error/Error';
 
 const Inputs = ({ input, meta, label, ...rest }) => {
   return (
