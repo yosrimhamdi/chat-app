@@ -1,19 +1,13 @@
-import { toastr } from 'react-redux-toastr';
-
-const validate = (file) => {
-  let error = '';
+const validate = ({ file }) => {
+  const errors = {};
 
   if (!file) {
-    error = 'No image selected';
+    errors.message = 'No image selected';
   } else if (!file.type.includes('image')) {
-    error = 'Not an image';
+    errors.message = 'Not an image';
   }
 
-  if (error) {
-    toastr.warning('Warning', error);
-  }
-
-  return error == '';
+  return errors;
 };
 
 export default validate;

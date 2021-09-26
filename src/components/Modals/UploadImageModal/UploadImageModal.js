@@ -1,21 +1,23 @@
 import React, { useContext } from 'react';
-import ReactDOM from 'react-dom';
-import { Input, Modal, Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
 
 import validate from './validate';
 import uploadImage from '../../../firebase/storage/uploadImage';
-import setFileToUpload from '../../../redux/actions/setFileToUpload';
 import setPercent from '../../../redux/actions/setPercent';
 import setLoading from '@actions/setLoading';
 import ModalContext from '../../Modal/ModalContext';
+import Modal from '../../Modal/Modal';
+import FileInput from './FileInput';
+import clearForm from '@actions/clearForm';
 
 const UploadImageModal = ({
   selectedChannelId,
-  setFileToUpload,
-  file,
   setPercent,
   setLoading,
+  handleSubmit,
+  clearForm,
+  invalid,
 }) => {
   const { isModalOpen, closeModal } = useContext(ModalContext);
 
@@ -23,48 +25,29 @@ const UploadImageModal = ({
     return null;
   }
 
-  const clearModal = () => {
+  const onSubmit = ({ file }) => {
+    uploadImage(file, selectedChannelId, setPercent, setLoading);
+    clearForm('uploadImageForm');
     closeModal();
-
-    setFileToUpload(null);
   };
 
-  const onSubmitButtonClick = () => {
-    const valid = validate(file);
-
-    if (valid) {
-      uploadImage(file, selectedChannelId, setPercent, setLoading);
-
-      clearModal();
-    }
-  };
-
-  const modal = (
-    <Modal basic open={true} onClose={closeModal}>
-      <Modal.Header>Select An Image File</Modal.Header>
-      <Modal.Content>
-        <Input
-          name="file"
-          type="file"
-          label="File type; jpg, png"
-          accept="image/*"
-          fluid
-          onChange={e => setFileToUpload(e.target.files[0])}
-        />
-      </Modal.Content>
-      <Modal.Actions>
-        <Button inverted color="green" onClick={onSubmitButtonClick}>
-          <Icon name="checkmark" /> Add
-        </Button>
-        <Button color="red" type="button" inverted onClick={clearModal}>
-          <Icon name="remove" /> Cancel
-        </Button>
-      </Modal.Actions>
+  return (
+    <Modal
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      loading={false}
+      title="Upload an image"
+      buttonMessage="Upload"
+      invalid={invalid}
+    >
+      <Field name="file" normalize={file => file[0]} component={FileInput} />
     </Modal>
   );
-
-  return ReactDOM.createPortal(modal, document.getElementById('modal'));
 };
+
+const WrappedForm = reduxForm({ form: 'uploadImageForm', validate })(
+  UploadImageModal,
+);
 
 const mapStateToProps = state => ({
   selectedChannelId: state.channels.selectedChannel.id,
@@ -72,7 +55,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  setFileToUpload,
   setLoading,
   setPercent,
-})(UploadImageModal);
+  clearForm,
+})(WrappedForm);
