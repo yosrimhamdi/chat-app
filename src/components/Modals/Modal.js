@@ -23,34 +23,27 @@ const Modal = ({
   }
 
   const buttonClassName = classNames({
-    'create-post-modal__button': true,
-    'create-post-modal__button--valid': !invalid,
+    'modal__button': true,
+    'modal__button--valid': !invalid,
   });
 
   const modal = (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="create-post-modal"
+      className="modal"
       onClick={closeModal}
     >
-      <div
-        className="create-post-modal__wrapper"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="create-post-modal__content">
-          <div className="create-post-modal__header">
-            <h1 className="create-post-modal__title">{title}</h1>
+      <div className="modal__wrapper" onClick={e => e.stopPropagation()}>
+        <div className="modal__content">
+          <div className="modal__header">
+            <h1 className="modal__title">{title}</h1>
             <div onClick={closeModal}>
-              <img
-                src={closeIcon}
-                alt="close"
-                className="create-post-modal__close-icon"
-              />
+              <img src={closeIcon} alt="close" className="modal__close-icon" />
             </div>
           </div>
           {children}
         </div>
-        <div className="create-post-modal__actions">
+        <div className="modal__actions">
           <button className={buttonClassName} type="submit">
             {buttonMessage}
           </button>
