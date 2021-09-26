@@ -52,7 +52,6 @@ const MessageForm = ({
             labelPosition="right"
             icon="cloud upload"
             type="button"
-            loading={isUploading}
             disabled={isUploading}
             onClick={openModal}
           />
