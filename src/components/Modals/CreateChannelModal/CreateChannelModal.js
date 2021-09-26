@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
@@ -8,15 +8,17 @@ import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../../redux/actions/setLoading';
 import validate from './validate';
 import Input from './Input/Input';
+import ModalContext from './ModalContext';
 
 const CreateChannelModal = ({
   user,
   setLoading,
-  closeModal,
-  isModalOpen,
   isCreatingChannel,
   handleSubmit,
+  invalid,
 }) => {
+  const { closeModal } = useContext(ModalContext);
+
   const onSubmit = async formValues => {
     setLoading(CREATING_CHANNEL, true);
     await createChannel(formValues, user);
@@ -28,11 +30,10 @@ const CreateChannelModal = ({
     <Modal
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
-      closeModal={closeModal}
-      isModalOpen={isModalOpen}
       loading={isCreatingChannel}
       title="Create new channel"
       buttonMessage="Create"
+      invalid={invalid}
     >
       <Field label="Name of Channel" name="channelName" component={Input} />
       <Field

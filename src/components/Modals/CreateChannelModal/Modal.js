@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import './CreateChannelModal.scss';
 import Spinner from '../../Spinner2/Spinner';
 import classNames from 'classnames';
 import closeIcon from './close.svg';
+import ModalContext from './ModalContext';
 
 const Modal = ({
-  isModalOpen,
-  closeModal,
   handleSubmit,
   onSubmit,
   loading,
@@ -17,6 +16,8 @@ const Modal = ({
   children,
   buttonMessage,
 }) => {
+  const { isModalOpen, closeModal } = useContext(ModalContext);
+
   if (!isModalOpen) {
     return null;
   }

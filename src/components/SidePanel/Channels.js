@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
@@ -7,9 +7,11 @@ import Channel from './Channel';
 import removeListener from '../../firebase/database/removeListener';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import fetchChannels from '@actions/fetchChannels';
+import ModalContext from '../Modals/CreateChannelModal/ModalContext';
+import useModal from '../Modals/CreateChannelModal/useModal';
 
 function Channels({ channels, fetchChannels }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
     onCollectionChange('channels/', fetchChannels);
@@ -28,17 +30,17 @@ function Channels({ channels, fetchChannels }) {
           <Icon name="exchange" /> CHANNELS
         </span>{' '}
         {channels.all.length}
-        <Icon
-          style={{ cursor: 'pointer' }}
-          name="add"
-          onClick={() => setIsModalOpen(true)}
-        />
+        <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedChannels}
-      <CreateChannelModal
-        isModalOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
-      />
+      <ModalContext.Provider
+        value={{
+          isModalOpen,
+          closeModal,
+        }}
+      >
+        <CreateChannelModal />
+      </ModalContext.Provider>
     </Menu.Menu>
   );
 }
