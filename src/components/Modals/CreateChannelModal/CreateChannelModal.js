@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
 import './CreateChannelModal.scss';
-import Input from './Input';
+import Input from './Input/Input';
 import validate from './validate';
 import createChannel from '../../../firebase/database/createChannel';
 import Spinner from '../../Spinner2/Spinner';
