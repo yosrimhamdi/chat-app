@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeCollectionListener from '../../firebase/database/removeCollectionListener';
 import fetchUsers from '@actions/fetchUsers';
+import User from './User';
 
-const DirectMessages = ({ fetchUsers }) => {
+const DirectMessages = ({ fetchUsers, users }) => {
   useEffect(() => {
     const handleCollectionChange = snapshot => {
       const users = Object.values(snapshot.val() || []);
@@ -19,6 +20,8 @@ const DirectMessages = ({ fetchUsers }) => {
     return () => removeCollectionListener('/users');
   }, []);
 
+  const renderedUsers = users.map(user => <User key={user.uid} user={user} />);
+
   return (
     <Menu.Menu>
       <Menu.Item>
@@ -27,9 +30,13 @@ const DirectMessages = ({ fetchUsers }) => {
         </span>{' '}
         ({[].length})
       </Menu.Item>
-      {/* Users to Send Direct Messages */}
+      {renderedUsers}
     </Menu.Menu>
   );
 };
 
-export default connect(null, { fetchUsers })(DirectMessages);
+const mapStateToProps = state => ({
+  users: state.users,
+});
+
+export default connect(mapStateToProps, { fetchUsers })(DirectMessages);
