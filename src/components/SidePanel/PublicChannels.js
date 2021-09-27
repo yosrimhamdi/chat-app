@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
-import './Channels.scss';
+import './PublicChannel.scss';
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal';
 import PublicChannel from './PublicChannel';
 import removeCollectionListener from '../../firebase/database/removeCollectionListener';
