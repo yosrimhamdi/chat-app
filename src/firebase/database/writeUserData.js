@@ -12,6 +12,7 @@ const writeUserData = async () => {
     email,
     displayName,
     photoURL,
+    isConnected: true,
   });
 };
 
