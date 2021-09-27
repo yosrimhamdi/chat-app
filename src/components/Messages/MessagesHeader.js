@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { Header, Segment, Input, Icon } from 'semantic-ui-react';
+import { Header, Segment, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import NumUsers from './NumUsers';
 import setSearchTerm from '../../redux/actions/setSearchTerm';
 import setLoading from '../../redux/actions/setLoading';
 import { SEARCHING } from '../../redux/actions/types';
+import ChannelName from './ChannelName';
 
 const MessagesHeader = ({
-  selectedChannel,
   setSearchTerm,
   searchTerm,
   setLoading,
@@ -34,9 +34,7 @@ const MessagesHeader = ({
   return (
     <Segment clearing>
       <Header fluid="true" as="h2" floated="left" style={{ marginBottom: 0 }}>
-        <span>
-          #{selectedChannel.name} <Icon name={'star outline'} color="black" />
-        </span>
+        <ChannelName />
         <Header.Subheader>
           <NumUsers />
         </Header.Subheader>
@@ -57,7 +55,6 @@ const MessagesHeader = ({
 };
 
 const mapStateToProps = state => ({
-  selectedChannel: state.channels.selectedChannel,
   searchTerm: state.messages.searchTerm,
   isSearching: state.loading.isSearching,
 });
