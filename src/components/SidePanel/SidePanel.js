@@ -2,8 +2,8 @@ import React from 'react';
 import UserPanel from './UserPanel';
 import { Menu } from 'semantic-ui-react';
 
-import PublicChannels from './PublicChannels';
-import PrivateChannels from './PrivateChannels';
+import PublicChannels from './PublicChannels/PublicChannels';
+import PrivateChannels from './PrivateChannels/PrivateChannels';
 
 function SidePanel() {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 
-import selectChannel from '../../redux/actions/selectChannel';
+import selectChannel from '../../../redux/actions/selectChannel';
 
 const PublicChannel = ({ channel, selectChannel, selectedChannelId }) => {
   const { id, name } = channel;

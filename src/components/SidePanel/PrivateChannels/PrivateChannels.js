@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import onCollectionChange from '../../firebase/database/onCollectionChange';
-import removeCollectionListener from '../../firebase/database/removeCollectionListener';
+import onCollectionChange from '../../../firebase/database/onCollectionChange';
+import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
 import fetchUsers from '@actions/fetchUsers';
 import PrivateChannel from './PrivateChannel';
 

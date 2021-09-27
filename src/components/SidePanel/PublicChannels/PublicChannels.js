@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
 import './PublicChannel.scss';
-import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal';
+import CreateChannelModal from '../../Modals/CreateChannelModal/CreateChannelModal';
 import PublicChannel from './PublicChannel';
-import removeCollectionListener from '../../firebase/database/removeCollectionListener';
-import onCollectionChange from '../../firebase/database/onCollectionChange';
+import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
+import onCollectionChange from '../../../firebase/database/onCollectionChange';
 import fetchChannels from '@actions/fetchChannels';
-import ModalContext from '../Modals/ModalContext';
-import useModal from '../Modals/useModal';
+import ModalContext from '../../Modals/ModalContext';
+import useModal from '../../Modals/useModal';
 
 function PublicChannels({ channels, fetchChannels }) {
   const [isModalOpen, openModal, closeModal] = useModal();
