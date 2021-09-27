@@ -4,6 +4,7 @@ import {
   APP_MOUNTED,
   UPLOADING_FILE,
   CREATING_CHANNEL,
+  SEARCHING,
 } from '@types';
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
   isInitialMount: true,
   isUploading: false,
   isCreatingChannel: false,
+  isSearching: false,
 };
 
 const loadingReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +42,11 @@ const loadingReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isUploading: action.payload,
+      };
+    case SEARCHING:
+      return {
+        ...state,
+        isSearching: action.payload,
       };
     default:
       return state;
