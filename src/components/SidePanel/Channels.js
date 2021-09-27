@@ -5,7 +5,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import './Channels.scss';
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal';
 import Channel from './Channel';
-import removeListener from '../../firebase/database/removeListener';
+import removeCollectionListener from '../../firebase/database/removeCollectionListener';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import fetchChannels from '@actions/fetchChannels';
 import ModalContext from '../Modals/ModalContext';
@@ -23,7 +23,7 @@ function Channels({ channels, fetchChannels }) {
 
     onCollectionChange('channels/', handleCollectionChange);
 
-    return () => removeListener('channels/');
+    return () => removeCollectionListener('channels/');
   }, [onCollectionChange]);
 
   const renderedChannels = channels.all.map(channel => (

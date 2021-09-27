@@ -21,3 +21,6 @@ export const SEARCHING = 'SEARCHING';
 
 // Uploading Reducer
 export const SET_PERCENT = 'SET_PERCENT';
+
+// Users Reducer
+export const FETCH_USERS = 'FETCH_USERS';

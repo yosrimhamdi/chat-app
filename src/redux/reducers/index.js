@@ -7,6 +7,7 @@ import auth from './authReducer';
 import messages from './messagesReducer';
 import loading from './loadingReducer';
 import upload from './uploadReducer';
+import users from './usersReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   messages,
   loading,
   upload,
+  users,
 });

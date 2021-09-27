@@ -5,7 +5,7 @@ import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm/MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
-import removeListener from '../../firebase/database/removeListener';
+import removeCollectionListener from '../../firebase/database/removeCollectionListener';
 import fetchMessages from '@actions/fetchMessages';
 import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
@@ -33,7 +33,8 @@ const Messages = ({
       );
     }
 
-    return () => removeListener('messages/' + selectedChannelId + '/');
+    return () =>
+      removeCollectionListener('messages/' + selectedChannelId + '/');
   }, [selectedChannelId]);
 
   useEffect(() => {
