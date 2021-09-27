@@ -15,7 +15,7 @@ import ModalContext from '../../Modals/ModalContext';
 
 const MessageForm = ({
   handleSubmit,
-  selectedChannelId,
+  messagesPath,
   clearForm,
   setLoading,
   isSendingMessage,
@@ -28,7 +28,7 @@ const MessageForm = ({
 
     clearForm('messageForm');
 
-    await createTextMessage(message, selectedChannelId);
+    await createTextMessage(message, messagesPath);
 
     setLoading(SENDING_MESSAGE, false);
   };
@@ -65,9 +65,9 @@ const MessageForm = ({
   );
 };
 
-const mapStateToProps = ({ channels, loading }) => {
+const mapStateToProps = ({ messages, loading }) => {
   return {
-    selectedChannelId: channels.selectedChannel.id,
+    messagesPath: messages.path,
     isSendingMessage: loading.isSendingMessage,
     isUploading: loading.isUploading,
   };

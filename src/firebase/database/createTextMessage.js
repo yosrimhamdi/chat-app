@@ -3,10 +3,10 @@ import { getAuth } from 'firebase/auth';
 import writeData from './writeData';
 import catcher from '../../catcher';
 
-const createTextMessage = async (content, channelId) => {
+const createTextMessage = async (content, path) => {
   const { uid, photoURL, displayName } = getAuth().currentUser;
 
-  await writeData('messages/' + channelId + '/', {
+  await writeData(path, {
     content,
     type: 'text',
     createdAt: Date.now(),
