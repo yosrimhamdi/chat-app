@@ -1,13 +1,13 @@
 import { getAuth, signOut } from 'firebase/auth';
 import catcher from '../../catcher';
-import setAbsent from '../database/setAbsent';
+import setDisconnected from '../database/setDisconnected';
 
 const trySignOut = async signOutActionCreator => {
   const auth = getAuth();
   const uid = auth.currentUser.uid;
   await signOut(auth);
 
-  setAbsent(uid);
+  setDisconnected(uid);
 
   signOutActionCreator();
 };

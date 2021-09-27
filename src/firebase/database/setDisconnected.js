@@ -1,6 +1,6 @@
 import { getDatabase, ref, update } from 'firebase/database';
 
-const setAbsent = uid => {
+const setDisconnected = uid => {
   const db = getDatabase();
   const userRef = ref(db, 'users/' + uid);
 
@@ -9,4 +9,4 @@ const setAbsent = uid => {
   });
 };
 
-export default setAbsent;
+export default setDisconnected;
