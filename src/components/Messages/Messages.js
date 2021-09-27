@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import './Messages.scss';
@@ -9,15 +9,19 @@ import removeCollectionListener from '../../firebase/database/removeCollectionLi
 import fetchMessages from '@actions/fetchMessages';
 import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
+import setMessagesPath from '../../redux/actions/setMessagesPath';
+import useAutoBottomScroll from './useAutoBottomScroll';
 
 const Messages = ({
-  selectedChannelId,
+  setMessagesPath,
+  selectedChannel,
   fetchMessages,
   messages,
   setMessagesDivHeight,
   containerHeight,
+  messagesPath,
 }) => {
-  const messagesRef = useRef();
+  const { id, isPrivate } = selectedChannel;
 
   useEffect(() => {
     const handleCollectionChange = snapshot => {
@@ -26,28 +30,29 @@ const Messages = ({
       fetchMessages(messages);
     };
 
-    if (selectedChannelId) {
-      onCollectionChange(
-        'messages/' + selectedChannelId + '/',
-        handleCollectionChange,
-      );
-    }
+    if (messagesPath) {
+      onCollectionChange(messagesPath, handleCollectionChange);
 
-    return () =>
-      removeCollectionListener('messages/' + selectedChannelId + '/');
-  }, [selectedChannelId]);
+      return () => removeCollectionListener(messagesPath);
+    }
+  }, [messagesPath]);
 
   useEffect(() => {
-    messagesRef.current.style.height = `${containerHeight}px`;
+    if (id) {
+      let path = 'messages/public/' + id + '/';
 
-    if (containerHeight == 'auto') {
-      setMessagesDivHeight(messagesRef.current.offsetHeight);
+      if (isPrivate) {
+        path = 'messages/private/' + id + '/';
+      }
+
+      setMessagesPath(path);
     }
-  }, [containerHeight]);
+  }, [selectedChannel]);
 
-  useEffect(() => {
-    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-  });
+  const messagesRef = useAutoBottomScroll(
+    containerHeight,
+    setMessagesDivHeight,
+  );
 
   const renderedMessages = [];
 
@@ -75,7 +80,7 @@ const Messages = ({
 };
 
 const mapStateToProps = ({ channels, messages, loading }) => {
-  const { searchTerm, containerHeight, all } = messages;
+  const { searchTerm, containerHeight, all, path } = messages;
 
   let filteredMessages = all;
 
@@ -89,8 +94,9 @@ const mapStateToProps = ({ channels, messages, loading }) => {
   }
 
   return {
-    selectedChannelId: channels.selectedChannel.id,
+    selectedChannel: channels.selectedChannel,
     messages: filteredMessages,
+    messagesPath: path,
     containerHeight: containerHeight,
   };
 };
@@ -98,4 +104,5 @@ const mapStateToProps = ({ channels, messages, loading }) => {
 export default connect(mapStateToProps, {
   fetchMessages,
   setMessagesDivHeight,
+  setMessagesPath,
 })(Messages);
