@@ -23,13 +23,9 @@ import writeUserData from '../../../firebase/database/writeUserData';
 function Register({ handleSubmit, isAuthenticating, setLoading }) {
   const onFormSubmit = async ({ email, password, username }) => {
     setLoading(AUTHENTICATING, true);
-
     await tryRegister(email, password);
-
     updateProfile(username);
-
     await writeUserData();
-
     setLoading(AUTHENTICATING, false);
   };
 
