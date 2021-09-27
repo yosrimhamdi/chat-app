@@ -64,16 +64,19 @@ const Messages = ({
   );
 };
 
-const mapStateToProps = ({ channels, messages }) => {
+const mapStateToProps = ({ channels, messages, loading }) => {
   const { searchTerm, containerHeight, all } = messages;
 
-  const filteredMessages = all.filter(({ content, user }) => {
-    return (
-      !searchTerm ||
-      (content && content.includes(searchTerm)) ||
-      user.displayName.includes(searchTerm)
-    );
-  });
+  let filteredMessages = all;
+
+  if (!loading.isSearching && searchTerm) {
+    filteredMessages = all.filter(({ content, user }) => {
+      return (
+        (content && content.includes(searchTerm)) ||
+        user.displayName.includes(searchTerm)
+      );
+    });
+  }
 
   return {
     selectedChannelId: channels.selectedChannel.id,
