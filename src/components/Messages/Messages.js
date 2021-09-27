@@ -67,12 +67,8 @@ const Messages = ({
 const mapStateToProps = ({ channels, messages }) => {
   const { searchTerm, containerHeight, all } = messages;
 
-  const filteredMessages = all.filter(({ type, content }) => {
-    if (type == 'image') {
-      return false;
-    }
-
-    return content.includes(searchTerm);
+  const filteredMessages = all.filter(({ content }) => {
+    return !searchTerm || (content && content.includes(searchTerm));
   });
 
   return {
