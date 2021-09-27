@@ -20,8 +20,17 @@ const Messages = ({
   const messagesRef = useRef();
 
   useEffect(() => {
+    const handleCollectionChange = snapshot => {
+      const messages = Object.values(snapshot.val() || []);
+
+      fetchMessages(messages);
+    };
+
     if (selectedChannelId) {
-      onCollectionChange('messages/' + selectedChannelId + '/', fetchMessages);
+      onCollectionChange(
+        'messages/' + selectedChannelId + '/',
+        handleCollectionChange,
+      );
     }
 
     return () => removeListener('messages/' + selectedChannelId + '/');

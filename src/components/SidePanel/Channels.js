@@ -15,7 +15,13 @@ function Channels({ channels, fetchChannels }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
-    onCollectionChange('channels/', fetchChannels);
+    const handleCollectionChange = snapshot => {
+      const channels = Object.values(snapshot.val() || []);
+
+      fetchChannels(channels);
+    };
+
+    onCollectionChange('channels/', handleCollectionChange);
 
     return () => removeListener('channels/');
   }, [onCollectionChange]);

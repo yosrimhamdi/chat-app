@@ -1,14 +1,10 @@
 import { getDatabase, ref, onValue } from 'firebase/database';
 
-const onCollectionChange = (collectionName, actionCreator) => {
+const onCollectionChange = (collectionName, handleCollectionChange) => {
   const db = getDatabase();
   const collectionRef = ref(db, collectionName);
 
-  onValue(collectionRef, snapshot => {
-    const documents = Object.values(snapshot.val() || []);
-
-    actionCreator(documents);
-  });
+  onValue(collectionRef, handleCollectionChange);
 };
 
 export default onCollectionChange;
