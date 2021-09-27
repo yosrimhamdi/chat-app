@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const NumUsers = ({ messages }) => {
+const NumUsers = ({ messages, selectedChannel }) => {
+  if (selectedChannel.isPrivate) {
+    return null;
+  }
+
   const usersIds = messages.reduce((acc, message) => {
     if (!acc.includes(message.user.uid)) {
       acc.push(message.user.uid);
@@ -19,6 +23,7 @@ const NumUsers = ({ messages }) => {
 
 const mapStateToProps = state => ({
   messages: state.messages.all,
+  selectedChannel: state.channels.selectedChannel,
 });
 
 export default connect(mapStateToProps)(NumUsers);

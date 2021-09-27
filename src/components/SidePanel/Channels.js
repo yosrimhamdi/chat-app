@@ -34,7 +34,7 @@ function Channels({ channels, fetchChannels }) {
     <Menu.Menu>
       <Menu.Item>
         <span>
-          <Icon name="exchange" /> CHANNELS
+          <Icon name="exchange" /> PUB CHANNELS
         </span>{' '}
         ({channels.all.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />

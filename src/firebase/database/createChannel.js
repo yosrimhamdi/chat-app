@@ -12,6 +12,7 @@ const createChannel = async formValues => {
   await writeData('channels/', {
     name: channelName,
     details: channelDetails,
+    isPrivate: false,
     createdBy: {
       displayName,
       email,

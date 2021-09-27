@@ -26,9 +26,9 @@ const DirectMessages = ({ fetchUsers, users }) => {
     <Menu.Menu>
       <Menu.Item>
         <span>
-          <Icon name="mail" /> DIRECT MESSAGES
+          <Icon name="mail" /> PRIVATE CHANNELS
         </span>{' '}
-        ({[].length})
+        ({users.length - 1})
       </Menu.Item>
       {renderedUsers}
     </Menu.Menu>
