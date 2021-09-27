@@ -1,10 +1,10 @@
 import { ref, getDatabase, off } from 'firebase/database';
 
-const removeCollectionListener = collectionRef => {
+const removeCollectionListener = path => {
   const db = getDatabase();
-  const dbRef = ref(db, collectionRef);
+  const collectionRef = ref(db, path);
 
-  off(dbRef);
+  off(collectionRef);
 };
 
 export default removeCollectionListener;
