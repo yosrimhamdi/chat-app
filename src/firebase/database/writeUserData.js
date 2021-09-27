@@ -1,15 +1,17 @@
 import { getAuth } from 'firebase/auth';
+import { getDatabase, set, ref } from '@firebase/database';
 
 import catcher from '../../catcher';
-import writeData from './writeData';
 
 const writeUserData = async () => {
-  const { displayName, photoURL, email } = getAuth().currentUser;
+  const db = getDatabase();
+  const { displayName, photoURL, email, uid } = getAuth().currentUser;
 
-  await writeData('users/', {
+  return set(ref(db, 'users/' + uid), {
+    uid,
+    email,
     displayName,
     photoURL,
-    email,
   });
 };
 

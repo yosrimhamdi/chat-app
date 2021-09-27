@@ -9,12 +9,10 @@ const updateUserProfile = async username => {
     currentUser.email,
   )}?s=200&d=identicon`;
 
-  await updateProfile(currentUser, {
+  return updateProfile(currentUser, {
     displayName: username,
     photoURL,
   });
-
-  return currentUser;
 };
 
 export default catcher(updateUserProfile);
