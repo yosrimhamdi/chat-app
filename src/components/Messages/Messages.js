@@ -67,8 +67,12 @@ const Messages = ({
 const mapStateToProps = ({ channels, messages }) => {
   const { searchTerm, containerHeight, all } = messages;
 
-  const filteredMessages = all.filter(({ content }) => {
-    return !searchTerm || (content && content.includes(searchTerm));
+  const filteredMessages = all.filter(({ content, user }) => {
+    return (
+      !searchTerm ||
+      (content && content.includes(searchTerm)) ||
+      user.displayName.includes(searchTerm)
+    );
   });
 
   return {
