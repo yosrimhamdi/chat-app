@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 import selectChannel from '@actions/selectChannel';
 
-const User = ({ user, authUser, selectChannel, selectedPrivateChannelId }) => {
+const PrivateChannel = ({
+  user,
+  authUser,
+  selectChannel,
+  selectedPrivateChannelId,
+}) => {
   if (authUser.uid == user.uid) {
     return null;
   }
 
-  const onUserClick = () => {
+  const onUserNameClick = () => {
     let channelId = authUser.uid + '/' + user.uid;
 
     if (authUser.uid > user.uid) {
@@ -24,7 +29,7 @@ const User = ({ user, authUser, selectChannel, selectedPrivateChannelId }) => {
 
   return (
     <Menu.Item
-      onClick={onUserClick}
+      onClick={onUserNameClick}
       style={{ opacity: 0.7, fontStyle: 'italic' }}
       active={selectedPrivateChannelId.includes(user.uid)}
     >
@@ -39,4 +44,4 @@ const mapStateToProps = state => ({
   selectedPrivateChannelId: state.channels.selectedChannel.id || '',
 });
 
-export default connect(mapStateToProps, { selectChannel })(User);
+export default connect(mapStateToProps, { selectChannel })(PrivateChannel);

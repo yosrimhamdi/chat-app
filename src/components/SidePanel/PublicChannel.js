@@ -4,7 +4,7 @@ import { Menu } from 'semantic-ui-react';
 
 import selectChannel from '../../redux/actions/selectChannel';
 
-const Channel = ({ channel, selectChannel, selectedChannelId }) => {
+const PublicChannel = ({ channel, selectChannel, selectedChannelId }) => {
   const { id, name } = channel;
 
   return (
@@ -24,4 +24,4 @@ const mapStateToProps = state => ({
   selectedChannelId: state.channels.selectedChannel.id,
 });
 
-export default connect(mapStateToProps, { selectChannel })(Channel);
+export default connect(mapStateToProps, { selectChannel })(PublicChannel);

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeCollectionListener from '../../firebase/database/removeCollectionListener';
 import fetchUsers from '@actions/fetchUsers';
-import User from './User';
+import PrivateChannel from './PrivateChannel';
 
 const PrivateChannels = ({ fetchUsers, users }) => {
   useEffect(() => {
@@ -20,7 +20,9 @@ const PrivateChannels = ({ fetchUsers, users }) => {
     return () => removeCollectionListener('/users');
   }, []);
 
-  const renderedUsers = users.map(user => <User key={user.uid} user={user} />);
+  const renderedPrivateChannels = users.map(user => (
+    <PrivateChannel key={user.uid} user={user} />
+  ));
 
   return (
     <Menu.Menu>
@@ -30,7 +32,7 @@ const PrivateChannels = ({ fetchUsers, users }) => {
         </span>{' '}
         ({users.length - 1})
       </Menu.Item>
-      {renderedUsers}
+      {renderedPrivateChannels}
     </Menu.Menu>
   );
 };

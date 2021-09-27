@@ -4,7 +4,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 
 import './Channels.scss';
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal';
-import Channel from './Channel';
+import PublicChannel from './PublicChannel';
 import removeCollectionListener from '../../firebase/database/removeCollectionListener';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import fetchChannels from '@actions/fetchChannels';
@@ -26,8 +26,8 @@ function PublicChannels({ channels, fetchChannels }) {
     return () => removeCollectionListener('channels/');
   }, [onCollectionChange]);
 
-  const renderedChannels = channels.all.map(channel => (
-    <Channel key={channel.id} channel={channel} />
+  const renderedPublicChannels = channels.all.map(channel => (
+    <PublicChannel key={channel.id} channel={channel} />
   ));
 
   return (
@@ -39,7 +39,7 @@ function PublicChannels({ channels, fetchChannels }) {
         ({channels.all.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
-      {renderedChannels}
+      {renderedPublicChannels}
       <ModalContext.Provider value={{ isModalOpen, closeModal }}>
         <CreateChannelModal />
       </ModalContext.Provider>
