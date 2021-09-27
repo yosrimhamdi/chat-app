@@ -7,7 +7,7 @@ import removeCollectionListener from '../../firebase/database/removeCollectionLi
 import fetchUsers from '@actions/fetchUsers';
 import User from './User';
 
-const DirectMessages = ({ fetchUsers, users }) => {
+const PrivateChannels = ({ fetchUsers, users }) => {
   useEffect(() => {
     const handleCollectionChange = snapshot => {
       const users = Object.values(snapshot.val() || []);
@@ -39,4 +39,4 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { fetchUsers })(DirectMessages);
+export default connect(mapStateToProps, { fetchUsers })(PrivateChannels);

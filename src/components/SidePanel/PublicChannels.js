@@ -11,7 +11,7 @@ import fetchChannels from '@actions/fetchChannels';
 import ModalContext from '../Modals/ModalContext';
 import useModal from '../Modals/useModal';
 
-function Channels({ channels, fetchChannels }) {
+function PublicChannels({ channels, fetchChannels }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const mapStateToProps = state => ({
   channels: state.channels,
 });
 
-export default connect(mapStateToProps, { fetchChannels })(Channels);
+export default connect(mapStateToProps, { fetchChannels })(PublicChannels);
