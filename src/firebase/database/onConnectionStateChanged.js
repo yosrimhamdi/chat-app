@@ -1,10 +1,4 @@
-import {
-  getDatabase,
-  set,
-  ref,
-  onValue,
-  onDisconnect,
-} from 'firebase/database';
+import { getDatabase, ref, update, onValue } from 'firebase/database';
 import { getAuth } from '@firebase/auth';
 
 const onConnectionStateChanged = () => {
@@ -14,14 +8,12 @@ const onConnectionStateChanged = () => {
   onValue(connectedRef, snap => {
     const { currentUser } = getAuth();
 
-    const presenceRef = ref(db, 'presence/' + currentUser.uid);
+    const userRef = ref(db, 'users/' + currentUser.uid);
 
     if (snap.val() == true) {
-      set(presenceRef, true);
-
-      onDisconnect(presenceRef).remove();
-    } else {
-      console.log('disconnected');
+      update(userRef, {
+        isConnected: true,
+      });
     }
   });
 };

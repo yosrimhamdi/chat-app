@@ -1,10 +1,12 @@
-import { getDatabase, ref, remove } from 'firebase/database';
+import { getDatabase, ref, update } from 'firebase/database';
 
 const setAbsent = uid => {
   const db = getDatabase();
-  const presenceRef = ref(db, 'presence/' + uid);
+  const userRef = ref(db, 'users/' + uid);
 
-  remove(presenceRef);
+  update(userRef, {
+    isConnected: false,
+  });
 };
 
 export default setAbsent;
