@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 
+import './Channels.scss';
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal';
 import Channel from './Channel';
 import removeListener from '../../firebase/database/removeListener';
@@ -24,7 +25,7 @@ function Channels({ channels, fetchChannels }) {
   ));
 
   return (
-    <Menu.Menu style={{ paddingBottom: '2em' }}>
+    <Menu.Menu>
       <Menu.Item>
         <span>
           <Icon name="exchange" /> CHANNELS

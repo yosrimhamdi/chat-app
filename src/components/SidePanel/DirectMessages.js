@@ -3,7 +3,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 
 const DirectMessages = () => {
   return (
-    <Menu.Menu className="menu">
+    <Menu.Menu>
       <Menu.Item>
         <span>
           <Icon name="mail" /> DIRECT MESSAGES
