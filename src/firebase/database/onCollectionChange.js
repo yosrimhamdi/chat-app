@@ -1,8 +1,8 @@
 import { getDatabase, ref, onValue } from 'firebase/database';
 
-const onCollectionChange = (collectionName, handleCollectionChange) => {
+const onCollectionChange = (path, handleCollectionChange) => {
   const db = getDatabase();
-  const collectionRef = ref(db, collectionName);
+  const collectionRef = ref(db, path);
 
   onValue(collectionRef, handleCollectionChange);
 };
