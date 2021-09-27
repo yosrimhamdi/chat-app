@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Header, Segment, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import NumUsers from './NumUsers';
+import NumUsers from './Details/NumUsers';
 import setSearchTerm from '../../redux/actions/setSearchTerm';
 import setLoading from '../../redux/actions/setLoading';
 import { SEARCHING } from '../../redux/actions/types';
-import ChannelName from './ChannelName';
+import ChannelName from './Details/ChannelName';
 
 const MessagesHeader = ({
   setSearchTerm,
