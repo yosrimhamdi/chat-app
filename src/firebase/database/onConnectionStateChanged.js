@@ -1,4 +1,10 @@
-import { getDatabase, ref, update, onValue } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  update,
+  onValue,
+  onDisconnect,
+} from 'firebase/database';
 import { getAuth } from '@firebase/auth';
 
 const onConnectionStateChanged = () => {
@@ -13,6 +19,10 @@ const onConnectionStateChanged = () => {
     if (snap.val() == true) {
       update(userRef, {
         isConnected: true,
+      });
+
+      onDisconnect(userRef).update({
+        isConnected: false,
       });
     }
   });
