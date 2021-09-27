@@ -65,10 +65,20 @@ const Messages = ({
 };
 
 const mapStateToProps = ({ channels, messages }) => {
+  const { searchTerm, containerHeight, all } = messages;
+
+  const filteredMessages = all.filter(({ type, content }) => {
+    if (type == 'image') {
+      return false;
+    }
+
+    return content.includes(searchTerm);
+  });
+
   return {
     selectedChannelId: channels.selectedChannel.id,
-    messages: messages.all,
-    containerHeight: messages.containerHeight,
+    messages: filteredMessages,
+    containerHeight: containerHeight,
   };
 };
 
