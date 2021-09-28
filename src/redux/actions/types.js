@@ -25,3 +25,7 @@ export const SET_PERCENT = 'SET_PERCENT';
 
 // Users Reducer
 export const FETCH_USERS = 'FETCH_USERS';
+
+// Notification Reducer
+export const SET_NEW_NOTIFICATION = 'SET_NEW_NOTIFICATION';
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';

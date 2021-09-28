@@ -10,8 +10,10 @@ import onCollectionChange from '../../../firebase/database/onCollectionChange';
 import fetchChannels from '@actions/fetchChannels';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
+import onNewChannelMessage from '../../../firebase/database/onNewChannelMessage';
+import setNewNotification from '@actions/setNewNotification';
 
-function PublicChannels({ channels, fetchChannels }) {
+function PublicChannels({ channels, fetchChannels, setNewNotification }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
@@ -26,7 +28,16 @@ function PublicChannels({ channels, fetchChannels }) {
     return () => removeCollectionListener('channels/');
   }, [onCollectionChange]);
 
-  const renderedPublicChannels = channels.all.map(channel => (
+  useEffect(() => {
+    channels.forEach(channel => {
+      // put this on collection change: up
+      onNewChannelMessage(channel.id, setNewNotification);
+    });
+
+    return () => null; // clear here.
+  }, [channels]);
+
+  const renderedPublicChannels = channels.map(channel => (
     <PublicChannel key={channel.id} channel={channel} />
   ));
 
@@ -36,7 +47,7 @@ function PublicChannels({ channels, fetchChannels }) {
         <span>
           <Icon name="exchange" /> PUB CHANNELS
         </span>{' '}
-        ({channels.all.length})
+        ({channels.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedPublicChannels}
@@ -48,7 +59,9 @@ function PublicChannels({ channels, fetchChannels }) {
 }
 
 const mapStateToProps = state => ({
-  channels: state.channels,
+  channels: state.channels.all,
 });
 
-export default connect(mapStateToProps, { fetchChannels })(PublicChannels);
+export default connect(mapStateToProps, { fetchChannels, setNewNotification })(
+  PublicChannels,
+);
