@@ -7,20 +7,18 @@ import CreateChannelModal from '../../Modals/CreateChannelModal/CreateChannelMod
 import PublicChannel from './PublicChannel';
 import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
 import onCollectionChange from '../../../firebase/database/onCollectionChange';
-import fetchChannels from '@actions/fetchChannels';
+import fetchChannel from '@actions/fetchChannel';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
 import onNewChannelMessage from '../../../firebase/database/onNewChannelMessage';
 import setNewNotification from '@actions/setNewNotification';
 
-function PublicChannels({ channels, fetchChannels, setNewNotification }) {
+function PublicChannels({ channels, fetchChannel, setNewNotification }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
     const handleCollectionChange = snapshot => {
-      const channels = Object.values(snapshot.val() || []);
-
-      fetchChannels(channels);
+      fetchChannel(snapshot.val());
     };
 
     onCollectionChange('channels/', handleCollectionChange);
@@ -62,6 +60,6 @@ const mapStateToProps = state => ({
   channels: state.channels.all,
 });
 
-export default connect(mapStateToProps, { fetchChannels, setNewNotification })(
+export default connect(mapStateToProps, { fetchChannel, setNewNotification })(
   PublicChannels,
 );

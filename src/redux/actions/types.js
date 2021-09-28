@@ -3,11 +3,11 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const SIGN_IN = 'SIGN_IN';
 
 // Channels Reducer
-export const FETCH_CHANNELS = 'FETCH_CHANNELS';
+export const FETCH_CHANNEL = 'FETCH_CHANNEL';
 export const SELECT_CHANNEL = 'SELECT_CHANNEL';
 
 // Messages Reducer
-export const FETCH_MESSAGES = 'FETCH_MESSAGES';
+export const FETCH_MESSAGE = 'FETCH_MESSAGE';
 export const SET_MESSAGES_CONTAINER_HEIGHT = 'SET_MESSAGES_CONTAINER_HEIGHT';
 export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
 export const SET_MESSAGES_PATH = 'SET_MESSAGES_PATH';
@@ -24,7 +24,7 @@ export const SEARCHING = 'SEARCHING';
 export const SET_PERCENT = 'SET_PERCENT';
 
 // Users Reducer
-export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_USER = 'FETCH_USER';
 
 // Notification Reducer
 export const SET_NEW_NOTIFICATION = 'SET_NEW_NOTIFICATION';

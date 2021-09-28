@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 
 import onCollectionChange from '../../../firebase/database/onCollectionChange';
 import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
-import fetchUsers from '@actions/fetchUsers';
+import fetchUser from '@actions/fetchUser';
 import PrivateChannel from './PrivateChannel';
 
-const PrivateChannels = ({ fetchUsers, users }) => {
+const PrivateChannels = ({ fetchUser, users }) => {
   useEffect(() => {
     const handleCollectionChange = snapshot => {
-      const users = Object.values(snapshot.val() || []);
-
-      fetchUsers(users);
+      fetchUser(snapshot.val());
     };
 
     onCollectionChange('users/', handleCollectionChange);
@@ -41,4 +39,4 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { fetchUsers })(PrivateChannels);
+export default connect(mapStateToProps, { fetchUser })(PrivateChannels);

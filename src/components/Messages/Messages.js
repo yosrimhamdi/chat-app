@@ -6,7 +6,7 @@ import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm/MessageForm';
 import onCollectionChange from '../../firebase/database/onCollectionChange';
 import removeCollectionListener from '../../firebase/database/removeCollectionListener';
-import fetchMessages from '@actions/fetchMessages';
+import fetchMessage from '@actions/fetchMessage';
 import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
 import setMessagesPath from '../../redux/actions/setMessagesPath';
@@ -15,7 +15,7 @@ import useAutoBottomScroll from './useAutoBottomScroll';
 const Messages = ({
   setMessagesPath,
   selectedChannel,
-  fetchMessages,
+  fetchMessage,
   messages,
   setMessagesDivHeight,
   containerHeight,
@@ -25,9 +25,7 @@ const Messages = ({
 
   useEffect(() => {
     const handleCollectionChange = snapshot => {
-      const messages = Object.values(snapshot.val() || []);
-
-      fetchMessages(messages);
+      fetchMessage(snapshot.val());
     };
 
     if (messagesPath) {
@@ -102,7 +100,7 @@ const mapStateToProps = ({ channels, messages, loading }) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchMessages,
+  fetchMessage,
   setMessagesDivHeight,
   setMessagesPath,
 })(Messages);

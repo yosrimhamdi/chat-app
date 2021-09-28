@@ -1,5 +1,5 @@
 import {
-  FETCH_MESSAGES,
+  FETCH_MESSAGE,
   SET_MESSAGES_CONTAINER_HEIGHT,
   SET_SEARCH_TERM,
   SET_MESSAGES_PATH,
@@ -14,10 +14,10 @@ const INITIAL_STATE = {
 
 const messagesReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_MESSAGES:
+    case FETCH_MESSAGE:
       return {
         ...state,
-        all: action.payload,
+        all: [...state.all, action.payload],
       };
     case SET_MESSAGES_CONTAINER_HEIGHT:
       return {

@@ -1,4 +1,4 @@
-import { FETCH_CHANNELS, SELECT_CHANNEL } from '@types';
+import { FETCH_CHANNEL, SELECT_CHANNEL } from '@types';
 
 const INITIAL_STATE = {
   selectedChannel: {},
@@ -7,11 +7,11 @@ const INITIAL_STATE = {
 
 const channelsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_CHANNELS:
+    case FETCH_CHANNEL:
       return {
         ...state,
-        all: action.payload,
-        selectedChannel: action.payload.length ? action.payload[0] : {},
+        all: [...state.all, action.payload],
+        selectedChannel: action.payload,
       };
     case SELECT_CHANNEL:
       return {

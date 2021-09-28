@@ -1,10 +1,10 @@
-import { getDatabase, ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onChildAdded } from 'firebase/database';
 
 const onCollectionChange = (path, handleCollectionChange) => {
   const db = getDatabase();
   const collectionRef = ref(db, path);
 
-  onValue(collectionRef, handleCollectionChange);
+  onChildAdded(collectionRef, handleCollectionChange);
 };
 
 export default onCollectionChange;
