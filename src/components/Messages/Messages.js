@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm/MessageForm';
-import onCollectionChange from '../../firebase/database/onCollectionChange';
+import onChildAdded from '../../firebase/database/onChildAdded';
 import removeCollectionListener from '../../firebase/database/removeCollectionListener';
 import fetchMessage from '@actions/fetchMessage';
 import Message from './Message';
@@ -29,7 +29,7 @@ const Messages = ({
     };
 
     if (messagesPath) {
-      onCollectionChange(messagesPath, handleCollectionChange);
+      onChildAdded(messagesPath, handleCollectionChange);
 
       return () => removeCollectionListener(messagesPath);
     }

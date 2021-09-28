@@ -6,7 +6,7 @@ import './PublicChannel.scss';
 import CreateChannelModal from '../../Modals/CreateChannelModal/CreateChannelModal';
 import PublicChannel from './PublicChannel';
 import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
-import onCollectionChange from '../../../firebase/database/onCollectionChange';
+import onChildAdded from '../../../firebase/database/onChildAdded';
 import fetchChannel from '@actions/fetchChannel';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
@@ -21,10 +21,10 @@ function PublicChannels({ channels, fetchChannel, setNewNotification }) {
       fetchChannel(snapshot.val());
     };
 
-    onCollectionChange('channels/', handleCollectionChange);
+    onChildAdded('channels/', handleCollectionChange);
 
     return () => removeCollectionListener('channels/');
-  }, [onCollectionChange]);
+  }, [onChildAdded]);
 
   useEffect(() => {
     channels.forEach(channel => {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import onCollectionChange from '../../../firebase/database/onCollectionChange';
+import onChildAdded from '../../../firebase/database/onChildAdded';
 import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
 import fetchUser from '@actions/fetchUser';
 import PrivateChannel from './PrivateChannel';
@@ -13,7 +13,7 @@ const PrivateChannels = ({ fetchUser, users }) => {
       fetchUser(snapshot.val());
     };
 
-    onCollectionChange('users/', handleCollectionChange);
+    onChildAdded('users/', handleCollectionChange);
 
     return () => removeCollectionListener('/users');
   }, []);
