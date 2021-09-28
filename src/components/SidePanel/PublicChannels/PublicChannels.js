@@ -10,7 +10,6 @@ import onCollectionChildAdded from '../../../firebase/database/onCollectionChild
 import fetchChannel from '@actions/fetchChannel';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
-import onNewChannelMessage from '../../../firebase/database/onNewChannelMessage';
 import setNewNotification from '@actions/setNewNotification';
 
 function PublicChannels({ channels, fetchChannel, setNewNotification }) {
@@ -28,8 +27,9 @@ function PublicChannels({ channels, fetchChannel, setNewNotification }) {
 
   useEffect(() => {
     channels.forEach(channel => {
-      // put this on collection change: up
-      onNewChannelMessage(channel.id, setNewNotification);
+      onCollectionChildAdded('messages/public/' + channel.id + '/', () =>
+        setNewNotification(channel.id),
+      );
     });
 
     return () => null; // clear here.
