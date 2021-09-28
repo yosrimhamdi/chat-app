@@ -1,52 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm/MessageForm';
-import onCollectionChildAdded from '../../firebase/database/onCollectionChildAdded';
-import removeCollectionListener from '../../firebase/database/removeCollectionListener';
-import fetchMessage from '@actions/fetchMessage';
 import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
 import setMessagesPath from '../../redux/actions/setMessagesPath';
 import useAutoBottomScroll from './useAutoBottomScroll';
 
-const Messages = ({
-  setMessagesPath,
-  selectedChannel,
-  fetchMessage,
-  messages,
-  setMessagesDivHeight,
-  containerHeight,
-  messagesPath,
-}) => {
-  const { id, isPrivate } = selectedChannel;
-
-  useEffect(() => {
-    const handleCollectionChange = snapshot => {
-      fetchMessage(snapshot.val());
-    };
-
-    if (messagesPath) {
-      onCollectionChildAdded(messagesPath, handleCollectionChange);
-
-      return () => removeCollectionListener(messagesPath);
-    }
-  }, [messagesPath]);
-
-  useEffect(() => {
-    if (id) {
-      let path = 'messages/public/' + id + '/';
-
-      if (isPrivate) {
-        path = 'messages/private/' + id + '/';
-      }
-
-      setMessagesPath(path);
-    }
-  }, [selectedChannel]);
-
+const Messages = ({ messages, setMessagesDivHeight, containerHeight }) => {
   const messagesRef = useAutoBottomScroll(
     containerHeight,
     setMessagesDivHeight,
@@ -77,8 +40,8 @@ const Messages = ({
   );
 };
 
-const mapStateToProps = ({ channels, messages, loading }) => {
-  const { searchTerm, containerHeight, all, path } = messages;
+const mapStateToProps = ({ messages, loading }) => {
+  const { searchTerm, containerHeight, all } = messages;
 
   let filteredMessages = all;
 
@@ -92,15 +55,12 @@ const mapStateToProps = ({ channels, messages, loading }) => {
   }
 
   return {
-    selectedChannel: channels.selectedChannel,
     messages: filteredMessages,
-    messagesPath: path,
     containerHeight: containerHeight,
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchMessage,
   setMessagesDivHeight,
   setMessagesPath,
 })(Messages);

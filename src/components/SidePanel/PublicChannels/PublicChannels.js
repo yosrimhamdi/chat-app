@@ -11,8 +11,17 @@ import fetchChannel from '@actions/fetchChannel';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
 import setNewNotification from '@actions/setNewNotification';
+import clearNotification from '../../../redux/actions/clearNotification';
+import fetchMessage from '@actions/fetchMessage';
 
-function PublicChannels({ channels, fetchChannel, setNewNotification }) {
+function PublicChannels({
+  clearNotification,
+  fetchMessage,
+  channels,
+  fetchChannel,
+  setNewNotification,
+  selectedChannelId,
+}) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
@@ -27,13 +36,25 @@ function PublicChannels({ channels, fetchChannel, setNewNotification }) {
 
   useEffect(() => {
     channels.forEach(channel => {
-      onCollectionChildAdded('messages/public/' + channel.id + '/', () =>
-        setNewNotification(channel.id),
+      onCollectionChildAdded(
+        'messages/public/' + channel.id + '/',
+        snapshot => {
+          if (selectedChannelId === channel.id) {
+            fetchMessage(snapshot.val());
+          } else {
+            setNewNotification(channel.id);
+          }
+        },
       );
     });
 
-    return () => null; // clear here.
-  }, [channels]);
+    return () => {
+      channels.forEach(channel => {
+        clearNotification(channel.id);
+        removeCollectionListener('messages/public/' + channel.id + '/');
+      });
+    };
+  }, [channels, selectedChannelId]);
 
   const renderedPublicChannels = channels.map(channel => (
     <PublicChannel key={channel.id} channel={channel} />
@@ -58,8 +79,12 @@ function PublicChannels({ channels, fetchChannel, setNewNotification }) {
 
 const mapStateToProps = state => ({
   channels: state.channels.all,
+  selectedChannelId: state.channels.selectedChannel.id,
 });
 
-export default connect(mapStateToProps, { fetchChannel, setNewNotification })(
-  PublicChannels,
-);
+export default connect(mapStateToProps, {
+  fetchChannel,
+  fetchMessage,
+  setNewNotification,
+  clearNotification,
+})(PublicChannels);

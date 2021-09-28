@@ -1,18 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Label } from 'semantic-ui-react';
-import clearNotification from '../../../redux/actions/clearNotification';
 
 const Notification = ({
   currentChannelId,
-  clearNotification,
   notificationCount,
   selectedChannelId,
 }) => {
-  if (selectedChannelId === currentChannelId) {
-    clearNotification(currentChannelId);
-  }
-
   if (selectedChannelId === currentChannelId || notificationCount === 0) {
     return null;
   }
@@ -27,4 +21,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { clearNotification })(Notification);
+export default connect(mapStateToProps)(Notification);

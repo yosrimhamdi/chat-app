@@ -5,18 +5,21 @@ import { Menu } from 'semantic-ui-react';
 import selectChannel from '../../../redux/actions/selectChannel';
 import Notification from './Notification';
 import clearNotification from '../../../redux/actions/clearNotification';
+import clearMessages from '../../../redux/actions/clearMessages';
 
 const PublicChannel = ({
   channel,
   selectChannel,
   selectedChannelId,
   clearNotification,
+  clearMessages,
 }) => {
   const { id, name } = channel;
 
   const onPublicChannelClick = () => {
-    selectChannel(channel);
     clearNotification(channel.id);
+    clearMessages();
+    selectChannel(channel);
   };
 
   return (
@@ -36,6 +39,8 @@ const mapStateToProps = state => ({
   selectedChannelId: state.channels.selectedChannel.id,
 });
 
-export default connect(mapStateToProps, { selectChannel, clearNotification })(
-  PublicChannel,
-);
+export default connect(mapStateToProps, {
+  selectChannel,
+  clearNotification,
+  clearMessages,
+})(PublicChannel);
