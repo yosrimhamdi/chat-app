@@ -8,15 +8,22 @@ import fetchUsers from '@actions/fetchUsers';
 import PrivateChannel from './PrivateChannel';
 import fetchUser from '../../../redux/actions/fetchUser';
 import readData from '../../../firebase/database/readData';
+import onChildChanged from '../../../firebase/database/onChildChanged';
+import updateUser from '../../../redux/actions/updateUser';
 
-const PrivateChannels = ({ fetchUser, fetchUsers, users }) => {
+const PrivateChannels = ({ fetchUser, fetchUsers, users, updateUser }) => {
   useEffect(() => {
     const handleOnChildAdded = snap => fetchUser(snap.val());
+    const handleOnChildUpdated = snap => updateUser(snap.val());
 
     onChildAdded('users/', fetchUser, handleOnChildAdded);
+    onChildChanged(handleOnChildUpdated);
 
-    return () => removeListener('users/', handleOnChildAdded);
-  }, [onChildAdded]);
+    return () => {
+      removeListener('users/', handleOnChildAdded);
+      removeListener('users/', handleOnChildUpdated);
+    };
+  }, []);
 
   useEffect(() => {
     readData('users/', fetchUsers);
@@ -43,6 +50,6 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { fetchUsers, fetchUser })(
+export default connect(mapStateToProps, { fetchUsers, fetchUser, updateUser })(
   PrivateChannels,
 );

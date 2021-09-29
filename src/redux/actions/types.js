@@ -29,3 +29,4 @@ export const SET_PERCENT = 'SET_PERCENT';
 // Users Reducer
 export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_USER = 'FETCH_USER';
+export const UPDATE_USER = 'UPDATE_USER';
