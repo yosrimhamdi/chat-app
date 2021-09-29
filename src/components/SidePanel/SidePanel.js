@@ -6,24 +6,23 @@ import { Menu } from 'semantic-ui-react';
 import PrivateChannels from './PrivateChannels/PrivateChannels';
 import UnStarredPublicChannels from './PublicChannels/UnStarredPublicChannels';
 import StarredPublicChannels from './PublicChannels/StarredPublicChannels';
-import removeListener from '../../firebase/database/removeListener';
-import onChildAdded from '../../firebase/database/onChildAdded';
-import readData from '../../firebase/database/readData';
 import fetchChannels from '@actions/fetchChannels';
 import fetchChannel from '@actions/fetchChannel';
+import fetchUsers from '@actions/fetchUsers';
+import updateUser from '@actions/updateUser';
+import fetchUser from '@actions/fetchUser';
+import useWatchUsers from './useWatchChannels';
+import useWatchChannels from './useWatchUsers';
 
-function SidePanel({ fetchChannels, fetchChannel }) {
-  useEffect(() => {
-    const handleOnChildAdded = snap => fetchChannel(snap.val());
-
-    onChildAdded('channels/', handleOnChildAdded);
-
-    return () => removeListener('channels/', handleOnChildAdded);
-  }, [onChildAdded]);
-
-  useEffect(() => {
-    readData('channels/', fetchChannels);
-  }, []);
+function SidePanel({
+  fetchChannels,
+  fetchChannel,
+  fetchUser,
+  fetchUsers,
+  updateUser,
+}) {
+  useWatchChannels(fetchUser, fetchUsers, updateUser);
+  useWatchUsers(fetchChannel, fetchChannels);
 
   return (
     <Menu
@@ -41,4 +40,10 @@ function SidePanel({ fetchChannels, fetchChannel }) {
   );
 }
 
-export default connect(null, { fetchChannels, fetchChannel })(SidePanel);
+export default connect(null, {
+  fetchChannels,
+  fetchChannel,
+  fetchUsers,
+  fetchUser,
+  updateUser,
+})(SidePanel);
