@@ -55,7 +55,7 @@ function UnStarredPublicChannels({
 }
 
 const mapStateToProps = ({ auth, users, channels }) => ({
-  unStarredChannels: filterChannels(auth, users, channels.all),
+  unStarredChannels: filterChannels(auth, users, channels.all, 'UnStarred'),
 });
 
 export default connect(mapStateToProps, { fetchChannels, fetchChannel })(
