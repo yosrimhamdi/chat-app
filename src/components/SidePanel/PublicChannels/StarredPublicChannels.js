@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import StarredPublicChannel from './StarredPublicChannel';
+import StarredPublicChannel from './PublicChannel';
 
 const StarredPublicChannels = ({ starredChannels }) => {
   const renderedStarredChannels = starredChannels.map(channel => (

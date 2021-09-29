@@ -37,7 +37,7 @@ const PrivateChannels = ({ fetchUser, fetchUsers, users, updateUser }) => {
     <Menu.Menu>
       <Menu.Item>
         <span>
-          <Icon name="mail" /> PRIVATE CHANNELS
+          <Icon name="mail" /> DIRECT MESSAGES
         </span>{' '}
         ({users.length - 1})
       </Menu.Item>

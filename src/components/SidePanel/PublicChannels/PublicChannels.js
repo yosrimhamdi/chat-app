@@ -36,7 +36,7 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
     <Menu.Menu>
       <Menu.Item>
         <span>
-          <Icon name="exchange" /> PUB CHANNELS
+          <Icon name="exchange" /> CHANNELS
         </span>{' '}
         ({channels.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />

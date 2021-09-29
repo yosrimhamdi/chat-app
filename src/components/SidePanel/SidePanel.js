@@ -4,7 +4,7 @@ import { Menu } from 'semantic-ui-react';
 
 import PublicChannels from './PublicChannels/PublicChannels';
 import PrivateChannels from './PrivateChannels/PrivateChannels';
-import StarredPublicChannels from './StarredPublicChannels/StarredPublicChannels';
+import StarredPublicChannels from './PublicChannels/StarredPublicChannels';
 
 function SidePanel() {
   return (
