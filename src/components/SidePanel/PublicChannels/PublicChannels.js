@@ -28,7 +28,7 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
     readData('channels/', fetchChannels);
   }, []);
 
-  const renderedPublicChannels = channels.all.map(channel => (
+  const renderedPublicChannels = channels.map(channel => (
     <PublicChannel key={channel.id} channel={channel} />
   ));
 
@@ -38,7 +38,7 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
         <span>
           <Icon name="exchange" /> PUB CHANNELS
         </span>{' '}
-        ({channels.all.length})
+        ({channels.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedPublicChannels}
@@ -49,9 +49,18 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
   );
 }
 
-const mapStateToProps = state => ({
-  channels: state.channels,
-});
+const mapStateToProps = ({ auth, users, channels }) => {
+  const uid = auth.user.uid;
+  const user = users.find(user => user.uid === uid);
+
+  const starredChannelsIds = Object.keys(user?.starredChannels || {});
+
+  const filteredChannels = channels.all.filter(
+    channel => !starredChannelsIds.includes(channel.id),
+  );
+
+  return { channels: filteredChannels };
+};
 
 export default connect(mapStateToProps, { fetchChannels, fetchChannel })(
   PublicChannels,
