@@ -12,9 +12,7 @@ const Notification = ({
   notifications,
 }) => {
   useEffect(() => {
-    onChildAdded('messages/public/' + channel.id, () => {
-      setNotification(channel.id);
-    });
+    onChildAdded('messages/public/' + channel.id, setNotification);
   }, []);
 
   if (channel.id === selectedChannelId || !notifications[channel.id]) {
