@@ -12,6 +12,7 @@ import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
 import readData from '../../../firebase/database/readData';
 import fetchChannel from '@actions/fetchChannel';
+import filterChannels from './filterChannels';
 
 function UnStarredPublicChannels({
   unStarredChannels,
@@ -53,18 +54,9 @@ function UnStarredPublicChannels({
   );
 }
 
-const mapStateToProps = ({ auth, users, channels }) => {
-  const uid = auth.user.uid;
-  const user = users.find(user => user.uid === uid);
-
-  const starredChannelsIds = Object.keys(user?.starredChannels || {});
-
-  const unStarredChannels = channels.all.filter(
-    channel => !starredChannelsIds.includes(channel.id),
-  );
-
-  return { unStarredChannels };
-};
+const mapStateToProps = ({ auth, users, channels }) => ({
+  unStarredChannels: filterChannels(auth, users, channels.all),
+});
 
 export default connect(mapStateToProps, { fetchChannels, fetchChannel })(
   UnStarredPublicChannels,
