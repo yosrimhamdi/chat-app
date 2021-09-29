@@ -24,10 +24,14 @@ const Messages = ({
   const { id } = selectedChannel;
 
   useEffect(() => {
-    if (id) {
-      onChildAdded('messages/public/' + id, fetchMessage);
+    const handleChildAdded = snap => {
+      fetchMessage(snap.val());
+    };
 
-      return () => removeListener('messages/public/' + id);
+    if (id) {
+      onChildAdded('messages/public/' + id, handleChildAdded);
+
+      return () => removeListener('messages/public/' + id, handleChildAdded);
     }
   }, [onChildAdded, id]);
 

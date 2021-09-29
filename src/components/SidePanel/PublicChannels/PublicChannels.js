@@ -17,9 +17,11 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
-    onChildAdded('channels/', fetchChannel);
+    const handleOnChildAdded = snap => fetchChannel(snap.val());
 
-    return () => removeListener('channels/');
+    onChildAdded('channels/', handleOnChildAdded);
+
+    return () => removeListener('channels/', handleOnChildAdded);
   }, [onChildAdded]);
 
   useEffect(() => {

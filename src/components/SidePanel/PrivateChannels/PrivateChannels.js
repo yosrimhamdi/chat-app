@@ -11,9 +11,11 @@ import readData from '../../../firebase/database/readData';
 
 const PrivateChannels = ({ fetchUser, fetchUsers, users }) => {
   useEffect(() => {
-    onChildAdded('users/', fetchUser);
+    const handleOnChildAdded = snap => fetchUser(snap.val());
 
-    return () => removeListener('users/');
+    onChildAdded('users/', fetchUser, handleOnChildAdded);
+
+    return () => removeListener('users/', handleOnChildAdded);
   }, [onChildAdded]);
 
   useEffect(() => {
