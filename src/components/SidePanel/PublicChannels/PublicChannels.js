@@ -6,57 +6,27 @@ import './PublicChannel.scss';
 import CreateChannelModal from '../../Modals/CreateChannelModal/CreateChannelModal';
 import PublicChannel from './PublicChannel';
 import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
-import onCollectionChildAdded from '../../../firebase/database/onCollectionChildAdded';
-import fetchChannel from '@actions/fetchChannel';
+import onCollectionChange from '../../../firebase/database/onCollectionChange';
+import fetchChannels from '@actions/fetchChannels';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
-import setNewNotification from '@actions/setNewNotification';
-import clearNotification from '../../../redux/actions/clearNotification';
-import fetchMessage from '@actions/fetchMessage';
 
-function PublicChannels({
-  clearNotification,
-  fetchMessage,
-  channels,
-  fetchChannel,
-  setNewNotification,
-  selectedChannelId,
-}) {
+function PublicChannels({ channels, fetchChannels }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
     const handleCollectionChange = snapshot => {
-      fetchChannel(snapshot.val());
+      const channels = Object.values(snapshot.val() || []);
+
+      fetchChannels(channels);
     };
 
-    onCollectionChildAdded('channels/', handleCollectionChange);
+    onCollectionChange('channels/', handleCollectionChange);
 
     return () => removeCollectionListener('channels/');
-  }, [onCollectionChildAdded]);
+  }, [onCollectionChange]);
 
-  useEffect(() => {
-    channels.forEach(channel => {
-      onCollectionChildAdded(
-        'messages/public/' + channel.id + '/',
-        snapshot => {
-          if (selectedChannelId === channel.id) {
-            fetchMessage(snapshot.val());
-          } else {
-            setNewNotification(channel.id);
-          }
-        },
-      );
-    });
-
-    return () => {
-      channels.forEach(channel => {
-        clearNotification(channel.id);
-        removeCollectionListener('messages/public/' + channel.id + '/');
-      });
-    };
-  }, [channels, selectedChannelId]);
-
-  const renderedPublicChannels = channels.map(channel => (
+  const renderedPublicChannels = channels.all.map(channel => (
     <PublicChannel key={channel.id} channel={channel} />
   ));
 
@@ -66,7 +36,7 @@ function PublicChannels({
         <span>
           <Icon name="exchange" /> PUB CHANNELS
         </span>{' '}
-        ({channels.length})
+        ({channels.all.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedPublicChannels}
@@ -78,13 +48,7 @@ function PublicChannels({
 }
 
 const mapStateToProps = state => ({
-  channels: state.channels.all,
-  selectedChannelId: state.channels.selectedChannel.id,
+  channels: state.channels,
 });
 
-export default connect(mapStateToProps, {
-  fetchChannel,
-  fetchMessage,
-  setNewNotification,
-  clearNotification,
-})(PublicChannels);
+export default connect(mapStateToProps, { fetchChannels })(PublicChannels);

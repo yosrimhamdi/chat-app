@@ -1,9 +1,8 @@
 import {
-  FETCH_MESSAGE,
+  FETCH_MESSAGES,
   SET_MESSAGES_CONTAINER_HEIGHT,
   SET_SEARCH_TERM,
   SET_MESSAGES_PATH,
-  CLEAR_MESSAGES,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,10 +14,10 @@ const INITIAL_STATE = {
 
 const messagesReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_MESSAGE:
+    case FETCH_MESSAGES:
       return {
         ...state,
-        all: [...state.all, action.payload],
+        all: action.payload,
       };
     case SET_MESSAGES_CONTAINER_HEIGHT:
       return {
@@ -34,11 +33,6 @@ const messagesReducers = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         path: action.payload,
-      };
-    case CLEAR_MESSAGES:
-      return {
-        ...state,
-        all: [],
       };
     default:
       return state;

@@ -2,18 +2,20 @@ import React, { useEffect } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import onCollectionChildAdded from '../../../firebase/database/onCollectionChildAdded';
+import onCollectionChange from '../../../firebase/database/onCollectionChange';
 import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
-import fetchUser from '@actions/fetchUser';
+import fetchUsers from '@actions/fetchUsers';
 import PrivateChannel from './PrivateChannel';
 
-const PrivateChannels = ({ fetchUser, users }) => {
+const PrivateChannels = ({ fetchUsers, users }) => {
   useEffect(() => {
     const handleCollectionChange = snapshot => {
-      fetchUser(snapshot.val());
+      const users = Object.values(snapshot.val() || []);
+
+      fetchUsers(users);
     };
 
-    onCollectionChildAdded('users/', handleCollectionChange);
+    onCollectionChange('users/', handleCollectionChange);
 
     return () => removeCollectionListener('/users');
   }, []);
@@ -39,4 +41,4 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { fetchUser })(PrivateChannels);
+export default connect(mapStateToProps, { fetchUsers })(PrivateChannels);
