@@ -6,12 +6,16 @@ const TopPosters = ({ topPoster }) => {
   const renderedTopPosters = topPoster.map(poster => {
     const { uid, photoURL, displayName, numMessages } = poster;
 
+    const suffix = numMessages > 1 ? 'posts' : 'post';
+
     return (
       <List.Item key={uid} style={{ display: 'flex', alignItems: 'center' }}>
         <Image src={photoURL} avatar />
         <List.Content style={{ padding: '.4em .5em' }}>
           <List.Header as="a">{displayName}</List.Header>
-          <List.Description>{numMessages} posts</List.Description>
+          <List.Description>
+            {numMessages} {suffix}
+          </List.Description>
         </List.Content>
       </List.Item>
     );
