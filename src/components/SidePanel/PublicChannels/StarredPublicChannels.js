@@ -1,11 +1,11 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import StarredPublicChannel from './PublicChannel';
+import Channel from './Channel';
 
 const StarredPublicChannels = ({ starredChannels }) => {
   const renderedStarredChannels = starredChannels.map(channel => (
-    <StarredPublicChannel key={channel.id} channel={channel} />
+    <Channel key={channel.id} channel={channel} />
   ));
 
   return (
