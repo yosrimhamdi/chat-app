@@ -9,48 +9,33 @@ import removeListener from '../../firebase/database/removeListener';
 import fetchMessages from '@actions/fetchMessages';
 import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
-import setMessagesPath from '../../redux/actions/setMessagesPath';
 import useAutoBottomScroll from './useAutoBottomScroll';
 import readData from '../../firebase/database/readData';
 import fetchMessage from '../../redux/actions/fetchMessage';
 
 const Messages = ({
   fetchMessage,
-  setMessagesPath,
   selectedChannel,
   fetchMessages,
   messages,
   setMessagesDivHeight,
   containerHeight,
-  messagesPath,
 }) => {
-  const { id, isPrivate } = selectedChannel;
-
-  useEffect(() => {
-    if (messagesPath) {
-      onChildAdded(messagesPath, fetchMessage);
-
-      return () => removeListener(messagesPath);
-    }
-  }, [onChildAdded, messagesPath]);
-
-  useEffect(() => {
-    if (messagesPath) {
-      readData(messagesPath, fetchMessages);
-    }
-  }, [messagesPath]);
+  const { id } = selectedChannel;
 
   useEffect(() => {
     if (id) {
-      let path = 'messages/public/' + id + '/';
+      onChildAdded('messages/public/' + id, fetchMessage);
 
-      if (isPrivate) {
-        path = 'messages/private/' + id + '/';
-      }
-
-      setMessagesPath(path);
+      return () => removeListener('messages/public/' + id);
     }
-  }, [selectedChannel]);
+  }, [onChildAdded, id]);
+
+  useEffect(() => {
+    if (id) {
+      readData('messages/public/' + id, fetchMessages);
+    }
+  }, [id]);
 
   const messagesRef = useAutoBottomScroll(
     containerHeight,
@@ -83,7 +68,7 @@ const Messages = ({
 };
 
 const mapStateToProps = ({ channels, messages, loading }) => {
-  const { searchTerm, containerHeight, all, path } = messages;
+  const { searchTerm, containerHeight, all } = messages;
 
   let filteredMessages = all;
 
@@ -99,7 +84,6 @@ const mapStateToProps = ({ channels, messages, loading }) => {
   return {
     selectedChannel: channels.selectedChannel,
     messages: filteredMessages,
-    messagesPath: path,
     containerHeight: containerHeight,
   };
 };
@@ -107,6 +91,5 @@ const mapStateToProps = ({ channels, messages, loading }) => {
 export default connect(mapStateToProps, {
   fetchMessages,
   setMessagesDivHeight,
-  setMessagesPath,
   fetchMessage,
 })(Messages);

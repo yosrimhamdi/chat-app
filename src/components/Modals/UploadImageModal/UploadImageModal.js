@@ -14,17 +14,17 @@ import clearForm from '@actions/clearForm';
 const FORM_NAME = 'uploadImageForm';
 
 const UploadImageModal = ({
-  messagesPath,
   setPercent,
   setLoading,
   handleSubmit,
   clearForm,
   invalid,
+  channelId,
 }) => {
   const { closeModal } = useContext(ModalContext);
 
   const onSubmit = ({ file }) => {
-    uploadImage(file, messagesPath, setPercent, setLoading);
+    uploadImage(file, channelId, setPercent, setLoading);
     clearForm(FORM_NAME);
     closeModal();
   };
@@ -45,7 +45,7 @@ const UploadImageModal = ({
 const WrappedForm = reduxForm({ form: FORM_NAME, validate })(UploadImageModal);
 
 const mapStateToProps = state => ({
-  messagesPath: state.messages.path,
+  channelId: state.channels.selectedChannel.id,
 });
 
 export default connect(mapStateToProps, {
