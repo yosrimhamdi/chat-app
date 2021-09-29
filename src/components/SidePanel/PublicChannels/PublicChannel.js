@@ -27,8 +27,6 @@ const PublicChannel = ({
 
   return (
     <Menu.Item
-      key={id}
-      name={name}
       style={{ opacity: 0.6 }}
       onClick={onPublicChannelClick}
       active={id == selectedChannelId}
