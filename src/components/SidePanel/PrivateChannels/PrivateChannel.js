@@ -2,12 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 import selectChannel from '@actions/selectChannel';
+import setMessagesPath from '../../../redux/actions/setMessagesPath';
+import setUploadPath from '../../../redux/actions/setUploadPath';
 
 const PrivateChannel = ({
   user,
   authUser,
   selectChannel,
   selectedPrivateChannelId,
+  setMessagesPath,
+  setUploadPath,
 }) => {
   if (authUser.uid == user.uid) {
     return null;
@@ -20,6 +24,9 @@ const PrivateChannel = ({
   }
 
   const onPrivateChannelNameClick = () => {
+    setMessagesPath('messages/private/' + channelId + '/');
+    setUploadPath('chat/private/' + channelId + '/');
+
     selectChannel({
       id: channelId,
       name: user.displayName,
@@ -44,4 +51,8 @@ const mapStateToProps = state => ({
   selectedPrivateChannelId: state.channels.selectedChannel.id,
 });
 
-export default connect(mapStateToProps, { selectChannel })(PrivateChannel);
+export default connect(mapStateToProps, {
+  selectChannel,
+  setMessagesPath,
+  setUploadPath,
+})(PrivateChannel);

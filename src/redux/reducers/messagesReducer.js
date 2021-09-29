@@ -3,35 +3,44 @@ import {
   SET_MESSAGES_CONTAINER_HEIGHT,
   SET_SEARCH_TERM,
   FETCH_MESSAGE,
+  SET_MESSAGES_PATH,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   all: [],
   containerHeight: 'auto',
   searchTerm: '',
+  path: '',
 };
 
 const messagesReducers = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case FETCH_MESSAGES:
       return {
         ...state,
-        all: action.payload,
+        all: payload,
       };
     case SET_MESSAGES_CONTAINER_HEIGHT:
       return {
         ...state,
-        containerHeight: action.payload,
+        containerHeight: payload,
       };
     case SET_SEARCH_TERM:
       return {
         ...state,
-        searchTerm: action.payload,
+        searchTerm: payload,
       };
     case FETCH_MESSAGE:
       return {
         ...state,
-        all: [...state.all, action.payload],
+        all: [...state.all, payload],
+      };
+    case SET_MESSAGES_PATH:
+      return {
+        ...state,
+        path: payload,
       };
     default:
       return state;

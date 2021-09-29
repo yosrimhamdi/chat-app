@@ -14,6 +14,7 @@ export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const FETCH_MESSAGE = 'FETCH_MESSAGE';
 export const SET_MESSAGES_CONTAINER_HEIGHT = 'SET_MESSAGES_CONTAINER_HEIGHT';
 export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
+export const SET_MESSAGES_PATH = 'SET_MESSAGES_PATH';
 
 // Loading Reducers
 export const SENDING_MESSAGE = 'SENDING_MESSAGE';
@@ -25,6 +26,7 @@ export const SEARCHING = 'SEARCHING';
 
 // Uploading Reducer
 export const SET_PERCENT = 'SET_PERCENT';
+export const SET_UPLOAD_PATH = 'SET_UPLOAD_PATH';
 
 // Users Reducer
 export const FETCH_USERS = 'FETCH_USERS';
