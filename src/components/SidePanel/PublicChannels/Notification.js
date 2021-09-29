@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Label } from 'semantic-ui-react';
 
 import onChildAdded from '../../../firebase/database/onChildAdded';
+import removeListener from '../../../firebase/database/removeListener';
 import setNotification from '../../../redux/actions/setNotification';
 
 const Notification = ({
@@ -15,6 +16,8 @@ const Notification = ({
     const handleOnChildAdded = snap => setNotification(snap.val());
 
     onChildAdded('messages/public/' + channel.id, handleOnChildAdded);
+
+    return removeListener('messages/public/' + channel.id, handleOnChildAdded);
   }, []);
 
   if (channel.id === selectedChannelId || !notifications[channel.id]) {
