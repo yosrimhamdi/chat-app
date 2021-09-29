@@ -3,19 +3,31 @@ import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 
 import selectChannel from '../../../redux/actions/selectChannel';
+import Notification from './Notification';
+import clearNotifications from '../../../redux/actions/clearNotifications';
 
-const PublicChannel = ({ channel, selectChannel, selectedChannelId }) => {
+const PublicChannel = ({
+  channel,
+  selectChannel,
+  selectedChannelId,
+  clearNotifications,
+}) => {
   const { id, name } = channel;
+
+  const onPublicChannelClick = () => {
+    selectChannel(channel);
+    clearNotifications(id);
+  };
 
   return (
     <Menu.Item
       key={id}
       name={name}
       style={{ opacity: 0.6 }}
-      onClick={() => selectChannel(channel)}
+      onClick={onPublicChannelClick}
       active={id == selectedChannelId}
     >
-      # {name}
+      <Notification channel={channel} /># {name}
     </Menu.Item>
   );
 };
@@ -24,4 +36,6 @@ const mapStateToProps = state => ({
   selectedChannelId: state.channels.selectedChannel.id,
 });
 
-export default connect(mapStateToProps, { selectChannel })(PublicChannel);
+export default connect(mapStateToProps, { selectChannel, clearNotifications })(
+  PublicChannel,
+);

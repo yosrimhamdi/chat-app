@@ -6,6 +6,8 @@ export const SIGN_IN = 'SIGN_IN';
 export const FETCH_CHANNELS = 'FETCH_CHANNELS';
 export const FETCH_CHANNEL = 'FETCH_CHANNEL';
 export const SELECT_CHANNEL = 'SELECT_CHANNEL';
+export const SET_NOTIFICATION = 'SET_NOTIFICATION';
+export const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS';
 
 // Messages Reducer
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';

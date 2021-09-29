@@ -1,9 +1,15 @@
-import { FETCH_CHANNELS, SELECT_CHANNEL } from '@types';
+import {
+  FETCH_CHANNELS,
+  SELECT_CHANNEL,
+  SET_NOTIFICATION,
+  CLEAR_NOTIFICATIONS,
+} from '@types';
 import { FETCH_CHANNEL } from '../actions/types';
 
 const INITIAL_STATE = {
   selectedChannel: {},
   all: [],
+  notifications: {},
 };
 
 const channelsReducer = (state = INITIAL_STATE, action) => {
@@ -23,6 +29,24 @@ const channelsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedChannel: action.payload,
+      };
+    case SET_NOTIFICATION:
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          [action.payload]: state.notifications[action.payload]
+            ? state.notifications[action.payload] + 1
+            : 1,
+        },
+      };
+    case CLEAR_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          [action.payload]: 0,
+        },
       };
     default:
       return state;
