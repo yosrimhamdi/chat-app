@@ -1,17 +1,37 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import StarredPublicChannel from './StarredPublicChannel';
 
-const StarredPublicChannels = () => {
+const StarredPublicChannels = ({ starredChannels }) => {
+  const renderedStarredChannels = starredChannels.map(channel => (
+    <StarredPublicChannel key={channel.id} channel={channel} />
+  ));
+
   return (
     <Menu.Menu>
       <Menu.Item>
         <span>
           <Icon name="star" /> STARRED
         </span>{' '}
-        ({[].length})
+        ({starredChannels.length})
       </Menu.Item>
+      {renderedStarredChannels}
     </Menu.Menu>
   );
 };
 
-export default StarredPublicChannels;
+const mapStateToProps = ({ auth, users, channels }) => {
+  const uid = auth.user.uid;
+  const user = users.find(user => user.uid === uid);
+
+  const starredChannelsIds = Object.keys(user?.starredChannels || {});
+
+  const starredChannels = channels.all.filter(channel =>
+    starredChannelsIds.includes(channel.id),
+  );
+
+  return { starredChannels };
+};
+
+export default connect(mapStateToProps)(StarredPublicChannels);

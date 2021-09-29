@@ -1,10 +1,10 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 
-const StarredPublicChannel = () => {
+const StarredPublicChannel = ({ channel }) => {
   return (
     <Menu.Item style={{ opacity: 0.6 }} active={false}>
-      # Javascript
+      # {channel.name}
     </Menu.Item>
   );
 };
