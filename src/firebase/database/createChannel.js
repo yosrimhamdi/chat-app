@@ -13,6 +13,7 @@ const createChannel = async formValues => {
     name: channelName,
     details: channelDetails,
     isPrivate: false,
+    createdAt: Date.now(),
     createdBy: {
       displayName,
       email,

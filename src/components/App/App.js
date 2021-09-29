@@ -17,7 +17,7 @@ import signIn from '@actions/signIn';
 import AppMountSpinner from '../AppMountSpinner/AppMountSpinner';
 import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
 import onConnectionStateChanged from '../../firebase/database/onConnectionStateChanged';
-import removeCollectionListener from '../../firebase/database/removeCollectionListener';
+import removeListener from '../../firebase/database/removeListener';
 
 function App({ signIn, removeLoadingChatSpinner, isLoggedIn }) {
   useEffect(() => {
@@ -29,7 +29,7 @@ function App({ signIn, removeLoadingChatSpinner, isLoggedIn }) {
       onConnectionStateChanged();
     }
 
-    return () => removeCollectionListener('.info/connected');
+    return () => removeListener('.info/connected');
   }, [isLoggedIn]);
 
   return (

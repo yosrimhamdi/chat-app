@@ -2,22 +2,22 @@ import React, { useEffect } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import onCollectionChange from '../../../firebase/database/onCollectionChange';
-import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
+import onChildAdded from '../../../firebase/database/onChildAdded';
+import removeListener from '../../../firebase/database/removeListener';
 import fetchUsers from '@actions/fetchUsers';
 import PrivateChannel from './PrivateChannel';
+import fetchUser from '../../../redux/actions/fetchUser';
+import readData from '../../../firebase/database/readData';
 
-const PrivateChannels = ({ fetchUsers, users }) => {
+const PrivateChannels = ({ fetchUser, fetchUsers, users }) => {
   useEffect(() => {
-    const handleCollectionChange = snapshot => {
-      const users = Object.values(snapshot.val() || []);
+    onChildAdded('users/', fetchUser);
 
-      fetchUsers(users);
-    };
+    return () => removeListener('users/');
+  }, [onChildAdded]);
 
-    onCollectionChange('users/', handleCollectionChange);
-
-    return () => removeCollectionListener('/users');
+  useEffect(() => {
+    readData('users/', fetchUsers);
   }, []);
 
   const renderedPrivateChannels = users.map(user => (
@@ -41,4 +41,6 @@ const mapStateToProps = state => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { fetchUsers })(PrivateChannels);
+export default connect(mapStateToProps, { fetchUsers, fetchUser })(
+  PrivateChannels,
+);

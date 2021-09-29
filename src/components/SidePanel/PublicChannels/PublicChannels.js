@@ -5,26 +5,26 @@ import { Menu, Icon } from 'semantic-ui-react';
 import './PublicChannel.scss';
 import CreateChannelModal from '../../Modals/CreateChannelModal/CreateChannelModal';
 import PublicChannel from './PublicChannel';
-import removeCollectionListener from '../../../firebase/database/removeCollectionListener';
-import onCollectionChange from '../../../firebase/database/onCollectionChange';
+import removeListener from '../../../firebase/database/removeListener';
+import onChildAdded from '../../../firebase/database/onChildAdded';
 import fetchChannels from '@actions/fetchChannels';
 import ModalContext from '../../Modals/ModalContext';
 import useModal from '../../Modals/useModal';
+import readData from '../../../firebase/database/readData';
+import fetchChannel from '@actions/fetchChannel';
 
-function PublicChannels({ channels, fetchChannels }) {
+function PublicChannels({ channels, fetchChannels, fetchChannel }) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
-    const handleCollectionChange = snapshot => {
-      const channels = Object.values(snapshot.val() || []);
+    onChildAdded('channels/', fetchChannel);
 
-      fetchChannels(channels);
-    };
+    return () => removeListener('channels/');
+  }, [onChildAdded]);
 
-    onCollectionChange('channels/', handleCollectionChange);
-
-    return () => removeCollectionListener('channels/');
-  }, [onCollectionChange]);
+  useEffect(() => {
+    readData('channels/', fetchChannels);
+  }, []);
 
   const renderedPublicChannels = channels.all.map(channel => (
     <PublicChannel key={channel.id} channel={channel} />
@@ -51,4 +51,6 @@ const mapStateToProps = state => ({
   channels: state.channels,
 });
 
-export default connect(mapStateToProps, { fetchChannels })(PublicChannels);
+export default connect(mapStateToProps, { fetchChannels, fetchChannel })(
+  PublicChannels,
+);

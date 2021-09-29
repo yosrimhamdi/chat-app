@@ -4,15 +4,18 @@ import { connect } from 'react-redux';
 import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
 import MessageForm from './MessageForm/MessageForm';
-import onCollectionChange from '../../firebase/database/onCollectionChange';
-import removeCollectionListener from '../../firebase/database/removeCollectionListener';
+import onChildAdded from '../../firebase/database/onChildAdded';
+import removeListener from '../../firebase/database/removeListener';
 import fetchMessages from '@actions/fetchMessages';
 import Message from './Message';
 import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight';
 import setMessagesPath from '../../redux/actions/setMessagesPath';
 import useAutoBottomScroll from './useAutoBottomScroll';
+import readData from '../../firebase/database/readData';
+import fetchMessage from '../../redux/actions/fetchMessage';
 
 const Messages = ({
+  fetchMessage,
   setMessagesPath,
   selectedChannel,
   fetchMessages,
@@ -24,16 +27,16 @@ const Messages = ({
   const { id, isPrivate } = selectedChannel;
 
   useEffect(() => {
-    const handleCollectionChange = snapshot => {
-      const messages = Object.values(snapshot.val() || []);
-
-      fetchMessages(messages);
-    };
-
     if (messagesPath) {
-      onCollectionChange(messagesPath, handleCollectionChange);
+      onChildAdded(messagesPath, fetchMessage);
 
-      return () => removeCollectionListener(messagesPath);
+      return () => removeListener(messagesPath);
+    }
+  }, [onChildAdded, messagesPath]);
+
+  useEffect(() => {
+    if (messagesPath) {
+      readData(messagesPath, fetchMessages);
     }
   }, [messagesPath]);
 
@@ -105,4 +108,5 @@ export default connect(mapStateToProps, {
   fetchMessages,
   setMessagesDivHeight,
   setMessagesPath,
+  fetchMessage,
 })(Messages);

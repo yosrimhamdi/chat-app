@@ -3,6 +3,7 @@ import {
   SET_MESSAGES_CONTAINER_HEIGHT,
   SET_SEARCH_TERM,
   SET_MESSAGES_PATH,
+  FETCH_MESSAGE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -33,6 +34,11 @@ const messagesReducers = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         path: action.payload,
+      };
+    case FETCH_MESSAGE:
+      return {
+        ...state,
+        all: [...state.all, action.payload],
       };
     default:
       return state;
