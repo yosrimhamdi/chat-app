@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Segment, Icon, Header, Accordion, Image } from 'semantic-ui-react';
+import TopPosters from './TopPosters';
 
 const MetaPanel = ({ selectedChannel }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -9,7 +10,7 @@ const MetaPanel = ({ selectedChannel }) => {
     setActiveIndex(titleProps.index);
   };
 
-  const { createdBy, isPrivate, details, name } = selectedChannel;
+  const { createdBy = {}, isPrivate, details, name } = selectedChannel;
 
   if (isPrivate) {
     return null;
@@ -44,7 +45,7 @@ const MetaPanel = ({ selectedChannel }) => {
           Top Posters
         </Accordion.Title>
         <Accordion.Content active={activeIndex === 1}>
-          posters
+          <TopPosters />
         </Accordion.Content>
 
         <Accordion.Title
