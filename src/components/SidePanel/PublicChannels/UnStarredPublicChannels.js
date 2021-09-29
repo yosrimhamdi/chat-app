@@ -13,7 +13,11 @@ import useModal from '../../Modals/useModal';
 import readData from '../../../firebase/database/readData';
 import fetchChannel from '@actions/fetchChannel';
 
-function PublicChannels({ channels, fetchChannels, fetchChannel }) {
+function UnStarredPublicChannels({
+  unStarredChannels,
+  fetchChannels,
+  fetchChannel,
+}) {
   const [isModalOpen, openModal, closeModal] = useModal();
 
   useEffect(() => {
@@ -28,7 +32,7 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
     readData('channels/', fetchChannels);
   }, []);
 
-  const renderedPublicChannels = channels.map(channel => (
+  const renderedPublicChannels = unStarredChannels.map(channel => (
     <PublicChannel key={channel.id} channel={channel} />
   ));
 
@@ -38,7 +42,7 @@ function PublicChannels({ channels, fetchChannels, fetchChannel }) {
         <span>
           <Icon name="exchange" /> CHANNELS
         </span>{' '}
-        ({channels.length})
+        ({unStarredChannels.length})
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedPublicChannels}
@@ -55,13 +59,13 @@ const mapStateToProps = ({ auth, users, channels }) => {
 
   const starredChannelsIds = Object.keys(user?.starredChannels || {});
 
-  const filteredChannels = channels.all.filter(
+  const unStarredChannels = channels.all.filter(
     channel => !starredChannelsIds.includes(channel.id),
   );
 
-  return { channels: filteredChannels };
+  return { unStarredChannels };
 };
 
 export default connect(mapStateToProps, { fetchChannels, fetchChannel })(
-  PublicChannels,
+  UnStarredPublicChannels,
 );

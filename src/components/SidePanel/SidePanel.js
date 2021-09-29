@@ -2,8 +2,8 @@ import React from 'react';
 import UserPanel from './UserPanel';
 import { Menu } from 'semantic-ui-react';
 
-import PublicChannels from './PublicChannels/PublicChannels';
 import PrivateChannels from './PrivateChannels/PrivateChannels';
+import UnStarredPublicChannels from './PublicChannels/UnStarredPublicChannels';
 import StarredPublicChannels from './PublicChannels/StarredPublicChannels';
 
 function SidePanel() {
@@ -17,7 +17,7 @@ function SidePanel() {
     >
       <UserPanel />
       <StarredPublicChannels />
-      <PublicChannels />
+      <UnStarredPublicChannels />
       <PrivateChannels />
     </Menu>
   );
