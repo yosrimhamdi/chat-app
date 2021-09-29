@@ -1,7 +1,7 @@
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, remove } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 
-const addStarredChannel = channelId => {
+const unStartChannel = channelId => {
   const { currentUser } = getAuth();
   const db = getDatabase();
   const starredChannelRef = ref(
@@ -9,9 +9,7 @@ const addStarredChannel = channelId => {
     'users/' + currentUser.uid + '/starredChannels/' + channelId + '/',
   );
 
-  set(starredChannelRef, {
-    starredAt: Date.now(),
-  });
+  remove(starredChannelRef);
 };
 
-export default addStarredChannel;
+export default unStartChannel;
