@@ -27,9 +27,9 @@ function App({ signIn, removeLoadingChatSpinner, isLoggedIn }) {
   useEffect(() => {
     if (isLoggedIn) {
       onConnectionStateChanged();
-    }
 
-    return () => removeListener('.info/connected');
+      return () => removeListener('.info/connected');
+    }
   }, [isLoggedIn]);
 
   return (
