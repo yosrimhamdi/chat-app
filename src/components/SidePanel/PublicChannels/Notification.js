@@ -21,7 +21,7 @@ const Notification = ({
       const message = snap.val();
 
       if (message.user.uid !== uid && selectedChannelId !== id) {
-        setNotification(message);
+        setNotification(message.channelId);
       }
     };
 

@@ -1,8 +1,8 @@
 import { SET_NOTIFICATION } from './types';
 
-const setNotification = message => ({
+const setNotification = channelId => ({
   type: SET_NOTIFICATION,
-  payload: message.channelId,
+  payload: channelId,
 });
 
 export default setNotification;
