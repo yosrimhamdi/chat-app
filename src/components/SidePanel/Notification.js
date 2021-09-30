@@ -12,6 +12,7 @@ const Notification = ({
   setNotification,
   notifications,
   uid,
+  path,
 }) => {
   useEffect(() => {
     const handleOnChildAdded = snap => {
@@ -22,10 +23,12 @@ const Notification = ({
       }
     };
 
-    onChildAdded('messages/public/' + channel.id, handleOnChildAdded);
+    if (path) {
+      onChildAdded(path, handleOnChildAdded);
 
-    return removeListener('messages/public/' + channel.id, 'child_added');
-  }, [selectedChannelId]);
+      return removeListener(path, 'child_added');
+    }
+  });
 
   if (channel.id === selectedChannelId || !notifications[channel.id]) {
     return null;
@@ -34,10 +37,11 @@ const Notification = ({
   return <Label color="red">{notifications[channel.id]}</Label>;
 };
 
-const mapStateToProps = state => ({
-  selectedChannelId: state.channels.selectedChannel.id,
-  notifications: state.channels.notifications,
-  uid: state.auth.user.uid,
+const mapStateToProps = ({ channels, auth, messages }) => ({
+  selectedChannelId: channels.selectedChannel.id,
+  notifications: channels.notifications,
+  uid: auth.user.uid,
+  path: messages.path,
 });
 
 export default connect(mapStateToProps, { setNotification })(Notification);

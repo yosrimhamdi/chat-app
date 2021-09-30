@@ -15,27 +15,25 @@ import fetchMessage from '../../redux/actions/fetchMessage';
 
 const Messages = ({
   fetchMessage,
-  selectedChannel,
   fetchMessages,
   messages,
   setMessagesDivHeight,
   containerHeight,
+  path,
 }) => {
-  const { id } = selectedChannel;
+  useEffect(() => {
+    if (path) {
+      onChildAdded(path, fetchMessage);
+
+      return () => removeListener(path, 'child_added');
+    }
+  });
 
   useEffect(() => {
-    if (id) {
-      onChildAdded('messages/public/' + id, fetchMessage);
-
-      return () => removeListener('messages/public/' + id, 'child_added');
+    if (path) {
+      readData(path, fetchMessages);
     }
-  }, [onChildAdded, id]);
-
-  useEffect(() => {
-    if (id) {
-      readData('messages/public/' + id, fetchMessages);
-    }
-  }, [id]);
+  }, [path]);
 
   const messagesRef = useAutoBottomScroll(
     containerHeight,
@@ -67,8 +65,8 @@ const Messages = ({
   );
 };
 
-const mapStateToProps = ({ channels, messages, loading }) => {
-  const { searchTerm, containerHeight, all } = messages;
+const mapStateToProps = ({ messages, loading }) => {
+  const { searchTerm, containerHeight, all, path } = messages;
 
   let filteredMessages = all;
 
@@ -82,9 +80,9 @@ const mapStateToProps = ({ channels, messages, loading }) => {
   }
 
   return {
-    selectedChannel: channels.selectedChannel,
     messages: filteredMessages,
     containerHeight: containerHeight,
+    path,
   };
 };
 
