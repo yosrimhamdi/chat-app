@@ -14,11 +14,13 @@ const Notification = ({
   uid,
   path,
 }) => {
+  const { id } = channel;
+
   useEffect(() => {
     const handleOnChildAdded = snap => {
       const message = snap.val();
 
-      if (message.user.uid !== uid && selectedChannelId !== channel.id) {
+      if (message.user.uid !== uid && selectedChannelId !== id) {
         setNotification(message);
       }
     };
@@ -30,11 +32,11 @@ const Notification = ({
     }
   });
 
-  if (channel.id === selectedChannelId || !notifications[channel.id]) {
+  if (id === selectedChannelId || !notifications[id]) {
     return null;
   }
 
-  return <Label color="red">{notifications[channel.id]}</Label>;
+  return <Label color="red">{notifications[id]}</Label>;
 };
 
 const mapStateToProps = ({ channels, auth, messages }) => ({
