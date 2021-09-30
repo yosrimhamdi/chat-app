@@ -42,7 +42,7 @@ function SidePanel({
 
     setMessagesPath(messagesPath);
     setUploadPath(uploadPath);
-  }, []);
+  }, [selectedChannel]);
 
   return (
     <Menu
