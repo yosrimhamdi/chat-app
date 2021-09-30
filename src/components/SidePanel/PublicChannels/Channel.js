@@ -21,8 +21,8 @@ const PublicChannel = ({
   const onPublicChannelClick = () => {
     selectChannel(channel);
     clearNotifications(id);
-    setMessagesPath('messages/public/' + id + '/');
-    setUploadPath('chat/public/' + id + '/');
+    setMessagesPath('messages/public/' + id);
+    setUploadPath('chat/public/' + id);
   };
 
   return (
