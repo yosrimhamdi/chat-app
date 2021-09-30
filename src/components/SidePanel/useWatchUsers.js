@@ -10,10 +10,7 @@ const useWatchUsers = (fetchUser, fetchUsers, updateUser) => {
     onChildAdded('users/', fetchUser);
     onChildChanged(updateUser);
 
-    return () => {
-      removeListener('users/', 'child_added');
-      removeListener('users/', 'child_changed');
-    };
+    return () => removeListener('users/');
   }, []);
 
   useEffect(() => {

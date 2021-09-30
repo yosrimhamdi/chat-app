@@ -9,7 +9,7 @@ const useWatchChannels = (fetchChannel, fetchChannels) => {
     onChildAdded('channels/', fetchChannel);
 
     return () => removeListener('channels/', 'child_added');
-  }, [onChildAdded]);
+  }, []);
 
   useEffect(() => {
     readData('channels/', fetchChannels);
