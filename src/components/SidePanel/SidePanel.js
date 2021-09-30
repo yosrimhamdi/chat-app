@@ -11,8 +11,8 @@ import fetchChannel from '@actions/fetchChannel';
 import fetchUsers from '@actions/fetchUsers';
 import updateUser from '@actions/updateUser';
 import fetchUser from '@actions/fetchUser';
-import useWatchUsers from './useWatchChannels';
-import useWatchChannels from './useWatchUsers';
+import useWatchChannels from './useWatchChannels';
+import useWatchUsers from './useWatchUsers';
 
 function SidePanel({
   fetchChannels,
@@ -21,8 +21,8 @@ function SidePanel({
   fetchUsers,
   updateUser,
 }) {
-  useWatchChannels(fetchUser, fetchUsers, updateUser);
-  useWatchUsers(fetchChannel, fetchChannels);
+  useWatchUsers(fetchUser, fetchUsers, updateUser);
+  useWatchChannels(fetchChannel, fetchChannels);
 
   return (
     <Menu

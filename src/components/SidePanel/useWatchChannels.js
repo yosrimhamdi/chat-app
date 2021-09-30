@@ -4,7 +4,7 @@ import removeListener from '../../firebase/database/removeListener';
 import onChildAdded from '../../firebase/database/onChildAdded';
 import readData from '../../firebase/database/readData';
 
-const useWatchUsers = (fetchChannel, fetchChannels) => {
+const useWatchChannels = (fetchChannel, fetchChannels) => {
   useEffect(() => {
     onChildAdded('channels/', fetchChannel);
 
@@ -16,4 +16,4 @@ const useWatchUsers = (fetchChannel, fetchChannels) => {
   }, []);
 };
 
-export default useWatchUsers;
+export default useWatchChannels;
