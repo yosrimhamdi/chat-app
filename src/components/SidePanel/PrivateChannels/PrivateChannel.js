@@ -4,6 +4,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import selectChannel from '@actions/selectChannel';
 import setMessagesPath from '../../../redux/actions/setMessagesPath';
 import setUploadPath from '../../../redux/actions/setUploadPath';
+import Notification from '../Notification';
 
 const PrivateChannel = ({
   user,
@@ -23,15 +24,17 @@ const PrivateChannel = ({
     channelId = user.uid + authUser.uid;
   }
 
+  const channel = {
+    id: channelId,
+    name: user.displayName,
+    isPrivate: true,
+  };
+
   const onPrivateChannelNameClick = () => {
     setMessagesPath('messages/private/' + channelId + '/');
     setUploadPath('chat/private/' + channelId + '/');
 
-    selectChannel({
-      id: channelId,
-      name: user.displayName,
-      isPrivate: true,
-    });
+    selectChannel(channel);
   };
 
   return (
@@ -41,6 +44,7 @@ const PrivateChannel = ({
       active={selectedPrivateChannelId == channelId}
     >
       <Icon name="circle" color={user.isConnected ? 'green' : 'red'} /> @{' '}
+      <Notification channel={channel} />
       {user.displayName}
     </Menu.Item>
   );

@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Label } from 'semantic-ui-react';
 
-import onChildAdded from '../../../firebase/database/onChildAdded';
-import removeListener from '../../../firebase/database/removeListener';
-import setNotification from '../../../redux/actions/setNotification';
+import onChildAdded from '../../firebase/database/onChildAdded';
+import removeListener from '../../firebase/database/removeListener';
+import setNotification from '../../redux/actions/setNotification';
 
 const Notification = ({
   channel,
