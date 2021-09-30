@@ -7,11 +7,8 @@ import readData from '../../firebase/database/readData';
 
 const useWatchChannels = (fetchUser, fetchUsers, updateUser) => {
   useEffect(() => {
-    const handleOnChildAdded = snap => fetchUser(snap.val());
-    const handleOnChildUpdated = snap => updateUser(snap.val());
-
-    onChildAdded('users/', fetchUser, handleOnChildAdded);
-    onChildChanged(handleOnChildUpdated);
+    onChildAdded('users/', fetchUser);
+    onChildChanged(updateUser);
 
     return () => {
       removeListener('users/', 'child_added');

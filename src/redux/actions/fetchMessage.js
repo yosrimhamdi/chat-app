@@ -1,8 +1,8 @@
 import { FETCH_MESSAGE } from '@types';
 
-const fetchMessage = message => ({
+const fetchMessage = snap => ({
   type: FETCH_MESSAGE,
-  payload: message,
+  payload: snap.val(),
 });
 
 export default fetchMessage;

@@ -1,8 +1,8 @@
 import { UPDATE_USER } from './types';
 
-const updateUser = user => ({
+const updateUser = snap => ({
   type: UPDATE_USER,
-  payload: user,
+  payload: snap.val(),
 });
 
 export default updateUser;

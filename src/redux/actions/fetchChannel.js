@@ -1,8 +1,8 @@
 import { FETCH_CHANNEL } from '@types';
 
-const fetchChannel = channel => ({
+const fetchChannel = snap => ({
   type: FETCH_CHANNEL,
-  payload: channel,
+  payload: snap.val(),
 });
 
 export default fetchChannel;

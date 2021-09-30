@@ -1,8 +1,8 @@
 import { FETCH_USER } from '@types';
 
-const fetchUser = user => ({
+const fetchUser = snap => ({
   type: FETCH_USER,
-  payload: user,
+  payload: snap.val(),
 });
 
 export default fetchUser;
