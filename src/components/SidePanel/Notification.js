@@ -39,11 +39,10 @@ const Notification = ({
   return <Label color="red">{notifications[id]}</Label>;
 };
 
-const mapStateToProps = ({ channels, auth, messages }) => ({
+const mapStateToProps = ({ channels, auth }) => ({
   selectedChannelId: channels.selectedChannel.id,
   notifications: channels.notifications,
   uid: auth.user.uid,
-  path: messages.path,
 });
 
 export default connect(mapStateToProps, { setNotification })(Notification);

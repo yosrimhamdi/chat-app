@@ -11,6 +11,7 @@ const PublicChannel = ({
   selectChannel,
   selectedChannelId,
   clearNotifications,
+  path,
 }) => {
   const { id, name } = channel;
 
@@ -25,13 +26,14 @@ const PublicChannel = ({
       onClick={onPublicChannelClick}
       active={id == selectedChannelId}
     >
-      <Notification channel={channel} /># {name}
+      <Notification channel={channel} path={path} /># {name}
     </Menu.Item>
   );
 };
 
-const mapStateToProps = state => ({
-  selectedChannelId: state.channels.selectedChannel.id,
+const mapStateToProps = ({ channels, messages }) => ({
+  selectedChannelId: channels.selectedChannel.id,
+  path: messages.path,
 });
 
 export default connect(mapStateToProps, {
