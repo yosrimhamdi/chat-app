@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 
 import selectChannel from '../../../redux/actions/selectChannel';
-import Notification from './Notification';
+import Notification from '../Notification';
 import clearNotifications from '../../../redux/actions/clearNotifications';
 
 const PublicChannel = ({

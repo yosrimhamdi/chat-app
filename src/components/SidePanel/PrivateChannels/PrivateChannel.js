@@ -4,6 +4,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import selectChannel from '@actions/selectChannel';
 import setMessagesPath from '../../../redux/actions/setMessagesPath';
 import setUploadPath from '../../../redux/actions/setUploadPath';
+import Notification from '../Notification';
 
 const PrivateChannel = ({
   user,
@@ -43,6 +44,7 @@ const PrivateChannel = ({
       active={selectedPrivateChannelId == channelId}
     >
       <Icon name="circle" color={user.isConnected ? 'green' : 'red'} /> @{' '}
+      <Notification channel={channel} path="messages/private/" />
       {user.displayName}
     </Menu.Item>
   );
