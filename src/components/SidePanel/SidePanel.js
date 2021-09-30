@@ -29,22 +29,20 @@ function SidePanel({
   useWatchUsers(fetchUser, fetchUsers, updateUser);
   useWatchChannels(fetchChannel, fetchChannels);
 
-  const { id, isPrivate } = selectedChannel;
+  const { isPrivate } = selectedChannel;
 
   useEffect(() => {
-    if (id) {
-      let messagesPath = 'messages/public/';
-      let uploadPath = 'chat/public/';
+    let messagesPath = 'messages/public/';
+    let uploadPath = 'chat/public/';
 
-      if (isPrivate) {
-        messagesPath = 'messages/private/';
-        uploadPath = 'chat/private/';
-      }
-
-      setMessagesPath(messagesPath + id);
-      setUploadPath(uploadPath + id);
+    if (isPrivate) {
+      messagesPath = 'messages/private/';
+      uploadPath = 'chat/private/';
     }
-  }, [id]);
+
+    setMessagesPath(messagesPath);
+    setUploadPath(uploadPath);
+  }, []);
 
   return (
     <Menu

@@ -20,20 +20,23 @@ const Messages = ({
   setMessagesDivHeight,
   containerHeight,
   path,
+  selectedChannel,
 }) => {
-  useEffect(() => {
-    if (path) {
-      onChildAdded(path, fetchMessage);
-
-      return () => removeListener(path, 'child_added');
-    }
-  });
+  const { id } = selectedChannel;
 
   useEffect(() => {
-    if (path) {
-      readData(path, fetchMessages);
+    if (id) {
+      onChildAdded(path + id, fetchMessage);
+
+      return () => removeListener(path + id, 'child_added');
     }
-  }, [path]);
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      readData(path + id, fetchMessages);
+    }
+  }, [id]);
 
   const messagesRef = useAutoBottomScroll(
     containerHeight,
@@ -65,7 +68,7 @@ const Messages = ({
   );
 };
 
-const mapStateToProps = ({ messages, loading }) => {
+const mapStateToProps = ({ messages, loading, channels }) => {
   const { searchTerm, containerHeight, all, path } = messages;
 
   let filteredMessages = all;
@@ -83,6 +86,7 @@ const mapStateToProps = ({ messages, loading }) => {
     messages: filteredMessages,
     containerHeight: containerHeight,
     path,
+    selectedChannel: channels.selectedChannel,
   };
 };
 
