@@ -12,6 +12,9 @@ import setMessagesDivHeight from '../../redux/actions/setMessagesContainerHeight
 import useAutoBottomScroll from './useAutoBottomScroll';
 import readData from '../../firebase/database/readData';
 import fetchMessage from '../../redux/actions/fetchMessage';
+import setMessagesPath from '@actions/setMessagesPath';
+import setUploadPath from '@actions/setUploadPath';
+import useSetPaths from './useSetPaths';
 
 const Messages = ({
   fetchMessage,
@@ -21,8 +24,16 @@ const Messages = ({
   containerHeight,
   path,
   selectedChannel,
+  setMessagesPath,
+  setUploadPath,
 }) => {
-  const { id } = selectedChannel;
+  const { id, isPrivate } = selectedChannel;
+
+  useSetPaths(isPrivate, setMessagesPath, setUploadPath);
+  const messagesRef = useAutoBottomScroll(
+    containerHeight,
+    setMessagesDivHeight,
+  );
 
   useEffect(() => {
     if (id) {
@@ -36,12 +47,7 @@ const Messages = ({
     if (id) {
       readData(path + id, fetchMessages);
     }
-  }, [id]);
-
-  const messagesRef = useAutoBottomScroll(
-    containerHeight,
-    setMessagesDivHeight,
-  );
+  }, [id, path]);
 
   const renderedMessages = [];
 
@@ -94,4 +100,6 @@ export default connect(mapStateToProps, {
   fetchMessages,
   setMessagesDivHeight,
   fetchMessage,
+  setMessagesPath,
+  setUploadPath,
 })(Messages);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import UserPanel from './UserPanel';
 import { Menu } from 'semantic-ui-react';
@@ -13,36 +13,16 @@ import updateUser from '@actions/updateUser';
 import fetchUser from '@actions/fetchUser';
 import useWatchChannels from './useWatchChannels';
 import useWatchUsers from './useWatchUsers';
-import setMessagesPath from '../../redux/actions/setMessagesPath';
-import setUploadPath from '../../redux/actions/setUploadPath';
 
-function SidePanel({
+const SidePanel = ({
   fetchChannels,
   fetchChannel,
   fetchUser,
   fetchUsers,
   updateUser,
-  selectedChannel,
-  setMessagesPath,
-  setUploadPath,
-}) {
+}) => {
   useWatchUsers(fetchUser, fetchUsers, updateUser);
   useWatchChannels(fetchChannel, fetchChannels);
-
-  const { isPrivate } = selectedChannel;
-
-  useEffect(() => {
-    let messagesPath = 'messages/public/';
-    let uploadPath = 'chat/public/';
-
-    if (isPrivate) {
-      messagesPath = 'messages/private/';
-      uploadPath = 'chat/private/';
-    }
-
-    setMessagesPath(messagesPath);
-    setUploadPath(uploadPath);
-  }, [selectedChannel]);
 
   return (
     <Menu
@@ -58,18 +38,12 @@ function SidePanel({
       <PrivateChannels />
     </Menu>
   );
-}
+};
 
-const mapStateToProps = ({ channels }) => ({
-  selectedChannel: channels.selectedChannel,
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   fetchChannels,
   fetchChannel,
   fetchUsers,
   fetchUser,
   updateUser,
-  setMessagesPath,
-  setUploadPath,
 })(SidePanel);
