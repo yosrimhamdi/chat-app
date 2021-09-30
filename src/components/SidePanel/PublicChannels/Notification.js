@@ -24,7 +24,7 @@ const Notification = ({
 
     onChildAdded('messages/public/' + channel.id, handleOnChildAdded);
 
-    return removeListener('messages/public/' + channel.id, handleOnChildAdded);
+    return removeListener('messages/public/' + channel.id, 'child_added');
   }, [selectedChannelId]);
 
   if (channel.id === selectedChannelId || !notifications[channel.id]) {

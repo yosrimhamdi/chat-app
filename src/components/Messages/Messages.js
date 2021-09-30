@@ -31,7 +31,7 @@ const Messages = ({
     if (id) {
       onChildAdded('messages/public/' + id, handleChildAdded);
 
-      return () => removeListener('messages/public/' + id, handleChildAdded);
+      return () => removeListener('messages/public/' + id, 'child_added');
     }
   }, [onChildAdded, id]);
 

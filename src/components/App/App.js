@@ -28,7 +28,7 @@ function App({ signIn, removeLoadingChatSpinner, isLoggedIn }) {
     if (isLoggedIn) {
       onConnectionStateChanged();
 
-      return () => removeListener('.info/connected');
+      return () => removeListener('.info/connected', 'value');
     }
   }, [isLoggedIn]);
 

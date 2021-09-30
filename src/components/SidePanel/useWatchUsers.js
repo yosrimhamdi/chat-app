@@ -14,8 +14,8 @@ const useWatchChannels = (fetchUser, fetchUsers, updateUser) => {
     onChildChanged(handleOnChildUpdated);
 
     return () => {
-      removeListener('users/', handleOnChildAdded);
-      removeListener('users/', handleOnChildUpdated);
+      removeListener('users/', 'child_added');
+      removeListener('users/', 'child_changed');
     };
   }, []);
 
