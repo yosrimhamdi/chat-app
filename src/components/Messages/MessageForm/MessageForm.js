@@ -35,7 +35,7 @@ const MessageForm = ({
 
   return (
     <Segment className="messages__form">
-      <Form onSubmit={handleSubmit(onFormSubmit)}>
+      <Form onSubmit={handleSubmit(onFormSubmit)} autoComplete="off">
         <Field name="message" component={MessageInput} />
         <Button.Group icon widths="2">
           <Button
