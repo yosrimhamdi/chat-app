@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import './Messages.scss';
@@ -29,11 +29,10 @@ const Messages = ({
 }) => {
   const { id, isPrivate } = selectedChannel;
 
+  const ref = useRef();
+
   useSetPaths(isPrivate, setMessagesPath, setUploadPath);
-  const messagesRef = useAutoBottomScroll(
-    containerHeight,
-    setMessagesDivHeight,
-  );
+  useAutoBottomScroll(ref, containerHeight, setMessagesDivHeight);
 
   useEffect(() => {
     if (id) {
@@ -66,7 +65,7 @@ const Messages = ({
   return (
     <div className="messages">
       <MessagesHeader />
-      <div className="messages__messages-container" ref={messagesRef}>
+      <div className="messages__messages-container" ref={ref}>
         <div className="messages__messages-wrapper">{renderedMessages}</div>
       </div>
       <MessageForm />

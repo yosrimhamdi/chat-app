@@ -1,21 +1,17 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-const useAutoBottomScroll = (containerHeight, setMessagesDivHeight) => {
-  const messagesRef = useRef();
-
+const useAutoBottomScroll = (ref, containerHeight, setMessagesDivHeight) => {
   useEffect(() => {
-    messagesRef.current.style.height = `${containerHeight}px`;
+    ref.current.style.height = `${containerHeight}px`;
 
     if (containerHeight == 'auto') {
-      setMessagesDivHeight(messagesRef.current.offsetHeight);
+      setMessagesDivHeight(ref.current.offsetHeight);
     }
   }, [containerHeight]);
 
   useEffect(() => {
-    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    ref.current.scrollTop = ref.current.scrollHeight;
   });
-
-  return messagesRef;
 };
 
 export default useAutoBottomScroll;
