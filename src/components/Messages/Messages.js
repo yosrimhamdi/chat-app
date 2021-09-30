@@ -30,7 +30,7 @@ const Messages = ({
 
       return () => removeListener(path + id, 'child_added');
     }
-  }, [id]);
+  });
 
   useEffect(() => {
     if (id) {
