@@ -20,6 +20,7 @@ const MessageForm = ({
   isSendingMessage,
   isUploading,
   channelId,
+  path,
 }) => {
   const [isModalOpen, openModal, closeModal] = useModal();
 
@@ -28,7 +29,7 @@ const MessageForm = ({
 
     clearForm('messageForm');
 
-    await createTextMessage(message, channelId);
+    await createTextMessage(message, path, channelId);
 
     setLoading(SENDING_MESSAGE, false);
   };
@@ -65,11 +66,12 @@ const MessageForm = ({
   );
 };
 
-const mapStateToProps = ({ loading, channels }) => {
+const mapStateToProps = ({ loading, channels, messages }) => {
   return {
     isSendingMessage: loading.isSendingMessage,
     isUploading: loading.isUploading,
     channelId: channels.selectedChannel.id,
+    path: messages.path,
   };
 };
 
