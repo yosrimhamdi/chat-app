@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { Menu, Icon } from 'semantic-ui-react';
 import selectChannel from '@actions/selectChannel';
 import Notification from '../Notification';
+import clearNotifications from '../../../redux/actions/clearNotifications';
 
 const PrivateChannel = ({
   user,
   authUser,
   selectChannel,
   selectedPrivateChannelId,
+  clearNotifications,
 }) => {
   if (authUser.uid == user.uid) {
     return null;
@@ -26,9 +28,14 @@ const PrivateChannel = ({
     isPrivate: true,
   };
 
+  const onPrivateChannelNameClick = () => {
+    clearNotifications(channelId);
+    selectChannel(channel);
+  };
+
   return (
     <Menu.Item
-      onClick={() => selectChannel(channel)}
+      onClick={onPrivateChannelNameClick}
       style={{ opacity: 0.7, fontStyle: 'italic' }}
       active={selectedPrivateChannelId == channelId}
     >
@@ -46,4 +53,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   selectChannel,
+  clearNotifications,
 })(PrivateChannel);
