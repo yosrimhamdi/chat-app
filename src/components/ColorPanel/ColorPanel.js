@@ -15,9 +15,10 @@ import { SliderPicker } from 'react-color';
 import setPrimaryColor from '@actions/setPrimaryColor';
 import setSecondaryColor from '@actions/setSecondaryColor';
 import saveColorTheme from '../../firebase/auth/saveColorTheme';
+import ThemeMarker from './ThemeMarker';
 
 const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { primaryColor, secondaryColor } = theme;
 
@@ -41,6 +42,7 @@ const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
         color="blue"
         onClick={() => setIsModalOpen(true)}
       />
+      <ThemeMarker />
       <Modal basic open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Choose App Colors</Modal.Header>
         <Modal.Content>

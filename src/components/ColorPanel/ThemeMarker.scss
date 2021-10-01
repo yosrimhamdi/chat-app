@@ -1,0 +1,23 @@
+.theme-marker {
+  margin-top: 1em;
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+
+  &__primary-color {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__secondary-color {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  }
+}
