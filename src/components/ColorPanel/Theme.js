@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import './ThemeMarker.scss';
+import './Theme.scss';
 
 const ThemeMarker = ({ theme }) => {
   const { primaryColor, secondaryColor } = theme;
@@ -20,4 +19,4 @@ const ThemeMarker = ({ theme }) => {
   );
 };
 
-export default connect(null)(ThemeMarker);
+export default ThemeMarker;
