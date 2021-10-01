@@ -1,8 +1,8 @@
 import { SET_PRIMARY_COLOR, SET_SECONDARY_COLOR } from '../actions/types';
 
 const INITIAL_VALUES = {
-  primaryColor: '',
-  secondaryColor: '',
+  primaryColor: '#582d86',
+  secondaryColor: '#e6b3cd',
 };
 
 const themeReducer = (state = INITIAL_VALUES, action) => {
