@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 
 import starChannel from '../../../firebase/database/starChannel';
-import unStatChannel from '../../../firebase/database/unStatChannel';
+import unStarChannel from '../../../firebase/database/unStarChannel';
 
 const ChannelName = ({ selectedChannel, starredChannels }) => {
   const { name, isPrivate, id } = selectedChannel;
@@ -12,7 +12,7 @@ const ChannelName = ({ selectedChannel, starredChannels }) => {
 
   const onStarIconClick = () => {
     if (isStarred) {
-      unStatChannel(id);
+      unStarChannel(id);
     } else {
       starChannel(id);
     }
