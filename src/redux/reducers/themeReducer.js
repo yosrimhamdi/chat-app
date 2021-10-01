@@ -1,8 +1,13 @@
-import { SET_PRIMARY_COLOR, SET_SECONDARY_COLOR } from '../actions/types';
+import {
+  SET_PRIMARY_COLOR,
+  SET_SECONDARY_COLOR,
+  SET_THEME,
+} from '../actions/types';
 
 const INITIAL_VALUES = {
   primaryColor: '#582dfd',
   secondaryColor: '#a6e3cd',
+  id: null,
 };
 
 const themeReducer = (state = INITIAL_VALUES, action) => {
@@ -19,6 +24,8 @@ const themeReducer = (state = INITIAL_VALUES, action) => {
         ...state,
         secondaryColor: payload,
       };
+    case SET_THEME:
+      return { ...payload };
     default:
       return state;
   }

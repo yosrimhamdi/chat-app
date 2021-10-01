@@ -16,7 +16,7 @@ const mapStateToProps = ({ users, auth }) => {
 
   const user = users.find(user => uid == user.uid);
 
-  return { themes: Object.values(user.themes) };
+  return { themes: Object.values(user?.themes || {}) };
 };
 
 export default connect(mapStateToProps)(Themes);
