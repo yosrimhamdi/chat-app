@@ -7,11 +7,18 @@ import {
   Modal,
   Label,
   Icon,
+  Segment,
 } from 'semantic-ui-react';
 import { SliderPicker } from 'react-color';
 
 const ColorPanel = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [primaryColor, setPrimaryColor] = useState('#fff');
+  const [secondaryColor, setSecondaryColor] = useState('#ff3f');
+
+  const onSaveButtonClick = () => {
+    console.log(primaryColor, secondaryColor);
+  };
 
   return (
     <Sidebar
@@ -32,13 +39,23 @@ const ColorPanel = () => {
       <Modal basic open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Choose App Colors</Modal.Header>
         <Modal.Content>
-          <Label content="Primary Color" style={{ marginBottom: '1em' }} />
-          <SliderPicker />
-          <Label content="Secondary Color" style={{ margin: '2.4em 0 1em' }} />
-          <SliderPicker />
+          <Segment inverted>
+            <Label content="Primary Color" style={{ marginBottom: '1em' }} />
+            <SliderPicker
+              onChangeComplete={color => setPrimaryColor(color.hex)}
+              color={primaryColor}
+            />
+          </Segment>
+          <Segment inverted>
+            <Label content="Secondary Color" style={{ marginBottom: '1em' }} />
+            <SliderPicker
+              onChangeComplete={color => setSecondaryColor(color.hex)}
+              color={secondaryColor}
+            />
+          </Segment>
         </Modal.Content>
         <Modal.Actions>
-          <Button color="green" inverted>
+          <Button color="green" inverted onClick={onSaveButtonClick}>
             <Icon name="checkmark" /> Save Colors
           </Button>
           <Button color="red" inverted onClick={() => setIsModalOpen(false)}>
