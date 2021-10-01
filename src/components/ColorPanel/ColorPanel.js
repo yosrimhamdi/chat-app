@@ -14,7 +14,7 @@ import { SliderPicker } from 'react-color';
 
 import setPrimaryColor from '@actions/setPrimaryColor';
 import setSecondaryColor from '@actions/setSecondaryColor';
-import saveColorTheme from '../../firebase/auth/saveColorTheme';
+import saveColorTheme from '../../firebase/database/saveColorTheme';
 import ThemeMarker from './ThemeMarker';
 
 const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
@@ -24,6 +24,7 @@ const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
 
   const onSaveButtonClick = async () => {
     await saveColorTheme(theme);
+    setIsModalOpen(false);
   };
 
   return (
