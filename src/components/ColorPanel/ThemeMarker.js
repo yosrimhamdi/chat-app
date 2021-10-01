@@ -7,7 +7,7 @@ const ThemeMarker = ({ theme }) => {
   const { primaryColor, secondaryColor } = theme;
 
   return (
-    <div className="theme-marker">
+    <div className="theme-marker" onClick={() => console.log(theme)}>
       <div
         style={{ backgroundColor: primaryColor }}
         className="theme-marker__primary-color"
@@ -20,8 +20,4 @@ const ThemeMarker = ({ theme }) => {
   );
 };
 
-const mapStateToProps = ({ theme }) => {
-  return { theme };
-};
-
-export default connect(mapStateToProps)(ThemeMarker);
+export default connect(null)(ThemeMarker);

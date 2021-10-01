@@ -43,7 +43,7 @@ const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
         color="blue"
         onClick={() => setIsModalOpen(true)}
       />
-      <ThemeMarker />
+      <ThemeMarker theme={{}} />
       <Modal basic open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Choose App Colors</Modal.Header>
         <Modal.Content>
