@@ -11,12 +11,10 @@ const Themes = ({ themes }) => {
   return renderedThemes;
 };
 
-const mapStateToProps = ({ users, auth }) => {
-  const uid = auth.user.uid;
+const mapStateToProps = ({ auth }) => {
+  const themes = auth?.userDocument.themes || [];
 
-  const user = users.find(user => uid == user.uid);
-
-  return { themes: Object.values(user?.themes || {}) };
+  return { themes: Object.values(themes) };
 };
 
 export default connect(mapStateToProps)(Themes);
