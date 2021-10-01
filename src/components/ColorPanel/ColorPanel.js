@@ -14,14 +14,15 @@ import { SliderPicker } from 'react-color';
 
 import setPrimaryColor from '@actions/setPrimaryColor';
 import setSecondaryColor from '@actions/setSecondaryColor';
+import saveColorTheme from '../../firebase/auth/saveColorTheme';
 
 const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const { primaryColor, secondaryColor } = theme;
 
-  const onSaveButtonClick = () => {
-    console.log(primaryColor, secondaryColor);
+  const onSaveButtonClick = async () => {
+    await saveColorTheme(theme);
   };
 
   return (
