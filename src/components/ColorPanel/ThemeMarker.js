@@ -20,6 +20,17 @@ const ThemeMarker = ({ theme }) => {
   );
 };
 
-const mapStateToProps = ({ theme }) => ({ theme });
+const mapStateToProps = ({ theme, auth, users }) => {
+  const uid = auth.user.uid;
+  const user = users.find(user => user.uid === uid);
+
+  let appTheme = theme;
+
+  if (user && user.theme) {
+    appTheme = user.theme;
+  }
+
+  return { theme: appTheme };
+};
 
 export default connect(mapStateToProps)(ThemeMarker);
