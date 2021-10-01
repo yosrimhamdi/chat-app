@@ -32,3 +32,7 @@ export const SET_UPLOAD_PATH = 'SET_UPLOAD_PATH';
 export const FETCH_USERS = 'FETCH_USERS';
 export const FETCH_USER = 'FETCH_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+
+// Theme Reducer
+export const SET_PRIMARY_COLOR = 'SET_PRIMARY_COLOR';
+export const SET_SECONDARY_COLOR = 'SET_SECONDARY_COLOR';

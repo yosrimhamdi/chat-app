@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import {
   Sidebar,
   Menu,
@@ -11,10 +12,13 @@ import {
 } from 'semantic-ui-react';
 import { SliderPicker } from 'react-color';
 
-const ColorPanel = () => {
+import setPrimaryColor from '@actions/setPrimaryColor';
+import setSecondaryColor from '@actions/setSecondaryColor';
+
+const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [primaryColor, setPrimaryColor] = useState('#fff');
-  const [secondaryColor, setSecondaryColor] = useState('#ff3f');
+
+  const { primaryColor, secondaryColor } = theme;
 
   const onSaveButtonClick = () => {
     console.log(primaryColor, secondaryColor);
@@ -67,4 +71,8 @@ const ColorPanel = () => {
   );
 };
 
-export default ColorPanel;
+const mapStateToProps = ({ theme }) => ({ theme });
+
+export default connect(mapStateToProps, { setSecondaryColor, setPrimaryColor })(
+  ColorPanel,
+);

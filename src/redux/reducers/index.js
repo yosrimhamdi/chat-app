@@ -8,6 +8,7 @@ import messages from './messagesReducer';
 import loading from './loadingReducer';
 import upload from './uploadReducer';
 import users from './usersReducer';
+import theme from './themeReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   loading,
   upload,
   users,
+  theme,
 });
