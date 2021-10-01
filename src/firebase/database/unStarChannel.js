@@ -1,7 +1,7 @@
 import { getDatabase, ref, remove } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 
-const unStartChannel = channelId => {
+const unStarChannel = channelId => {
   const { currentUser } = getAuth();
   const db = getDatabase();
   const starredChannelRef = ref(
@@ -12,4 +12,4 @@ const unStartChannel = channelId => {
   remove(starredChannelRef);
 };
 
-export default unStartChannel;
+export default unStarChannel;
