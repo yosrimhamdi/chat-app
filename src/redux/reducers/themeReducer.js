@@ -5,9 +5,11 @@ import {
 } from '../actions/types';
 
 const INITIAL_VALUES = {
-  primaryColor: '#582dfd',
-  secondaryColor: '#a6e3cd',
-  id: null,
+  selectedTheme: null,
+  colorPicker: {
+    primaryColor: '#fff',
+    secondaryColor: '#fff',
+  },
 };
 
 const themeReducer = (state = INITIAL_VALUES, action) => {
@@ -17,12 +19,12 @@ const themeReducer = (state = INITIAL_VALUES, action) => {
     case SET_PRIMARY_COLOR:
       return {
         ...state,
-        primaryColor: payload,
+        colorPicker: { ...state.colorPicker, primaryColor: payload },
       };
     case SET_SECONDARY_COLOR:
       return {
         ...state,
-        secondaryColor: payload,
+        colorPicker: { ...state.colorPicker, secondaryColor: payload },
       };
     case SET_THEME:
       return { ...payload };

@@ -17,13 +17,13 @@ import setSecondaryColor from '@actions/setSecondaryColor';
 import saveColorTheme from '../../firebase/database/saveColorTheme';
 import Themes from './Themes';
 
-const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
+const ColorPanel = ({ colorPicker, setPrimaryColor, setSecondaryColor }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { primaryColor, secondaryColor } = theme;
+  const { primaryColor, secondaryColor } = colorPicker;
 
   const onSaveButtonClick = async () => {
-    await saveColorTheme(theme);
+    await saveColorTheme(colorPicker);
     setIsModalOpen(false);
   };
 
@@ -75,7 +75,7 @@ const ColorPanel = ({ theme, setPrimaryColor, setSecondaryColor }) => {
   );
 };
 
-const mapStateToProps = ({ theme }) => ({ theme });
+const mapStateToProps = ({ theme }) => ({ colorPicker: theme.colorPicker });
 
 export default connect(mapStateToProps, { setSecondaryColor, setPrimaryColor })(
   ColorPanel,
