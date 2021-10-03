@@ -26,6 +26,7 @@ const Theme = ({ theme, prevSelectedTheme }) => {
         style={{ backgroundColor: secondaryColor }}
         className="theme-marker__secondary-color"
       ></div>
+      <div className="theme-marker__remove-icon"></div>
     </div>
   );
 };
