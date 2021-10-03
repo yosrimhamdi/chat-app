@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import trySignOut from '../../firebase/auth/trySignOut';
 import signOut from '@actions/signOut';
 
-function UserPanel({ signOut, user }) {
+function UserPanel({ signOut, user, theme }) {
   const dropdownOptions = [
     {
       key: 'user',
@@ -27,7 +27,7 @@ function UserPanel({ signOut, user }) {
   ];
 
   return (
-    <Grid style={{ background: '#4c3c4c' }}>
+    <Grid style={{ background: theme.primaryColor }}>
       <Grid.Column>
         <Grid.Row style={{ padding: '1.2em', margin: 0 }}>
           <Header inverted floated="left" as="h2">
@@ -51,8 +51,11 @@ function UserPanel({ signOut, user }) {
   );
 }
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-});
+const mapStateToProps = ({ theme, auth }) => {
+  return {
+    user: auth.user,
+    theme: theme.userTheme ?? theme.defaultTheme,
+  };
+};
 
 export default connect(mapStateToProps, { signOut })(UserPanel);
