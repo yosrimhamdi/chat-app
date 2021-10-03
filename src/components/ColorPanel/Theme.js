@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './Theme.scss';
 import selectTheme from '../../firebase/database/selectTheme';
 import unSelectTheme from '../../firebase/database/unSelectTheme';
+import removeTheme from '../../firebase/database/removeTheme';
 
 const Theme = ({ theme, prevSelectedTheme }) => {
   const { primaryColor, secondaryColor, id } = theme;
@@ -14,10 +15,6 @@ const Theme = ({ theme, prevSelectedTheme }) => {
     if (prevSelectedTheme) {
       unSelectTheme(prevSelectedTheme.id);
     }
-  };
-
-  const onRemoveIconClick = () => {
-    console.log(id);
   };
 
   return (
@@ -34,7 +31,7 @@ const Theme = ({ theme, prevSelectedTheme }) => {
       </div>
       <div
         className="theme-marker__remove-icon"
-        onClick={onRemoveIconClick}
+        onClick={() => removeTheme(id)}
       ></div>
     </div>
   );
