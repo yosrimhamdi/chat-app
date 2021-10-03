@@ -9,11 +9,11 @@
     position: absolute;
     right: 0;
     top: 0;
-    transform: translate(5px, calc(-100% - 3px));
+    transform: translate(calc(100% + 2px), calc(-100% - 2px));
     width: 10px;
     height: 10px;
     border-radius: 100%;
-    box-shadow: 0 0 5px 3px rgba(#000, 0.25);
+    box-shadow: 0 0 5px 3px rgba(#000, 0.5);
     opacity: 0;
     transition: all 200ms;
     cursor: pointer;
