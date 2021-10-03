@@ -179,7 +179,13 @@ const UserPanel = ({
             </Button>
           )}
           {photoAsDataURL && (
-            <Button color="green" inverted onClick={onCropButtonClick}>
+            <Button
+              color="green"
+              inverted
+              onClick={onCropButtonClick}
+              disabled={isUploading}
+              loading={isUploading}
+            >
               <Icon name="image" /> Crop
             </Button>
           )}
