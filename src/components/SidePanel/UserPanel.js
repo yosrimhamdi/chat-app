@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Button,
   Input,
@@ -10,6 +10,7 @@ import {
   Modal,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import AvatarEditor from 'react-avatar-editor';
 
 import trySignOut from '../../firebase/auth/trySignOut';
 import signOut from '@actions/signOut';
@@ -30,21 +31,43 @@ const UserPanel = ({
   isUploading,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPhoto, setNewPhoto] = useState();
+  const [photo, setPhoto] = useState();
+  const [photoAsDataURL, setPhotoAsDataURL] = useState();
+  const [croppedPhoto, setCroppedPhoto] = useState();
+  const [croppedPhotoBlob, setCroppedPhotoBlob] = useState();
+  const avatarEditor = useRef();
+
+  const onCropButtonClick = () => {
+    avatarEditor.current.getImageScaledToCanvas().toBlob(blob => {
+      const croppedPhoto = URL.createObjectURL(blob);
+
+      setCroppedPhoto(croppedPhoto);
+      setCroppedPhotoBlob(blob);
+    });
+  };
 
   const onSubmit = async () => {
-    if (!newPhoto) {
-      toastr.info('Forbidden', 'Please select an image');
-    } else if (!newPhoto.type.startsWith('image')) {
+    setLoading(UPLOADING_FILE, true);
+    const photoURL = await uploadUserPhoto(photo, croppedPhotoBlob, setPercent);
+    await updateAuthUserPhoto(photoURL);
+    await updateDBUserPhoto(photoURL);
+    setLoading(UPLOADING_FILE, false);
+    setIsModalOpen(false);
+  };
+
+  const onFileChange = e => {
+    const photo = e.target.files[0];
+
+    if (!photo.type.startsWith('image')) {
       toastr.info('Forbidden', 'Not an image');
     } else {
-      setLoading(UPLOADING_FILE, true);
-      const photoURL = await uploadUserPhoto(newPhoto, setPercent);
-      await updateAuthUserPhoto(photoURL);
-      await updateDBUserPhoto(photoURL);
-      setLoading(UPLOADING_FILE, false);
-      setNewPhoto(null);
-      setIsModalOpen(false);
+      const reader = new FileReader();
+
+      reader.readAsDataURL(photo);
+      reader.addEventListener('load', () => {
+        setPhotoAsDataURL(reader.result);
+        setPhoto(photo);
+      });
     }
   };
 
@@ -99,31 +122,55 @@ const UserPanel = ({
             type="file"
             label="New Avatar"
             name="newPhoto"
-            onChange={e => setNewPhoto(e.target.files[0])}
+            onChange={onFileChange}
             accept="image/*"
           />
           <Grid centered stackable columns={2}>
             <Grid.Row centered>
               <Grid.Column className="ui center aligned grid">
-                Image Preview
+                {photoAsDataURL && (
+                  <AvatarEditor
+                    ref={avatarEditor}
+                    image={photoAsDataURL}
+                    width={120}
+                    height={120}
+                    border={50}
+                    scale={1.2}
+                  />
+                )}
               </Grid.Column>
-              <Grid.Column>Copped Image Preview</Grid.Column>
+              <Grid.Column>
+                {croppedPhoto && (
+                  <Image
+                    style={{
+                      margin: '3.5em 0',
+                      width: ' 100px',
+                      height: '100px',
+                    }}
+                    src={croppedPhoto}
+                  />
+                )}
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </Modal.Content>
         <Modal.Actions>
-          <Button
-            color="green"
-            disabled={isUploading}
-            loading={isUploading}
-            inverted
-            onClick={onSubmit}
-          >
-            <Icon name="save" /> Change Avatar
-          </Button>
-          <Button color="green" inverted>
-            <Icon name="image" /> Preview
-          </Button>
+          {croppedPhotoBlob && (
+            <Button
+              color="green"
+              disabled={isUploading}
+              loading={isUploading}
+              inverted
+              onClick={onSubmit}
+            >
+              <Icon name="save" /> Change Avatar
+            </Button>
+          )}
+          {photoAsDataURL && (
+            <Button color="green" inverted onClick={onCropButtonClick}>
+              <Icon name="image" /> Crop
+            </Button>
+          )}
           <Button
             color="red"
             inverted
