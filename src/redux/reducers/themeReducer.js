@@ -1,7 +1,7 @@
 import {
   SET_PRIMARY_COLOR,
   SET_SECONDARY_COLOR,
-  SET_THEME,
+  AUTH_USER_DOCUMENT,
 } from '../actions/types';
 
 const INITIAL_VALUES = {
@@ -30,8 +30,15 @@ const themeReducer = (state = INITIAL_VALUES, action) => {
         ...state,
         colorPicker: { ...state.colorPicker, secondaryColor: payload },
       };
-    case SET_THEME:
-      return { ...state, userTheme: payload };
+    case AUTH_USER_DOCUMENT: {
+      let userTheme = null;
+      if (payload.themes) {
+        userTheme =
+          Object.values(payload.themes).find(theme => theme.isSelected) || null;
+      }
+
+      return { ...state, userTheme };
+    }
     default:
       return state;
   }

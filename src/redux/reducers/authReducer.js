@@ -25,7 +25,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case AUTH_USER_DOCUMENT: {
       return {
         ...state,
-        userDocument: payload[state.user.uid],
+        userDocument: payload,
       };
     }
     default:
