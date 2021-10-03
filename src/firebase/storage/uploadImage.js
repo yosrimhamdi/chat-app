@@ -10,11 +10,21 @@ import catcher from '../../catcher';
 import createImageMessage from '../database/createImageMessage';
 import { UPLOADING_FILE } from '../../redux/actions/types';
 
-const uploadImage = async (file, channelId, setPercent, setLoading) => {
+const uploadImage = async (
+  file,
+  uploadPath,
+  messagePath,
+  channelId,
+  setPercent,
+  setLoading,
+) => {
   const mimetype = file.type.split('/')[1];
 
   const storage = getStorage();
-  const storageRef = ref(storage, `chat/${uuidv4()}.${mimetype}`);
+  const storageRef = ref(
+    storage,
+    `${uploadPath}${channelId}/${uuidv4()}.${mimetype}`,
+  );
 
   const UploadTask = uploadBytesResumable(storageRef, file);
   setLoading(UPLOADING_FILE, true);
@@ -29,7 +39,7 @@ const uploadImage = async (file, channelId, setPercent, setLoading) => {
         try {
           const imageURL = await getDownloadURL(storageRef);
 
-          await createImageMessage(imageURL, channelId);
+          await createImageMessage(imageURL, messagePath, channelId);
 
           setLoading(UPLOADING_FILE, false);
           setPercent(0);
