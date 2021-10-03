@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   Sidebar,
   Menu,
-  Divider,
   Button,
   Modal,
   Label,
@@ -40,9 +39,11 @@ const ColorPanel = ({
       vertical
       visible
       width="very thin"
-      style={{ backgroundColor: theme.secondaryColor }}
+      style={{
+        backgroundColor: theme.secondaryColor,
+        paddingTop: '1.2em',
+      }}
     >
-      <Divider />
       <Button
         icon="add"
         size="small"

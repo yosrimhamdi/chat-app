@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Divider } from 'semantic-ui-react';
 
 import Theme from './Theme';
 
 const Themes = ({ themes }) => {
   const renderedThemes = themes.map(theme => (
-    <Theme key={theme.id} theme={theme} />
+    <>
+      <Divider />
+      <Theme key={theme.id} theme={theme} />
+    </>
   ));
 
   return renderedThemes;
