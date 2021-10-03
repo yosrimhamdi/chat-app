@@ -1,4 +1,4 @@
-import { SIGN_OUT, SIGN_IN, UPDATE_USER, FETCH_USERS } from '@types';
+import { SIGN_OUT, SIGN_IN } from '@types';
 
 const INITIAL_STATE = {
   user: null,
@@ -22,18 +22,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
         user: null,
         isLoggedIn: false,
       };
-    case FETCH_USERS: {
-      const userDocument = payload.find(user => user.uid == state.user.uid);
-
-      return { ...state, userDocument };
-    }
-    case UPDATE_USER: {
-      if (payload.uid == state.user.uid) {
-        return { ...state, userDocument: payload };
-      }
-
-      return state;
-    }
     default:
       return state;
   }
