@@ -16,17 +16,26 @@ const Theme = ({ theme, prevSelectedTheme }) => {
     }
   };
 
+  const onRemoveIconClick = () => {
+    console.log(id);
+  };
+
   return (
-    <div className="theme-marker" onClick={onThemeClick}>
+    <div className="theme-marker">
+      <div className="theme-marker__wrapper" onClick={onThemeClick}>
+        <div
+          style={{ backgroundColor: primaryColor }}
+          className="theme-marker__primary-color"
+        ></div>
+        <div
+          style={{ backgroundColor: secondaryColor }}
+          className="theme-marker__secondary-color"
+        ></div>
+      </div>
       <div
-        style={{ backgroundColor: primaryColor }}
-        className="theme-marker__primary-color"
+        className="theme-marker__remove-icon"
+        onClick={onRemoveIconClick}
       ></div>
-      <div
-        style={{ backgroundColor: secondaryColor }}
-        className="theme-marker__secondary-color"
-      ></div>
-      <div className="theme-marker__remove-icon"></div>
     </div>
   );
 };
