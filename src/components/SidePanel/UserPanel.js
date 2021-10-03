@@ -37,6 +37,14 @@ const UserPanel = ({
   const [croppedPhotoBlob, setCroppedPhotoBlob] = useState();
   const avatarEditor = useRef();
 
+  const resetState = () => {
+    setPhoto(null);
+    setPhotoAsDataURL(null);
+    setCroppedPhoto(null);
+    setCroppedPhotoBlob(null);
+    setIsModalOpen(false);
+  };
+
   const onCropButtonClick = () => {
     avatarEditor.current.getImageScaledToCanvas().toBlob(blob => {
       const croppedPhoto = URL.createObjectURL(blob);
@@ -52,7 +60,7 @@ const UserPanel = ({
     await updateAuthUserPhoto(photoURL);
     await updateDBUserPhoto(photoURL);
     setLoading(UPLOADING_FILE, false);
-    setIsModalOpen(false);
+    resetState();
   };
 
   const onFileChange = e => {
@@ -176,7 +184,7 @@ const UserPanel = ({
             inverted
             disabled={isUploading}
             loading={isUploading}
-            onClick={() => setIsModalOpen(false)}
+            onClick={resetState}
           >
             <Icon name="remove" /> Cancel
           </Button>
