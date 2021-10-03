@@ -2,13 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './Theme.scss';
-import setTheme from '../../redux/actions/setTheme';
+import selectTheme from '../../firebase/database/selectTheme';
+import unSelectTheme from '../../firebase/database/unSelectTheme';
 
-const Theme = ({ theme, setTheme }) => {
-  const { primaryColor, secondaryColor } = theme;
+const Theme = ({ theme, prevSelectedTheme }) => {
+  const { primaryColor, secondaryColor, id } = theme;
+
+  const onThemeClick = () => {
+    selectTheme(id);
+
+    if (prevSelectedTheme) {
+      unSelectTheme(prevSelectedTheme.id);
+    }
+  };
 
   return (
-    <div className="theme-marker" onClick={() => setTheme(theme)}>
+    <div className="theme-marker" onClick={onThemeClick}>
       <div
         style={{ backgroundColor: primaryColor }}
         className="theme-marker__primary-color"
@@ -21,4 +30,12 @@ const Theme = ({ theme, setTheme }) => {
   );
 };
 
-export default connect(null, { setTheme })(Theme);
+const mapStateToProps = ({ auth }) => {
+  const prevSelectedTheme = Object.values(auth.userDocument.themes).find(
+    theme => theme.isSelected,
+  );
+
+  return { prevSelectedTheme };
+};
+
+export default connect(mapStateToProps)(Theme);
