@@ -31,7 +31,7 @@ const themeReducer = (state = INITIAL_VALUES, action) => {
         colorPicker: { ...state.colorPicker, secondaryColor: payload },
       };
     case SET_THEME:
-      return { ...payload };
+      return { ...state, userTheme: payload };
     default:
       return state;
   }
