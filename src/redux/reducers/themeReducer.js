@@ -5,7 +5,11 @@ import {
 } from '../actions/types';
 
 const INITIAL_VALUES = {
-  selectedTheme: null,
+  userTheme: null,
+  defaultTheme: {
+    primaryColor: '#4C3C4C',
+    secondaryColor: '#1B1C1D',
+  },
   colorPicker: {
     primaryColor: '#fff',
     secondaryColor: '#fff',

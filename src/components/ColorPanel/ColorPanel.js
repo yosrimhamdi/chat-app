@@ -17,7 +17,12 @@ import setSecondaryColor from '@actions/setSecondaryColor';
 import saveColorTheme from '../../firebase/database/saveColorTheme';
 import Themes from './Themes';
 
-const ColorPanel = ({ colorPicker, setPrimaryColor, setSecondaryColor }) => {
+const ColorPanel = ({
+  colorPicker,
+  setPrimaryColor,
+  setSecondaryColor,
+  theme,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { primaryColor, secondaryColor } = colorPicker;
@@ -35,6 +40,7 @@ const ColorPanel = ({ colorPicker, setPrimaryColor, setSecondaryColor }) => {
       vertical
       visible
       width="very thin"
+      style={{ backgroundColor: theme.secondaryColor }}
     >
       <Divider />
       <Button
@@ -75,7 +81,11 @@ const ColorPanel = ({ colorPicker, setPrimaryColor, setSecondaryColor }) => {
   );
 };
 
-const mapStateToProps = ({ theme }) => ({ colorPicker: theme.colorPicker });
+const mapStateToProps = ({ theme }) => {
+  const { colorPicker, userTheme, defaultTheme } = theme;
+
+  return { colorPicker, theme: userTheme ?? defaultTheme };
+};
 
 export default connect(mapStateToProps, { setSecondaryColor, setPrimaryColor })(
   ColorPanel,
