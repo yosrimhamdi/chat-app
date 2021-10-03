@@ -31,14 +31,14 @@ const UserPanel = ({
   isUploading,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [photo, setPhoto] = useState();
+  const [photoFile, setPhotoFile] = useState();
   const [photoAsDataURL, setPhotoAsDataURL] = useState();
   const [croppedPhoto, setCroppedPhoto] = useState();
   const [croppedPhotoBlob, setCroppedPhotoBlob] = useState();
   const avatarEditor = useRef();
 
   const resetState = () => {
-    setPhoto(null);
+    setPhotoFile(null);
     setPhotoAsDataURL(null);
     setCroppedPhoto(null);
     setCroppedPhotoBlob(null);
@@ -56,7 +56,11 @@ const UserPanel = ({
 
   const onSubmit = async () => {
     setLoading(UPLOADING_FILE, true);
-    const photoURL = await uploadUserPhoto(photo, croppedPhotoBlob, setPercent);
+    const photoURL = await uploadUserPhoto(
+      photoFile,
+      croppedPhotoBlob,
+      setPercent,
+    );
     await updateAuthUserPhoto(photoURL);
     await updateDBUserPhoto(photoURL);
     setLoading(UPLOADING_FILE, false);
@@ -64,17 +68,17 @@ const UserPanel = ({
   };
 
   const onFileChange = e => {
-    const photo = e.target.files[0];
+    const photoFile = e.target.files[0];
 
-    if (!photo.type.startsWith('image')) {
+    if (!photoFile.type.startsWith('image')) {
       toastr.info('Forbidden', 'Not an image');
     } else {
       const reader = new FileReader();
 
-      reader.readAsDataURL(photo);
+      reader.readAsDataURL(photoFile);
       reader.addEventListener('load', () => {
         setPhotoAsDataURL(reader.result);
-        setPhoto(photo);
+        setPhotoFile(photoFile);
       });
     }
   };
