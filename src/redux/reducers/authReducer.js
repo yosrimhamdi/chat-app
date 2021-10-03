@@ -1,4 +1,4 @@
-import { SIGN_OUT, SIGN_IN } from '@types';
+import { SIGN_OUT, SIGN_IN, AUTH_USER_DOCUMENT } from '@types';
 
 const INITIAL_STATE = {
   user: null,
@@ -22,6 +22,12 @@ const authReducer = (state = INITIAL_STATE, action) => {
         user: null,
         isLoggedIn: false,
       };
+    case AUTH_USER_DOCUMENT: {
+      return {
+        ...state,
+        userDocument: payload[state.user.uid],
+      };
+    }
     default:
       return state;
   }

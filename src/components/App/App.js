@@ -18,19 +18,29 @@ import AppMountSpinner from '../AppMountSpinner/AppMountSpinner';
 import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
 import onConnectionStateChanged from '../../firebase/database/onConnectionStateChanged';
 import removeListener from '../../firebase/database/removeListener';
+import onAuthUserDocValue from '../../firebase/database/onAuthUserDocValue';
+import setAuthUserDoc from '../../redux/actions/setAuthUserDoc';
 
-function App({ signIn, removeLoadingChatSpinner, isLoggedIn }) {
+const App = ({ signIn, removeLoadingChatSpinner, user, setAuthUserDoc }) => {
   useEffect(() => {
     onAuthStateChanged(signIn, removeLoadingChatSpinner);
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (user) {
       onConnectionStateChanged();
 
       return () => removeListener('.info/connected', 'value');
     }
-  }, [isLoggedIn]);
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      onAuthUserDocValue(user.uid, setAuthUserDoc);
+
+      return () => removeListener('users/', 'value');
+    }
+  }, [user]);
 
   return (
     <Router history={history}>
@@ -45,12 +55,14 @@ function App({ signIn, removeLoadingChatSpinner, isLoggedIn }) {
       <Toastr transitionIn="fadeIn" transitionOut="fadeOut" />
     </Router>
   );
-}
+};
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn,
+  user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { signIn, removeLoadingChatSpinner })(
-  App,
-);
+export default connect(mapStateToProps, {
+  signIn,
+  removeLoadingChatSpinner,
+  setAuthUserDoc,
+})(App);

@@ -1,6 +1,7 @@
 // Auth Reducer
 export const SIGN_OUT = 'SIGN_OUT';
 export const SIGN_IN = 'SIGN_IN';
+export const AUTH_USER_DOCUMENT = 'AUTH_USER_DOCUMENT';
 
 // Channels Reducer
 export const FETCH_CHANNELS = 'FETCH_CHANNELS';
