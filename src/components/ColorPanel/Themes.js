@@ -6,10 +6,10 @@ import Theme from './Theme';
 
 const Themes = ({ themes }) => {
   const renderedThemes = themes.map(theme => (
-    <>
+    <React.Fragment key={theme.id}>
       <Divider />
-      <Theme key={theme.id} theme={theme} />
-    </>
+      <Theme theme={theme} />
+    </React.Fragment>
   ));
 
   return renderedThemes;
