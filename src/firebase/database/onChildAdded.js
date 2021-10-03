@@ -7,14 +7,13 @@ import {
   startAt,
 } from 'firebase/database';
 
-const onCollectionChildAdded = (path, handleChildAdded) => {
+const onCollectionChildAdded = (path, callback) => {
   const db = getDatabase();
-  const collectionRef = ref(db, path);
+  const r = ref(db, path);
 
-  onChildAdded(
-    query(collectionRef, orderByChild('createdAt'), startAt(Date.now())),
-    handleChildAdded,
-  );
+  const q = query(r, orderByChild('createdAt'), startAt(Date.now()));
+
+  onChildAdded(q, callback);
 };
 
 export default onCollectionChildAdded;
