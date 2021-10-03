@@ -1,11 +1,22 @@
-import React from 'react';
-import { Grid, Header, Icon, Dropdown, Image } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import {
+  Button,
+  Input,
+  Grid,
+  Header,
+  Icon,
+  Dropdown,
+  Image,
+  Modal,
+} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import trySignOut from '../../firebase/auth/trySignOut';
 import signOut from '@actions/signOut';
 
-function UserPanel({ signOut, user, theme }) {
+const UserPanel = ({ signOut, user, theme }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const dropdownOptions = [
     {
       key: 'user',
@@ -18,7 +29,7 @@ function UserPanel({ signOut, user, theme }) {
     },
     {
       key: 'avatar',
-      text: <div>Change Avatar</div>,
+      text: <div onClick={() => setIsModalOpen(true)}>Change Avatar</div>,
     },
     {
       key: 'signout',
@@ -47,9 +58,34 @@ function UserPanel({ signOut, user, theme }) {
           </Header>
         </Grid.Row>
       </Grid.Column>
+      <Modal basic open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Modal.Header>Change Avatar</Modal.Header>
+        <Modal.Content>
+          <Input fluid type="file" label="New Avatar" name="newPhoto" />
+          <Grid centered stackable columns={2}>
+            <Grid.Row centered>
+              <Grid.Column className="ui center aligned grid">
+                {/* Image Preivew */}
+              </Grid.Column>
+              <Grid.Column>Copped Image Preview</Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="green" inverted>
+            <Icon name="save" /> Change Avatar
+          </Button>
+          <Button color="green" inverted>
+            <Icon name="image" /> Preview
+          </Button>
+          <Button color="red" inverted onClick={() => setIsModalOpen(false)}>
+            <Icon name="remove" /> Cancel
+          </Button>
+        </Modal.Actions>
+      </Modal>
     </Grid>
   );
-}
+};
 
 const mapStateToProps = ({ theme, auth }) => {
   return {
