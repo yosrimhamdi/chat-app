@@ -11,6 +11,8 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor';
+import { toastr } from 'react-redux-toastr';
+import { v4 as uuidv4 } from 'uuid';
 
 import trySignOut from '../../firebase/auth/trySignOut';
 import signOut from '@actions/signOut';
@@ -20,7 +22,6 @@ import updateDBUserPhoto from '../../firebase/database/userDocument/updateDBUser
 import setPercent from '@actions/setPercent';
 import setLoading from '@actions/setLoading';
 import { UPLOADING_FILE } from '../../redux/actions/types';
-import { toastr } from 'react-redux-toastr';
 
 const UserPanel = ({
   signOut,
@@ -55,12 +56,11 @@ const UserPanel = ({
   };
 
   const onSubmit = async () => {
+    const ext = photoFile.type.split('/')[1];
+    const path = `photos/users/${user.uid}/${uuidv4()}.${ext}`;
+
     setLoading(UPLOADING_FILE, true);
-    const photoURL = await uploadUserPhoto(
-      photoFile,
-      croppedPhotoBlob,
-      setPercent,
-    );
+    const photoURL = await uploadUserPhoto(croppedPhotoBlob, path, setPercent);
     await updateAuthUserPhoto(photoURL);
     await updateDBUserPhoto(photoURL);
     setLoading(UPLOADING_FILE, false);

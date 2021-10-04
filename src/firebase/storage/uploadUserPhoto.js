@@ -4,19 +4,13 @@ import {
   ref,
   getStorage,
 } from 'firebase/storage';
-import { getAuth } from 'firebase/auth';
-import { v4 as uuidv4 } from 'uuid';
 
-const uploadUserPhoto = async (photoFile, croppedPhotoBlog, setPercent) => {
-  const { currentUser } = getAuth();
+const uploadUserPhoto = async (blob, path, setPercent) => {
   const storage = getStorage();
-
-  const ext = photoFile.type.split('/')[1];
-  const path = `photos/users/${currentUser.uid}/${uuidv4()}.${ext}`;
 
   const storageRef = ref(storage, path);
 
-  const UploadTask = uploadBytesResumable(storageRef, croppedPhotoBlog);
+  const UploadTask = uploadBytesResumable(storageRef, blob);
 
   const photoURL = await new Promise(resolve => {
     UploadTask.on('state_changed', async snapshot => {
