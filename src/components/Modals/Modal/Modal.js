@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './Modal.scss';
 import Spinner from '../../Spinner/Spinner';
 import closeIcon from './close.svg';
-import ModalContext from './ModalContext';
 
-const Modal = ({ loading, title, children, closeModal }) => {
-  const { isModalOpen } = useContext(ModalContext);
-
+const Modal = ({ loading, title, children, isModalOpen, closeModal }) => {
   if (!isModalOpen) {
     return null;
   }

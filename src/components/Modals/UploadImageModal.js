@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import setPercent from '../../redux/actions/setPercent';
 import setLoading from '@actions/setLoading';
-import ModalContext from './Modal/ModalContext';
 import Modal from './Modal/Modal';
 import createImageMessage from '../../firebase/database/message/createImageMessage';
 import { UPLOADING_FILE } from '@types';
@@ -17,8 +16,9 @@ const UploadImageModal = ({
   channelId,
   uploadPath,
   messagePath,
+  isModalOpen,
+  closeModal,
 }) => {
-  const { closeModal } = useContext(ModalContext);
   const [file, setFile] = useState();
 
   const resetModal = () => {
@@ -44,7 +44,11 @@ const UploadImageModal = ({
   };
 
   return (
-    <Modal title="Create new channel" closeModal={resetModal}>
+    <Modal
+      title="Create new channel"
+      closeModal={resetModal}
+      isModalOpen={isModalOpen}
+    >
       <Modal.Content>
         <input
           type="file"

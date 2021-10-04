@@ -5,7 +5,6 @@ import { Menu, Icon } from 'semantic-ui-react';
 import './Channel.scss';
 import CreateChannelModal from '../../Modals/CreateChannelModal';
 import Channel from './Channel';
-import ModalContext from '../../Modals/Modal/ModalContext';
 import useModal from '../../Modals/Modal/useModal';
 import filterChannels from './filterChannels';
 
@@ -26,9 +25,7 @@ function UnStarredPublicChannels({ unStarredChannels }) {
         <Icon style={{ cursor: 'pointer' }} name="add" onClick={openModal} />
       </Menu.Item>
       {renderedPublicChannels}
-      <ModalContext.Provider value={{ isModalOpen, closeModal }}>
-        <CreateChannelModal />
-      </ModalContext.Provider>
+      <CreateChannelModal isModalOpen={isModalOpen} closeModal={closeModal} />
     </Menu.Menu>
   );
 }

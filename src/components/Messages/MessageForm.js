@@ -7,7 +7,6 @@ import { SENDING_MESSAGE } from '@types';
 import UploadImageModal from '../Modals/UploadImageModal';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import useModal from '../Modals/Modal/useModal';
-import ModalContext from '../Modals/Modal/ModalContext';
 
 const MessageForm = ({
   setLoading,
@@ -58,9 +57,7 @@ const MessageForm = ({
             onClick={openModal}
           />
         </Button.Group>
-        <ModalContext.Provider value={{ isModalOpen, closeModal }}>
-          <UploadImageModal />
-        </ModalContext.Provider>
+        <UploadImageModal isModalOpen={isModalOpen} closeModal={closeModal} />
       </Form>
       <ProgressBar />
     </Segment>

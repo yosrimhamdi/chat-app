@@ -1,15 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Modal from './Modal/Modal';
 import createChannel from '../../firebase/database/channel/createChannel';
 import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../redux/actions/setLoading';
-import ModalContext from './Modal/ModalContext';
 import { toastr } from 'react-redux-toastr';
 
-const CreateChannelModal = ({ setLoading, isCreatingChannel }) => {
-  const { closeModal } = useContext(ModalContext);
+const CreateChannelModal = ({
+  setLoading,
+  isCreatingChannel,
+  isModalOpen,
+  closeModal,
+}) => {
   const [channelName, setChannelName] = useState('');
   const [channelDescription, setChannelDescription] = useState('');
 
@@ -37,6 +40,7 @@ const CreateChannelModal = ({ setLoading, isCreatingChannel }) => {
       loading={isCreatingChannel}
       title="Create new channel"
       closeModal={resetModal}
+      isModalOpen={isModalOpen}
     >
       <Modal.Content>
         <Modal.TextInput

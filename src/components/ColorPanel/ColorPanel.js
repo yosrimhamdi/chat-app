@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Sidebar,
-  Menu,
-  Button,
-  Modal,
-  Label,
-  Icon,
-  Segment,
-} from 'semantic-ui-react';
+import { Sidebar, Menu, Button, Label, Icon, Segment } from 'semantic-ui-react';
 import { SliderPicker } from 'react-color';
 
 import setPickerPrimaryColor from '@actions/setPickerPrimaryColor';
 import setPickerSecondaryColor from '@actions/setPickerSecondaryColor';
 import saveTheme from '../../firebase/database/theme/saveTheme';
 import Themes from './Themes';
+import Modal from '../Modals/Modal/Modal';
 
 const ColorPanel = ({
   colorPicker,
@@ -29,6 +22,12 @@ const ColorPanel = ({
   const onSaveButtonClick = async () => {
     await saveTheme(colorPicker);
     setIsModalOpen(false);
+  };
+
+  const resetState = () => {
+    setIsModalOpen(false);
+    setPickerPrimaryColor('#fff');
+    setPickerSecondaryColor('#fff');
   };
 
   return (
@@ -51,17 +50,20 @@ const ColorPanel = ({
         onClick={() => setIsModalOpen(true)}
       />
       <Themes />
-      <Modal basic open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Header>Choose App Colors</Modal.Header>
+      <Modal
+        closeModal={resetState}
+        isModalOpen={isModalOpen}
+        title="Choose App Colors"
+      >
         <Modal.Content>
-          <Segment inverted>
+          <Segment>
             <Label content="Primary Color" style={{ marginBottom: '1em' }} />
             <SliderPicker
               onChangeComplete={color => setPickerPrimaryColor(color.hex)}
               color={primaryColor}
             />
           </Segment>
-          <Segment inverted>
+          <Segment>
             <Label content="Secondary Color" style={{ marginBottom: '1em' }} />
             <SliderPicker
               onChangeComplete={color => setPickerSecondaryColor(color.hex)}
@@ -73,7 +75,7 @@ const ColorPanel = ({
           <Button color="green" inverted onClick={onSaveButtonClick}>
             <Icon name="checkmark" /> Save Colors
           </Button>
-          <Button color="red" inverted onClick={() => setIsModalOpen(false)}>
+          <Button color="red" inverted onClick={resetState}>
             <Icon name="remove" /> Cancel
           </Button>
         </Modal.Actions>
