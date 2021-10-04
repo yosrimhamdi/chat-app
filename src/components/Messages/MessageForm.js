@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Segment, Button, Form } from 'semantic-ui-react';
-import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import MessageInput from './MessageInput';
-import validate from './validate';
-import createTextMessage from '../../../firebase/database/message/createTextMessage';
-import clearForm from '@actions/clearForm';
-import setLoading from '../../../redux/actions/setLoading';
+import createTextMessage from '../../firebase/database/message/createTextMessage';
+import setLoading from '../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
-import UploadImageModal from '../../Modals/UploadImageModal';
-import ProgressBar from '../../ProgressBar/ProgressBar';
-import useModal from '../../Modals/Modal/useModal';
-import ModalContext from '../../Modals/Modal/ModalContext';
+import UploadImageModal from '../Modals/UploadImageModal';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import useModal from '../Modals/Modal/useModal';
+import ModalContext from '../Modals/Modal/ModalContext';
 
 const MessageForm = ({
-  handleSubmit,
-  clearForm,
   setLoading,
   isSendingMessage,
   isUploading,
@@ -23,21 +17,27 @@ const MessageForm = ({
   path,
 }) => {
   const [isModalOpen, openModal, closeModal] = useModal();
+  const [message, setMessage] = useState('');
 
-  const onFormSubmit = async ({ message }) => {
-    setLoading(SENDING_MESSAGE, true);
-
-    clearForm('messageForm');
-
-    await createTextMessage(message, path, channelId);
-
-    setLoading(SENDING_MESSAGE, false);
+  const onFormSubmit = async () => {
+    if (message) {
+      setLoading(SENDING_MESSAGE, true);
+      setMessage('');
+      await createTextMessage(message, path, channelId);
+      setLoading(SENDING_MESSAGE, false);
+    }
   };
 
   return (
     <Segment className="messages__form">
-      <Form onSubmit={handleSubmit(onFormSubmit)} autoComplete="off">
-        <Field name="message" component={MessageInput} />
+      <Form onSubmit={onFormSubmit} autoComplete="off">
+        <input
+          type="text"
+          placeholder="Aa"
+          style={{ marginBottom: '1em' }}
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+        />
         <Button.Group icon widths="2">
           <Button
             color="orange"
@@ -75,6 +75,4 @@ const mapStateToProps = ({ loading, channels, messages }) => {
   };
 };
 
-const WrappedForm = reduxForm({ form: 'messageForm', validate })(MessageForm);
-
-export default connect(mapStateToProps, { clearForm, setLoading })(WrappedForm);
+export default connect(mapStateToProps, { setLoading })(MessageForm);
