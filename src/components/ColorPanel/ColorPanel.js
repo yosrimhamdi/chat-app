@@ -11,15 +11,15 @@ import {
 } from 'semantic-ui-react';
 import { SliderPicker } from 'react-color';
 
-import setPrimaryColor from '@actions/setPrimaryColor';
-import setSecondaryColor from '@actions/setSecondaryColor';
+import setPickerPrimaryColor from '@actions/setPickerPrimaryColor';
+import setPickerSecondaryColor from '@actions/setPickerSecondaryColor';
 import saveTheme from '../../firebase/database/theme/saveTheme';
 import Themes from './Themes';
 
 const ColorPanel = ({
   colorPicker,
-  setPrimaryColor,
-  setSecondaryColor,
+  setPickerPrimaryColor,
+  setPickerSecondaryColor,
   theme,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,14 +57,14 @@ const ColorPanel = ({
           <Segment inverted>
             <Label content="Primary Color" style={{ marginBottom: '1em' }} />
             <SliderPicker
-              onChangeComplete={color => setPrimaryColor(color.hex)}
+              onChangeComplete={color => setPickerPrimaryColor(color.hex)}
               color={primaryColor}
             />
           </Segment>
           <Segment inverted>
             <Label content="Secondary Color" style={{ marginBottom: '1em' }} />
             <SliderPicker
-              onChangeComplete={color => setSecondaryColor(color.hex)}
+              onChangeComplete={color => setPickerSecondaryColor(color.hex)}
               color={secondaryColor}
             />
           </Segment>
@@ -88,6 +88,7 @@ const mapStateToProps = ({ theme }) => {
   return { colorPicker, theme: userTheme ?? defaultTheme };
 };
 
-export default connect(mapStateToProps, { setSecondaryColor, setPrimaryColor })(
-  ColorPanel,
-);
+export default connect(mapStateToProps, {
+  setPickerSecondaryColor,
+  setPickerPrimaryColor,
+})(ColorPanel);
