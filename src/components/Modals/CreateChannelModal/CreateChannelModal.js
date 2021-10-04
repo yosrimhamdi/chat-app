@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
 import Modal from '../../Modals/Modal';
-import createChannel from '../../../firebase/database/createChannel';
+import createChannel from '../../../firebase/database/channel/createChannel';
 import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../../redux/actions/setLoading';
 import validate from './validate';

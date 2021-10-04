@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './Theme.scss';
-import selectTheme from '../../firebase/database/selectTheme';
-import unSelectTheme from '../../firebase/database/unSelectTheme';
-import removeTheme from '../../firebase/database/removeTheme';
+import selectTheme from '../../firebase/database/theme/selectTheme';
+import unSelectTheme from '../../firebase/database/theme/unSelectTheme';
+import removeTheme from '../../firebase/database/theme/removeTheme';
 
 const Theme = ({ theme, prevSelectedTheme }) => {
   const { primaryColor, secondaryColor, id } = theme;

@@ -13,7 +13,7 @@ import { SliderPicker } from 'react-color';
 
 import setPrimaryColor from '@actions/setPrimaryColor';
 import setSecondaryColor from '@actions/setSecondaryColor';
-import saveTheme from '../../firebase/database/saveTheme';
+import saveTheme from '../../firebase/database/theme/saveTheme';
 import Themes from './Themes';
 
 const ColorPanel = ({

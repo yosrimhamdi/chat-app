@@ -7,7 +7,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 import catcher from '../../catcher';
-import createImageMessage from '../database/createImageMessage';
+import createImageMessage from '../database/message/createImageMessage';
 import { UPLOADING_FILE } from '../../redux/actions/types';
 
 const uploadImage = async (

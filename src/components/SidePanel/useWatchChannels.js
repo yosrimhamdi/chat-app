@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import removeListener from '../../firebase/database/removeListener';
-import onChildAdded from '../../firebase/database/onChildAdded';
+import removeListener from '../../firebase/database/listeners/removeListener';
+import onChildAdded from '../../firebase/database/listeners/onChildAdded';
 import readData from '../../firebase/database/readData';
 
 const useWatchChannels = (fetchChannel, fetchChannels) => {

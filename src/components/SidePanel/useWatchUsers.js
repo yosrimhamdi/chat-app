@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import onChildChanged from '../../firebase/database/onChildChanged';
-import removeListener from '../../firebase/database/removeListener';
-import onChildAdded from '../../firebase/database/onChildAdded';
+import onChildChanged from '../../firebase/database/listeners/onChildChanged';
+import removeListener from '../../firebase/database/listeners/removeListener';
+import onChildAdded from '../../firebase/database/listeners/onChildAdded';
 import readData from '../../firebase/database/readData';
 
 const useWatchUsers = (fetchUser, fetchUsers, updateUser) => {

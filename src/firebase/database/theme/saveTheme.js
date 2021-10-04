@@ -1,5 +1,5 @@
 import { getAuth } from 'firebase/auth';
-import writeData from './writeData';
+import writeData from '../writeData';
 
 const saveTheme = async theme => {
   const { currentUser } = getAuth();

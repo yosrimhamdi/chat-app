@@ -1,8 +1,8 @@
 import { toastr } from 'react-redux-toastr';
 import { getAuth } from 'firebase/auth';
 
-import writeData from './writeData';
-import catcher from '../../catcher';
+import writeData from '../writeData';
+import catcher from '../../../catcher';
 
 const createChannel = async formValues => {
   const { channelName, channelDetails } = formValues;

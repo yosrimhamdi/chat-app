@@ -16,9 +16,9 @@ import history from '../../history';
 import signIn from '@actions/signIn';
 import AppMountSpinner from '../AppMountSpinner/AppMountSpinner';
 import removeLoadingChatSpinner from '@actions/removeLoadingChatSpinner';
-import onConnectionStateChanged from '../../firebase/database/onConnectionStateChanged';
-import removeListener from '../../firebase/database/removeListener';
-import onAuthUserDocValue from '../../firebase/database/onAuthUserDocValue';
+import onConnectionStateChanged from '../../firebase/database/listeners/onConnectionStateChanged';
+import removeListener from '../../firebase/database/listeners/removeListener';
+import onAuthUserDocValue from '../../firebase/database/listeners/onAuthUserDocValue';
 import setAuthUserDoc from '../../redux/actions/setAuthUserDoc';
 
 const App = ({ signIn, removeLoadingChatSpinner, user, setAuthUserDoc }) => {

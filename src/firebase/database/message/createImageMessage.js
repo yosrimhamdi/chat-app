@@ -1,7 +1,7 @@
 import { getAuth } from 'firebase/auth';
 
-import writeData from './writeData';
-import catcher from '../../catcher';
+import writeData from '../writeData';
+import catcher from '../../../catcher';
 
 const createImageMessage = async (imageURL, path, channelId) => {
   const { uid, photoURL, displayName } = getAuth().currentUser;

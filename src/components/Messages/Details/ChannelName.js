@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 
-import starChannel from '../../../firebase/database/starChannel';
-import unStarChannel from '../../../firebase/database/unStarChannel';
+import starChannel from '../../../firebase/database/channel/starChannel';
+import unStarChannel from '../../../firebase/database/channel/unStarChannel';
 
 const ChannelName = ({ selectedChannel, starredChannels }) => {
   const { name, isPrivate, id } = selectedChannel;
