@@ -148,6 +148,7 @@ const UserPanel = ({
                     height={120}
                     border={50}
                     scale={1.2}
+                    style={{ objectFit: 'cover' }}
                   />
                 )}
               </Grid.Column>
