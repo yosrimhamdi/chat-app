@@ -16,7 +16,7 @@ import trySignOut from '../../firebase/auth/trySignOut';
 import signOut from '@actions/signOut';
 import uploadUserPhoto from '../../firebase/storage/uploadUserPhoto';
 import updateAuthUserPhoto from '../../firebase/auth/updateAuthUserPhoto';
-import updateDBUserPhoto from '../../firebase/database/updateDBUserPhoto';
+import updateDBUserPhoto from '../../firebase/database/userDocument/updateDBUserPhoto';
 import setPercent from '@actions/setPercent';
 import setLoading from '@actions/setLoading';
 import { UPLOADING_FILE } from '../../redux/actions/types';

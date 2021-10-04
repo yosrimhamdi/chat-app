@@ -18,7 +18,7 @@ import tryRegister from '../../../firebase/auth/tryRegister';
 import { AUTHENTICATING } from '@types';
 import setLoading from '@actions/setLoading';
 import updateProfile from '../../../firebase/auth/updateProfile';
-import writeUserData from '../../../firebase/database/writeUserData';
+import writeUserData from '../../../firebase/database/userDocument/writeUserData';
 
 function Register({ handleSubmit, isAuthenticating, setLoading }) {
   const onFormSubmit = async ({ email, password, username }) => {

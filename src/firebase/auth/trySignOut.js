@@ -1,6 +1,6 @@
 import { getAuth, signOut } from 'firebase/auth';
 import catcher from '../../catcher';
-import setDisconnected from '../database/setDisconnected';
+import setDisconnected from '../database/userDocument/setDisconnected';
 
 const trySignOut = async signOutActionCreator => {
   const auth = getAuth();
