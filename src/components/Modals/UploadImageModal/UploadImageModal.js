@@ -33,11 +33,11 @@ const UploadImageModal = ({
     const path = `${uploadPath}${channelId}/${uuidv4()}.${mimetype}`;
 
     setLoading(UPLOADING_FILE, true);
+    closeModal();
     const imageURL = await uploadImage(file, path, setPercent);
     await createImageMessage(imageURL, messagePath, channelId);
     setLoading(UPLOADING_FILE, false);
     clearForm(FORM_NAME);
-    closeModal();
   };
 
   return (
