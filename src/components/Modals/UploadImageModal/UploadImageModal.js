@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import { v4 as uuidv4 } from 'uuid';
 
 import validate from './validate';
 import uploadImage from '../../../firebase/storage/uploadImage';
@@ -10,6 +11,8 @@ import ModalContext from '../ModalContext';
 import Modal from '../Modal';
 import FileInput from './FileInput';
 import clearForm from '@actions/clearForm';
+import createImageMessage from '../../../firebase/database/message/createImageMessage';
+import { UPLOADING_FILE } from '@types';
 
 const FORM_NAME = 'uploadImageForm';
 
@@ -25,15 +28,14 @@ const UploadImageModal = ({
 }) => {
   const { closeModal } = useContext(ModalContext);
 
-  const onSubmit = ({ file }) => {
-    uploadImage(
-      file,
-      uploadPath,
-      messagePath,
-      channelId,
-      setPercent,
-      setLoading,
-    );
+  const onSubmit = async ({ file }) => {
+    const mimetype = file.type.split('/')[1];
+    const path = `${uploadPath}${channelId}/${uuidv4()}.${mimetype}`;
+
+    setLoading(UPLOADING_FILE, true);
+    const imageURL = await uploadImage(file, path, setPercent);
+    await createImageMessage(imageURL, messagePath, channelId);
+    setLoading(UPLOADING_FILE, false);
     clearForm(FORM_NAME);
     closeModal();
   };
