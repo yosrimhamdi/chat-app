@@ -1,6 +1,6 @@
 import {
-  SET_PRIMARY_COLOR,
-  SET_SECONDARY_COLOR,
+  SET_PICKER_PRIMARY_COLOR,
+  SET_PICKER_SECONDARY_COLOR,
   AUTH_USER_DOCUMENT,
 } from '../actions/types';
 
@@ -20,12 +20,12 @@ const themeReducer = (state = INITIAL_VALUES, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case SET_PRIMARY_COLOR:
+    case SET_PICKER_PRIMARY_COLOR:
       return {
         ...state,
         colorPicker: { ...state.colorPicker, primaryColor: payload },
       };
-    case SET_SECONDARY_COLOR:
+    case SET_PICKER_SECONDARY_COLOR:
       return {
         ...state,
         colorPicker: { ...state.colorPicker, secondaryColor: payload },

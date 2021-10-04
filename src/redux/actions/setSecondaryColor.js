@@ -1,7 +1,7 @@
-import { SET_SECONDARY_COLOR } from './types';
+import { SET_PICKER_SECONDARY_COLOR } from './types';
 
 const setSecondaryColor = secondaryColor => ({
-  type: SET_SECONDARY_COLOR,
+  type: SET_PICKER_SECONDARY_COLOR,
   payload: secondaryColor,
 });
 
