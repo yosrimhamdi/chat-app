@@ -1,38 +1,28 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
 
 import './Modal.scss';
 import Spinner from '../Spinner/Spinner';
 import closeIcon from './close.svg';
 import ModalContext from './ModalContext';
 
-const Modal = ({
-  handleSubmit,
-  onSubmit,
-  loading,
-  invalid,
-  title,
-  children,
-  buttonMessage,
-}) => {
-  const { isModalOpen, closeModal } = useContext(ModalContext);
+const Modal = ({ loading, title, children, closeModal }) => {
+  const { isModalOpen } = useContext(ModalContext);
 
   if (!isModalOpen) {
     return null;
   }
 
-  const buttonClassName = classNames({
-    'modal__button': true,
-    'modal__button--valid': !invalid,
+  let subComponentList = Object.keys(Modal);
+
+  let subComponents = subComponentList.map(key => {
+    return React.Children.map(children, child =>
+      child.type.name === key ? child : null,
+    );
   });
 
   const modal = (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="modal"
-      onClick={closeModal}
-    >
+    <div className="modal" onClick={closeModal}>
       <div className="modal__wrapper" onClick={e => e.stopPropagation()}>
         <div className="modal__content">
           <div className="modal__header">
@@ -41,19 +31,35 @@ const Modal = ({
               <img src={closeIcon} alt="close" className="modal__close-icon" />
             </div>
           </div>
-          {children}
+          {subComponents[0]}
         </div>
-        <div className="modal__actions">
-          <button className={buttonClassName} type="submit">
-            {buttonMessage}
-          </button>
-        </div>
+        <div className="modal__actions">{subComponents[1]}</div>
         <Spinner visible={loading} />
       </div>
-    </form>
+    </div>
   );
 
   return ReactDOM.createPortal(modal, document.getElementById('modal'));
 };
+
+const Actions = props => props.children;
+const Content = props => props.children;
+const Button = ({ children, onClick }) => (
+  <button className="modal__button" onClick={onClick}>
+    {children}
+  </button>
+);
+
+const Input = ({ label, ...rest }) => (
+  <>
+    <label className="modal__input-label">{label}</label>
+    <input className="modal__input" {...rest} />
+  </>
+);
+
+Modal.Content = Content;
+Modal.Actions = Actions;
+Modal.Button = Button;
+Modal.Input = Input;
 
 export default Modal;

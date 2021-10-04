@@ -4,14 +4,12 @@ import { getAuth } from 'firebase/auth';
 import writeData from '../writeData';
 import catcher from '../../../catcher';
 
-const createChannel = async formValues => {
-  const { channelName, channelDetails } = formValues;
-
+const createChannel = async (channelName, channelDescription) => {
   const { email, photoURL, displayName } = getAuth().currentUser;
 
   await writeData('channels/', {
     name: channelName,
-    details: channelDetails,
+    details: channelDescription,
     isPrivate: false,
     createdAt: Date.now(),
     createdBy: {

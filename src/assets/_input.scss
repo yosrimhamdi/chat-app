@@ -1,5 +1,4 @@
 @mixin inputContainer {
-  margin-bottom: 1em;
 }
 
 @mixin label {
@@ -11,4 +10,7 @@
   display: block;
   width: 50%;
   padding: 0.5em 0.2em;
+  outline: none;
+  border: 1px solid #000;
+  margin-bottom: 1em;
 }

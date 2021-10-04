@@ -1,50 +1,60 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
 
 import Modal from '../../Modals/Modal';
 import createChannel from '../../../firebase/database/channel/createChannel';
 import { CREATING_CHANNEL } from '@types';
 import setLoading from '../../../redux/actions/setLoading';
-import validate from './validate';
-import Input from './Input';
 import ModalContext from '../ModalContext';
-import clearForm from '@actions/clearForm';
+import { toastr } from 'react-redux-toastr';
 
-const FORM_NAME = 'createChannelForm';
-
-const CreateChannelModal = ({
-  setLoading,
-  isCreatingChannel,
-  handleSubmit,
-  invalid,
-  clearForm,
-}) => {
+const CreateChannelModal = ({ setLoading, isCreatingChannel }) => {
   const { closeModal } = useContext(ModalContext);
+  const [channelName, setChannelName] = useState('');
+  const [channelDescription, setChannelDescription] = useState('');
 
-  const onSubmit = async formValues => {
-    setLoading(CREATING_CHANNEL, true);
-    await createChannel(formValues);
-    setLoading(CREATING_CHANNEL, false);
-    clearForm(FORM_NAME);
+  const resetModal = () => {
     closeModal();
+    setChannelName('');
+    setChannelDescription('');
+  };
+
+  const onSubmit = async () => {
+    if (!channelName) {
+      toastr.info('Empty value found', 'Channel name is required');
+    } else if (!channelDescription) {
+      toastr.info('Empty value found', 'Channel description is required');
+    } else {
+      setLoading(CREATING_CHANNEL, true);
+      await createChannel(channelName, channelDescription);
+      setLoading(CREATING_CHANNEL, false);
+      resetModal();
+    }
   };
 
   return (
     <Modal
-      handleSubmit={handleSubmit}
-      onSubmit={onSubmit}
       loading={isCreatingChannel}
       title="Create new channel"
-      buttonMessage="Create"
-      invalid={invalid}
+      closeModal={resetModal}
     >
-      <Field label="Name of Channel" name="channelName" component={Input} />
-      <Field
-        label="About the Channel"
-        name="channelDetails"
-        component={Input}
-      />
+      <Modal.Content>
+        <Modal.Input
+          label="Channel Name"
+          type="text"
+          value={channelName}
+          onChange={e => setChannelName(e.target.value)}
+        />
+        <Modal.Input
+          label="Channel Description"
+          type="text"
+          value={channelDescription}
+          onChange={e => setChannelDescription(e.target.value)}
+        />
+      </Modal.Content>
+      <Modal.Actions>
+        <Modal.Button onClick={onSubmit}>Create Channel</Modal.Button>
+      </Modal.Actions>
     </Modal>
   );
 };
@@ -53,8 +63,4 @@ const mapStateToProps = state => ({
   isCreatingChannel: state.loading.isCreatingChannel,
 });
 
-const WrappedForm = reduxForm({ form: FORM_NAME, validate })(
-  CreateChannelModal,
-);
-
-export default connect(mapStateToProps, { setLoading, clearForm })(WrappedForm);
+export default connect(mapStateToProps, { setLoading })(CreateChannelModal);
