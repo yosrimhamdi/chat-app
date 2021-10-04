@@ -5,6 +5,7 @@ import { Label } from 'semantic-ui-react';
 import onChildAdded from '../../firebase/database/listeners/onChildAdded';
 import removeListener from '../../firebase/database/listeners/removeListener';
 import setNotification from '../../redux/actions/setNotification';
+import SOUND_URL from './soundURL';
 
 const Notification = ({
   channel,
@@ -22,6 +23,7 @@ const Notification = ({
 
       if (message.user.uid !== uid && selectedChannelId !== id) {
         setNotification(message.channelId);
+        new Audio(SOUND_URL).play();
       }
     };
 
