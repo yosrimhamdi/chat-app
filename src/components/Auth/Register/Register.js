@@ -11,20 +11,23 @@ import {
 } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import md5 from 'md5';
 
 import AuthInput from '../AuthInput';
 import validate from './validate.js';
 import tryRegister from '../../../firebase/auth/tryRegister';
 import { AUTHENTICATING } from '@types';
 import setLoading from '@actions/setLoading';
-import updateProfile from '../../../firebase/auth/updateProfile';
+import updateAuthUser from '../../../firebase/auth/updateAuthUser';
 import writeUserData from '../../../firebase/database/userDocument/writeUserData';
 
 function Register({ handleSubmit, isAuthenticating, setLoading }) {
   const onFormSubmit = async ({ email, password, username }) => {
+    const photoURL = `//0.gravatar.com/avatar/${md5(email)}?s=200&d=identicon`;
+
     setLoading(AUTHENTICATING, true);
     await tryRegister(email, password);
-    await updateProfile(username);
+    await updateAuthUser({ displayName: username, photoURL });
     await writeUserData();
     setLoading(AUTHENTICATING, false);
   };

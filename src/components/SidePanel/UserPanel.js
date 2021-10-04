@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 import trySignOut from '../../firebase/auth/trySignOut';
 import signOut from '@actions/signOut';
 import uploadImage from '../../firebase/storage/uploadImage';
-import updateAuthUserPhoto from '../../firebase/auth/updateAuthUserPhoto';
+import updateAuthUser from '../../firebase/auth/updateAuthUser';
 import updateDBUserPhoto from '../../firebase/database/userDocument/updateDBUserPhoto';
 import setPercent from '@actions/setPercent';
 import setLoading from '@actions/setLoading';
@@ -61,7 +61,7 @@ const UserPanel = ({
 
     setLoading(UPLOADING_FILE, true);
     const photoURL = await uploadImage(croppedPhotoBlob, path, setPercent);
-    await updateAuthUserPhoto(photoURL);
+    await updateAuthUser({ photoURL });
     await updateDBUserPhoto(photoURL);
     setLoading(UPLOADING_FILE, false);
     resetState();
