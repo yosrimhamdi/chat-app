@@ -1,32 +1,29 @@
 import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
   getDownloadURL,
+  uploadBytesResumable,
+  ref,
+  getStorage,
 } from 'firebase/storage';
 
-import catcher from '../../catcher';
-
-const uploadImage = async (file, path, setPercent) => {
+const uploadImage = async (blob, path, setPercent) => {
   const storage = getStorage();
+
   const storageRef = ref(storage, path);
 
-  const UploadTask = uploadBytesResumable(storageRef, file);
+  const UploadTask = uploadBytesResumable(storageRef, blob);
 
-  const imageURL = await new Promise(resolve => {
+  const photoURL = await new Promise(resolve => {
     UploadTask.on('state_changed', async snapshot => {
       const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
       setPercent(Math.round(percent));
 
       if (percent >= 100) {
+        setPercent(0);
         while (true) {
           try {
-            const imageURL = await getDownloadURL(storageRef);
-
-            setPercent(0);
-            resolve(imageURL);
-
+            const photoURL = await getDownloadURL(storageRef);
+            resolve(photoURL);
             break;
           } catch {
             //
@@ -36,7 +33,7 @@ const uploadImage = async (file, path, setPercent) => {
     });
   });
 
-  return imageURL;
+  return photoURL;
 };
 
-export default catcher(uploadImage);
+export default uploadImage;

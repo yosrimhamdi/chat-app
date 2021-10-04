@@ -12,7 +12,7 @@ import FileInput from './FileInput';
 import clearForm from '@actions/clearForm';
 import createImageMessage from '../../../firebase/database/message/createImageMessage';
 import { UPLOADING_FILE } from '@types';
-import uploadUserPhoto from '../../../firebase/storage/uploadUserPhoto';
+import uploadImage from '../../../firebase/storage/uploadImage';
 
 const FORM_NAME = 'uploadImageForm';
 
@@ -33,7 +33,7 @@ const UploadImageModal = ({
     const path = `${uploadPath}${channelId}/${uuidv4()}.${mimetype}`;
 
     setLoading(UPLOADING_FILE, true);
-    const imageURL = await uploadUserPhoto(file, path, setPercent);
+    const imageURL = await uploadImage(file, path, setPercent);
     await createImageMessage(imageURL, messagePath, channelId);
     setLoading(UPLOADING_FILE, false);
     clearForm(FORM_NAME);
