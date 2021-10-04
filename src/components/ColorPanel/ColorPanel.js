@@ -8,6 +8,7 @@ import setPickerSecondaryColor from '@actions/setPickerSecondaryColor';
 import saveTheme from '../../firebase/database/theme/saveTheme';
 import Themes from './Themes';
 import Modal from '../Modals/Modal/Modal';
+import { toastr } from 'react-redux-toastr';
 
 const ColorPanel = ({
   colorPicker,
@@ -17,17 +18,21 @@ const ColorPanel = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { primaryColor, secondaryColor } = colorPicker;
-
-  const onSaveButtonClick = async () => {
-    await saveTheme(colorPicker);
-    setIsModalOpen(false);
-  };
-
   const resetState = () => {
     setIsModalOpen(false);
     setPickerPrimaryColor('#fff');
     setPickerSecondaryColor('#fff');
+  };
+
+  const { primaryColor, secondaryColor } = colorPicker;
+
+  const onSaveButtonClick = async () => {
+    if (primaryColor === '#fff' && secondaryColor === '#fff') {
+      toastr.info('Forbidden', 'No color selected');
+    } else {
+      await saveTheme(colorPicker);
+      resetState();
+    }
   };
 
   return (
