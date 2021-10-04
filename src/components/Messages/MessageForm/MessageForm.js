@@ -8,10 +8,10 @@ import createTextMessage from '../../../firebase/database/message/createTextMess
 import clearForm from '@actions/clearForm';
 import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
-import UploadImageModal from '../../Modals/UploadImageModal/UploadImageModal';
+import UploadImageModal from '../../Modals/UploadImageModal';
 import ProgressBar from '../../ProgressBar/ProgressBar';
-import useModal from '../../Modals/useModal';
-import ModalContext from '../../Modals/ModalContext';
+import useModal from '../../Modals/Modal/useModal';
+import ModalContext from '../../Modals/Modal/ModalContext';
 
 const MessageForm = ({
   handleSubmit,

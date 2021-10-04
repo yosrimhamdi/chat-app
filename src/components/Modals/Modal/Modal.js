@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import './Modal.scss';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../../Spinner/Spinner';
 import closeIcon from './close.svg';
 import ModalContext from './ModalContext';
 
@@ -50,16 +50,16 @@ const Button = ({ children, onClick }) => (
   </button>
 );
 
-const Input = ({ label, ...rest }) => (
+const TextInput = ({ label, ...rest }) => (
   <>
     <label className="modal__input-label">{label}</label>
-    <input className="modal__input" {...rest} />
+    <input className="modal__input" type="text" {...rest} />
   </>
 );
 
 Modal.Content = Content;
 Modal.Actions = Actions;
 Modal.Button = Button;
-Modal.Input = Input;
+Modal.TextInput = TextInput;
 
 export default Modal;
