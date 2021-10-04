@@ -54,6 +54,7 @@ const MessageForm = ({
             icon="cloud upload"
             type="button"
             disabled={isUploading}
+            loading={isUploading}
             onClick={openModal}
           />
         </Button.Group>
