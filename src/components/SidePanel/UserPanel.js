@@ -1,14 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {
-  Button,
-  Input,
-  Grid,
-  Header,
-  Icon,
-  Dropdown,
-  Image,
-  Modal,
-} from 'semantic-ui-react';
+import { Button, Grid, Header, Icon, Dropdown, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import AvatarEditor from 'react-avatar-editor';
 import { toastr } from 'react-redux-toastr';
@@ -22,6 +13,7 @@ import updateDBUserPhoto from '../../firebase/database/userDocument/updateDBUser
 import setPercent from '@actions/setPercent';
 import setLoading from '@actions/setLoading';
 import { UPLOADING_FILE } from '../../redux/actions/types';
+import Modal from '../Modals/Modal/Modal';
 
 const UserPanel = ({
   signOut,
@@ -126,14 +118,15 @@ const UserPanel = ({
           </Header>
         </Grid.Row>
       </Grid.Column>
-      <Modal basic open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Header>Change Avatar</Modal.Header>
+      <Modal
+        isModalOpen={isModalOpen}
+        closeModal={resetState}
+        title="Change Avatar"
+      >
         <Modal.Content>
-          <Input
-            fluid
+          <input
+            style={{ padding: '2px' }}
             type="file"
-            label="New Avatar"
-            name="newPhoto"
             onChange={onFileChange}
             accept="image/*"
           />
