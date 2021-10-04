@@ -30,7 +30,7 @@ const UploadImageModal = ({
 
   const onSubmit = async ({ file }) => {
     const mimetype = file.type.split('/')[1];
-    const path = `${uploadPath}${channelId}/${uuidv4()}.${mimetype}`;
+    const path = `${uploadPath}/${channelId}/${uuidv4()}.${mimetype}`;
 
     setLoading(UPLOADING_FILE, true);
     closeModal();
