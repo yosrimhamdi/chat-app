@@ -200,7 +200,7 @@ const UserPanel = ({
 
 const mapStateToProps = ({ theme, auth, loading }) => {
   return {
-    user: auth.user,
+    user: auth.userDocument || {},
     theme: theme.userTheme ?? theme.defaultTheme,
     isUploading: loading.isUploading,
   };
