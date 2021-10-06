@@ -5,7 +5,7 @@ import {
   getStorage,
 } from 'firebase/storage';
 
-const uploadImage = async (blob, path, setPercent) => {
+const uploadImage = async (blob, path, setPercent = function () {}) => {
   const storage = getStorage();
 
   const storageRef = ref(storage, path);
