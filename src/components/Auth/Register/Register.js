@@ -11,7 +11,8 @@ import {
 } from 'semantic-ui-react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import md5 from 'md5';
+import { createAvatar } from '@dicebear/avatars';
+import * as style from '@dicebear/avatars-identicon-sprites';
 
 import AuthInput from '../AuthInput';
 import validate from './validate.js';
@@ -20,26 +21,25 @@ import { AUTHENTICATING } from '@types';
 import setLoading from '@actions/setLoading';
 import updateAuthUser from '../../../firebase/auth/updateAuthUser';
 import writeUserData from '../../../firebase/database/userDocument/writeUserData';
+import uploadImage from '../../../firebase/storage/uploadImage';
 
 function Register({ handleSubmit, isAuthenticating, setLoading }) {
   const onFormSubmit = async ({ email, password, username }) => {
-    const photoURL = `//0.gravatar.com/avatar/${md5(email)}?s=200&d=identicon`;
-
     setLoading(AUTHENTICATING, true);
-    await tryRegister(email, password);
+    const { user } = await tryRegister(email, password);
+    const svg = Buffer(createAvatar(style, { seed: email }));
+    const path = `photos/users/${user.uid}/avatar.svg`;
+    const photoURL = await uploadImage(svg, path);
     await updateAuthUser({ displayName: username, photoURL });
     await writeUserData();
     setLoading(AUTHENTICATING, false);
   };
 
   const capitalize = username => {
-    username = username.split(' ');
-
-    username = username.map(
-      part => part.charAt(0).toUpperCase() + part.slice(1),
-    );
-
-    return username.join(' ');
+    return username
+      .split(' ')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
   };
 
   return (
