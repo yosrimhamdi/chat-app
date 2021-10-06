@@ -87,7 +87,12 @@ const UserPanel = ({
             <Dropdown
               trigger={
                 <span>
-                  <Image src={user.photoURL} spaced="right" avatar />
+                  <Image
+                    style={{ backgroundColor: 'white' }}
+                    src={user.photoURL}
+                    spaced="right"
+                    avatar
+                  />
                   <span>{user.displayName}</span>
                 </span>
               }

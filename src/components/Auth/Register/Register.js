@@ -12,7 +12,7 @@ import {
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { createAvatar } from '@dicebear/avatars';
-import * as style from '@dicebear/avatars-identicon-sprites';
+import * as style from '@dicebear/avatars-initials-sprites';
 
 import AuthInput from '../AuthInput';
 import validate from './validate.js';
@@ -28,7 +28,7 @@ function Register({ handleSubmit, isAuthenticating, setLoading }) {
     setLoading(AUTHENTICATING, true);
     const { user } = await tryRegister(email, password);
     // eslint-disable-next-line
-    const svg = new Buffer(createAvatar(style, { seed: email }));
+    const svg = new Buffer(createAvatar(style, { seed: username }));
     const path = `photos/users/${user.uid}/default.svg`;
     const photoURL = await uploadImage(svg, path, undefined, {
       contentType: 'image/svg+xml',
