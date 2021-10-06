@@ -29,7 +29,7 @@ function Register({ handleSubmit, isAuthenticating, setLoading }) {
     const { user } = await tryRegister(email, password);
     // eslint-disable-next-line
     const svg = new Buffer(createAvatar(style, { seed: email }));
-    const path = `photos/users/${user.uid}/avatar.svg`;
+    const path = `photos/users/${user.uid}/default.svg`;
     const photoURL = await uploadImage(svg, path, undefined, {
       contentType: 'image/svg+xml',
     });
