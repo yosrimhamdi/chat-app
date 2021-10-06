@@ -5,12 +5,17 @@ import {
   getStorage,
 } from 'firebase/storage';
 
-const uploadImage = async (blob, path, setPercent = function () {}) => {
+const uploadImage = async (
+  blob,
+  path,
+  setPercent = function () {},
+  options,
+) => {
   const storage = getStorage();
 
   const storageRef = ref(storage, path);
 
-  const UploadTask = uploadBytesResumable(storageRef, blob);
+  const UploadTask = uploadBytesResumable(storageRef, blob, options);
 
   const photoURL = await new Promise(resolve => {
     UploadTask.on('state_changed', async snapshot => {

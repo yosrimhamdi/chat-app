@@ -29,7 +29,9 @@ function Register({ handleSubmit, isAuthenticating, setLoading }) {
     const { user } = await tryRegister(email, password);
     const svg = Buffer(createAvatar(style, { seed: email }));
     const path = `photos/users/${user.uid}/avatar.svg`;
-    const photoURL = await uploadImage(svg, path);
+    const photoURL = await uploadImage(svg, path, undefined, {
+      contentType: 'image/svg+xml',
+    });
     await updateAuthUser({ displayName: username, photoURL });
     await writeUserData();
     setLoading(AUTHENTICATING, false);
