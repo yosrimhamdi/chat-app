@@ -27,6 +27,7 @@ function Register({ handleSubmit, isAuthenticating, setLoading }) {
   const onFormSubmit = async ({ email, password, username }) => {
     setLoading(AUTHENTICATING, true);
     const { user } = await tryRegister(email, password);
+    // eslint-disable-next-line
     const svg = Buffer(createAvatar(style, { seed: email }));
     const path = `photos/users/${user.uid}/avatar.svg`;
     const photoURL = await uploadImage(svg, path, undefined, {
