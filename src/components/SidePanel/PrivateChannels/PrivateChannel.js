@@ -12,7 +12,7 @@ const PrivateChannel = ({
   selectedPrivateChannelId,
   clearNotifications,
 }) => {
-  if (authUser.uid == user.uid) {
+  if (authUser.uid === user.uid || !user.uid) {
     return null;
   }
 
