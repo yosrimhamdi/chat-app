@@ -1,5 +1,4 @@
 import { getAuth, signOut } from 'firebase/auth';
-import catcher from '../../catcher';
 import setDisconnected from '../database/userDocument/setDisconnected';
 
 const trySignOut = async signOutActionCreator => {
@@ -12,4 +11,4 @@ const trySignOut = async signOutActionCreator => {
   signOutActionCreator();
 };
 
-export default catcher(trySignOut);
+export default trySignOut;

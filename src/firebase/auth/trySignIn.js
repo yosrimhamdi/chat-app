@@ -1,5 +1,4 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import catcher from '../../catcher';
 
 const trySignIn = async formValues => {
   const { email, password } = formValues;
@@ -8,4 +7,4 @@ const trySignIn = async formValues => {
   await signInWithEmailAndPassword(auth, email, password);
 };
 
-export default catcher(trySignIn);
+export default trySignIn;

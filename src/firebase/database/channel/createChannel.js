@@ -2,7 +2,6 @@ import { toastr } from 'react-redux-toastr';
 import { getAuth } from 'firebase/auth';
 
 import writeData from '../writeData';
-import catcher from '../../../catcher';
 
 const createChannel = async (channelName, channelDescription) => {
   const { email, photoURL, displayName } = getAuth().currentUser;
@@ -22,4 +21,4 @@ const createChannel = async (channelName, channelDescription) => {
   toastr.success('Success', 'Channel created.');
 };
 
-export default catcher(createChannel);
+export default createChannel;

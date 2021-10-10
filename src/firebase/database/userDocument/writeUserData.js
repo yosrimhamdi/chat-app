@@ -1,8 +1,6 @@
 import { getAuth } from 'firebase/auth';
 import { getDatabase, set, ref } from '@firebase/database';
 
-import catcher from '../../../catcher';
-
 const writeUserData = async () => {
   const db = getDatabase();
   const { displayName, photoURL, email, uid } = getAuth().currentUser;
@@ -16,4 +14,4 @@ const writeUserData = async () => {
   });
 };
 
-export default catcher(writeUserData);
+export default writeUserData;

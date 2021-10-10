@@ -1,7 +1,6 @@
 import { getAuth } from 'firebase/auth';
 
 import writeData from '../writeData';
-import catcher from '../../../catcher';
 
 const createImageMessage = async (imageURL, path, channelId) => {
   const { uid, photoURL, displayName } = getAuth().currentUser;
@@ -19,4 +18,4 @@ const createImageMessage = async (imageURL, path, channelId) => {
   });
 };
 
-export default catcher(createImageMessage);
+export default createImageMessage;
