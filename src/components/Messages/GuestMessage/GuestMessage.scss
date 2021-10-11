@@ -12,11 +12,7 @@
   }
 
   &__user-photo {
-    width: 33px;
-    height: 33px;
-    object-fit: cover;
-    margin-right: 0.5em;
-    border-radius: 50%;
+    @include userPhoto;
   }
 
   &__user-name {
