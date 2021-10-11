@@ -16,7 +16,7 @@ const Themes = ({ themes }) => {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const themes = auth.userDocument?.themes ?? [];
+  const themes = auth.userDocument.themes ?? [];
 
   return { themes: Object.values(themes) };
 };

@@ -41,7 +41,7 @@ const mapStateToProps = ({ auth, users, channels }) => {
 
   return {
     selectedChannel: channels.selectedChannel,
-    starredChannels: Object.keys(user?.starredChannels || {}),
+    starredChannels: Object.keys(user.starredChannels || {}),
   };
 };
 
