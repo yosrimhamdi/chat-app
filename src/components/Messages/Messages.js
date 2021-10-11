@@ -18,7 +18,7 @@ import useSetPaths from './useSetPaths';
 import onTyping from '../../firebase/database/listeners/onTyping';
 import setTyping from '@actions/setTyping';
 import removeTyping from '@actions/removeTyping';
-import Typings from './Typings/Typing';
+import Typings from './Typings/Typings';
 
 const Messages = ({
   fetchMessage,
