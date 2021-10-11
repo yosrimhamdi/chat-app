@@ -18,7 +18,7 @@ import useSetPaths from './useSetPaths';
 import onTyping from '../../firebase/database/listeners/onTyping';
 import setTyping from '@actions/setTyping';
 import removeTyping from '@actions/removeTyping';
-import Typing from './Typing/Typing';
+import Typings from './Typings/Typing';
 
 const Messages = ({
   fetchMessage,
@@ -84,7 +84,7 @@ const Messages = ({
       <MessagesHeader />
       <div className="messages__messages-container" ref={ref}>
         <div className="messages__messages-wrapper">{renderedMessages}</div>
-        <Typing />
+        <Typings />
       </div>
       <MessageForm />
     </div>
