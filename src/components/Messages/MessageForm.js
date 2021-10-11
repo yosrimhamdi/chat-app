@@ -7,6 +7,8 @@ import { SENDING_MESSAGE } from '@types';
 import UploadImageModal from '../Modals/UploadImageModal';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import useModal from '../Modals/Modal/useModal';
+import setIsTyping from '../../firebase/database/typing/setIsTyping';
+import setIsNotTyping from '../../firebase/database/typing/setIsNotTyping';
 
 const MessageForm = ({
   setLoading,
@@ -20,11 +22,16 @@ const MessageForm = ({
 
   const onFormSubmit = async () => {
     if (message) {
+      setIsNotTyping(channelId);
       setLoading(SENDING_MESSAGE, true);
       setMessage('');
       await createTextMessage(message, path, channelId);
       setLoading(SENDING_MESSAGE, false);
     }
+  };
+
+  const onInputKeyDown = () => {
+    setIsTyping(channelId);
   };
 
   return (
@@ -36,6 +43,7 @@ const MessageForm = ({
           style={{ marginBottom: '1em' }}
           value={message}
           onChange={e => setMessage(e.target.value)}
+          onKeyDown={onInputKeyDown}
         />
         <Button.Group icon widths="2">
           <Button
