@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import Typing from './Typing';
 
 const Typings = ({ typings }) => {
-  console.log(typings);
+  const renderedTypings = typings.map(typing => (
+    <Typing key={typing.uid} typing={typing} />
+  ));
 
-  return <Typing />;
+  return <div>{renderedTypings}</div>;
 };
 
 const mapStateToProps = ({ typings }) => ({ typings });
