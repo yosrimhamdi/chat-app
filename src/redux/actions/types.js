@@ -37,3 +37,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 // Theme Reducer
 export const SET_PICKER_PRIMARY_COLOR = 'SET_PICKER_PRIMARY_COLOR';
 export const SET_PICKER_SECONDARY_COLOR = 'SET_PICKER_SECONDARY_COLOR';
+
+// Typing Reducer
+export const SET_TYPING = 'SET_TYPING';
+export const REMOVE_TYPING = 'REMOVE_TYPING';

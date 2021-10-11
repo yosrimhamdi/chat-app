@@ -15,6 +15,9 @@ import fetchMessage from '../../redux/actions/fetchMessage';
 import setMessagesPath from '@actions/setMessagesPath';
 import setUploadPath from '@actions/setUploadPath';
 import useSetPaths from './useSetPaths';
+import onTyping from '../../firebase/database/listeners/onTyping';
+import setTyping from '@actions/setTyping';
+import removeTyping from '@actions/removeTyping';
 
 const Messages = ({
   fetchMessage,
@@ -26,6 +29,8 @@ const Messages = ({
   selectedChannel,
   setMessagesPath,
   setUploadPath,
+  setTyping,
+  removeTyping,
 }) => {
   const { id, isPrivate } = selectedChannel;
 
@@ -39,6 +44,17 @@ const Messages = ({
       onChildAdded(path + id, fetchMessage);
 
       return () => removeListener(path + id, 'child_added');
+    }
+  });
+
+  useEffect(() => {
+    if (id) {
+      onTyping(id, setTyping, removeTyping);
+
+      return () => {
+        removeListener(`typing/${id}/`, 'child_added');
+        removeListener(`typing/${id}/`, 'child_removed');
+      };
     }
   });
 
@@ -101,4 +117,6 @@ export default connect(mapStateToProps, {
   fetchMessage,
   setMessagesPath,
   setUploadPath,
+  setTyping,
+  removeTyping,
 })(Messages);

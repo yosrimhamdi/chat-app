@@ -9,6 +9,7 @@ import loading from './loadingReducer';
 import upload from './uploadReducer';
 import users from './usersReducer';
 import theme from './themeReducer';
+import typing from './typingReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -20,4 +21,5 @@ export default combineReducers({
   upload,
   users,
   theme,
+  typing,
 });

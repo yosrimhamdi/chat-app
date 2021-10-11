@@ -6,7 +6,7 @@ const setIsTyping = channelId => {
   const db = getDatabase();
   const typingRef = ref(db, `typing/${channelId}/${uid}/`);
 
-  set(typingRef, { displayName, photoURL });
+  set(typingRef, { displayName, photoURL, uid });
 };
 
 export default setIsTyping;
