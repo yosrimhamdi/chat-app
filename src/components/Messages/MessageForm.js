@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Segment, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import createTextMessage from '../../firebase/database/message/createTextMessage';
@@ -20,6 +20,12 @@ const MessageForm = ({
   const [isModalOpen, openModal, closeModal] = useModal();
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    if (!message) {
+      setIsNotTyping(channelId);
+    }
+  }, [message]);
+
   const onFormSubmit = async () => {
     if (message) {
       setIsNotTyping(channelId);
@@ -28,10 +34,6 @@ const MessageForm = ({
       await createTextMessage(message, path, channelId);
       setLoading(SENDING_MESSAGE, false);
     }
-  };
-
-  const onInputKeyDown = () => {
-    setIsTyping(channelId);
   };
 
   return (
@@ -43,7 +45,7 @@ const MessageForm = ({
           style={{ marginBottom: '1em' }}
           value={message}
           onChange={e => setMessage(e.target.value)}
-          onKeyDown={onInputKeyDown}
+          onKeyDown={() => setIsTyping(channelId)}
         />
         <Button.Group icon widths="2">
           <Button

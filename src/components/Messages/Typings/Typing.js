@@ -1,8 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './Typing.scss';
 
-const Typing = ({ typing }) => {
+const Typing = ({ typing, authUser }) => {
+  if (authUser.uid === typing.uid) {
+    return null;
+  }
+
   return (
     <div className="typing">
       <img className="typing__user" src={typing.photoURL} />
@@ -15,4 +20,6 @@ const Typing = ({ typing }) => {
   );
 };
 
-export default Typing;
+const mapStateToProps = ({ auth }) => ({ authUser: auth.user });
+
+export default connect(mapStateToProps)(Typing);
