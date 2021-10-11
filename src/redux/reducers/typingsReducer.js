@@ -1,6 +1,6 @@
 import { SET_TYPING, REMOVE_TYPING } from '@types';
 
-const typingReducer = (state = [], action) => {
+const typingsReducer = (state = [], action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -13,4 +13,4 @@ const typingReducer = (state = [], action) => {
   }
 };
 
-export default typingReducer;
+export default typingsReducer;

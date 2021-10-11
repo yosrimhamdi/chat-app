@@ -9,7 +9,7 @@ import loading from './loadingReducer';
 import upload from './uploadReducer';
 import users from './usersReducer';
 import theme from './themeReducer';
-import typing from './typingReducer';
+import typings from './typingsReducer';
 
 export default combineReducers({
   form: formReducer,
@@ -21,5 +21,5 @@ export default combineReducers({
   upload,
   users,
   theme,
-  typing,
+  typings,
 });
