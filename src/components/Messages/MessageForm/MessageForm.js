@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Input, Segment, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Picker, emojiIndex } from 'emoji-mart';
@@ -24,6 +24,7 @@ const MessageForm = ({
   const [isModalOpen, openModal, closeModal] = useModal();
   const [message, setMessage] = useState('');
   const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState(false);
+  const inputRef = useRef();
 
   useEffect(() => {
     if (!message) {
@@ -41,8 +42,24 @@ const MessageForm = ({
     }
   };
 
-  const onAddEmojiGButtonClick = () => {
-    setIsEmojiPickerVisible(!isEmojiPickerVisible);
+  const colonToUnicode = message => {
+    return message.replace(/:[A-Za-z0-9_+-]+:/g, x => {
+      x = x.replace(/:/g, '');
+      let emoji = emojiIndex.emojis[x];
+      if (typeof emoji !== 'undefined') {
+        let unicode = emoji.native;
+        if (typeof unicode !== 'undefined') {
+          return unicode;
+        }
+      }
+      x = ':' + x + ':';
+      return x;
+    });
+  };
+
+  const onEmojiSelect = emoji => {
+    setMessage(colonToUnicode(`${message} ${emoji.colons}`));
+    inputRef.current.focus();
   };
 
   return (
@@ -56,6 +73,7 @@ const MessageForm = ({
               top: '0',
               transform: 'translateY(-100%)',
             }}
+            onSelect={onEmojiSelect}
             title="Pick your emoji"
             emoji="point_up"
           />
@@ -64,7 +82,14 @@ const MessageForm = ({
           fluid
           placeholder="Aa"
           style={{ marginBottom: '0.7em' }}
-          label={<Button icon={'add'} onClick={onAddEmojiGButtonClick} />}
+          ref={inputRef}
+          label={
+            <Button
+              icon={'add'}
+              onClick={() => setIsEmojiPickerVisible(!isEmojiPickerVisible)}
+              type="button"
+            />
+          }
           labelPosition="left"
           value={message}
           onChange={e => setMessage(e.target.value)}
