@@ -85,9 +85,10 @@ const MessageForm = ({
           ref={inputRef}
           label={
             <Button
-              icon={'add'}
+              icon={isEmojiPickerVisible ? 'close' : 'add'}
               onClick={() => setIsEmojiPickerVisible(!isEmojiPickerVisible)}
               type="button"
+              style={{ width: 40 }}
             />
           }
           labelPosition="left"
