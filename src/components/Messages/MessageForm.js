@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, Button, Form } from 'semantic-ui-react';
+import { Input, Segment, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import createTextMessage from '../../firebase/database/message/createTextMessage';
 import setLoading from '../../redux/actions/setLoading';
@@ -39,10 +39,12 @@ const MessageForm = ({
   return (
     <Segment className="messages__form">
       <Form onSubmit={onFormSubmit} autoComplete="off">
-        <input
-          type="text"
+        <Input
+          fluid
           placeholder="Aa"
-          style={{ marginBottom: '1em' }}
+          style={{ marginBottom: '0.7em' }}
+          label={<Button icon={'add'} />}
+          labelPosition="left"
           value={message}
           onChange={e => setMessage(e.target.value)}
           onKeyDown={() => setIsTyping(channelId)}
