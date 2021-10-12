@@ -10,4 +10,4 @@ deploy:
 	$(MAKE) open
 
 open:
-	firebase hosting:channel:open live
+	start chrome https://chat-app-41bde.web.app
