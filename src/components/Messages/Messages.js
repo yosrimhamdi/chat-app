@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './Messages.scss';
 import MessagesHeader from './MessagesHeader';
-import MessageForm from './MessageForm';
+import MessageForm from './MessageForm/MessageForm';
 import onChildAdded from '../../firebase/database/listeners/onChildAdded';
 import removeListener from '../../firebase/database/listeners/removeListener';
 import fetchMessages from '@actions/fetchMessages';

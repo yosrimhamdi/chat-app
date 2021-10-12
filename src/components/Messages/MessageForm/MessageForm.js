@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Segment, Button, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import createTextMessage from '../../firebase/database/message/createTextMessage';
-import setLoading from '../../redux/actions/setLoading';
+import { Picker, emojiIndex } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
+
+import './MessageForm.scss';
+import createTextMessage from '../../../firebase/database/message/createTextMessage';
+import setLoading from '../../../redux/actions/setLoading';
 import { SENDING_MESSAGE } from '@types';
-import UploadImageModal from '../Modals/UploadImageModal';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import useModal from '../Modals/Modal/useModal';
-import setIsTyping from '../../firebase/database/typing/setIsTyping';
-import setIsNotTyping from '../../firebase/database/typing/setIsNotTyping';
+import UploadImageModal from '../../Modals/UploadImageModal';
+import ProgressBar from '../../ProgressBar/ProgressBar';
+import useModal from '../../Modals/Modal/useModal';
+import setIsTyping from '../../../firebase/database/typing/setIsTyping';
+import setIsNotTyping from '../../../firebase/database/typing/setIsNotTyping';
 
 const MessageForm = ({
   setLoading,
@@ -19,6 +23,7 @@ const MessageForm = ({
 }) => {
   const [isModalOpen, openModal, closeModal] = useModal();
   const [message, setMessage] = useState('');
+  const [isEmojiPickerVisible, setIsEmojiPickerVisible] = useState(false);
 
   useEffect(() => {
     if (!message) {
@@ -36,14 +41,30 @@ const MessageForm = ({
     }
   };
 
+  const onAddEmojiGButtonClick = () => {
+    setIsEmojiPickerVisible(!isEmojiPickerVisible);
+  };
+
   return (
-    <Segment className="messages__form">
-      <Form onSubmit={onFormSubmit} autoComplete="off">
+    <Segment>
+      <Form className="message-form" onSubmit={onFormSubmit} autoComplete="off">
+        {isEmojiPickerVisible && (
+          <Picker
+            set="apple"
+            style={{
+              position: 'absolute',
+              top: '0',
+              transform: 'translateY(-100%)',
+            }}
+            title="Pick your emoji"
+            emoji="point_up"
+          />
+        )}
         <Input
           fluid
           placeholder="Aa"
           style={{ marginBottom: '0.7em' }}
-          label={<Button icon={'add'} />}
+          label={<Button icon={'add'} onClick={onAddEmojiGButtonClick} />}
           labelPosition="left"
           value={message}
           onChange={e => setMessage(e.target.value)}
