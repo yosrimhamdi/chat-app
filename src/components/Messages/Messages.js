@@ -19,6 +19,7 @@ import onTyping from '../../firebase/database/listeners/onTyping';
 import setTyping from '@actions/setTyping';
 import removeTyping from '@actions/removeTyping';
 import Typings from './Typings/Typings';
+import Skeleton from './Skeleton/Skeleton';
 
 const Messages = ({
   fetchMessage,
@@ -83,7 +84,9 @@ const Messages = ({
     <div className="messages">
       <MessagesHeader />
       <div className="messages__messages-container" ref={ref}>
-        <div className="messages__messages-wrapper">{renderedMessages}</div>
+        <div className="messages__messages-wrapper">
+          {renderedMessages.length ? renderedMessages : <Skeleton />}
+        </div>
         <Typings />
       </div>
       <MessageForm />
