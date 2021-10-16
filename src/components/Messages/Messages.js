@@ -35,6 +35,8 @@ const Messages = ({
   setUploadPath,
   setTyping,
   removeTyping,
+  isFetchingMessages,
+  setLoading,
 }) => {
   const { id, isPrivate } = selectedChannel;
 
@@ -62,10 +64,11 @@ const Messages = ({
     }
   });
 
-  useEffect(() => {
+  useEffect(async () => {
     if (id) {
       setLoading(FETCHING_MESSAGES, true);
-      readData(path + id, fetchMessages);
+      const data = await readData(path + id);
+      fetchMessages(data);
       setLoading(FETCHING_MESSAGES, false);
     }
   }, [id, path]);
@@ -89,7 +92,7 @@ const Messages = ({
       <MessagesHeader />
       <div className="messages__messages-container" ref={ref}>
         <div className="messages__messages-wrapper">
-          {renderedMessages.length ? renderedMessages : <Skeleton />}
+          {isFetchingMessages ? <Skeleton /> : renderedMessages}
         </div>
         <Typings />
       </div>
@@ -117,6 +120,7 @@ const mapStateToProps = ({ messages, loading, channels }) => {
     containerHeight: containerHeight,
     path,
     selectedChannel: channels.selectedChannel,
+    isFetchingMessages: loading.isFetchingMessages,
   };
 };
 
@@ -128,4 +132,5 @@ export default connect(mapStateToProps, {
   setUploadPath,
   setTyping,
   removeTyping,
+  setLoading,
 })(Messages);

@@ -13,8 +13,9 @@ const useWatchUsers = (fetchUser, fetchUsers, updateUser) => {
     return () => removeListener('users/');
   }, []);
 
-  useEffect(() => {
-    readData('users/', fetchUsers);
+  useEffect(async () => {
+    const data = await readData('users/');
+    fetchUsers(data);
   }, []);
 };
 

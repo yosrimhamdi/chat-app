@@ -11,8 +11,9 @@ const useWatchChannels = (fetchChannel, fetchChannels) => {
     return () => removeListener('channels/', 'child_added');
   }, []);
 
-  useEffect(() => {
-    readData('channels/', fetchChannels);
+  useEffect(async () => {
+    const data = await readData('channels/');
+    fetchChannels(data);
   }, []);
 };
 
