@@ -20,6 +20,8 @@ import setTyping from '@actions/setTyping';
 import removeTyping from '@actions/removeTyping';
 import Typings from './Typings/Typings';
 import Skeleton from './Skeleton/Skeleton';
+import setLoading from '../../redux/actions/setLoading';
+import { FETCHING_MESSAGES } from '../../redux/actions/types';
 
 const Messages = ({
   fetchMessage,
@@ -62,7 +64,9 @@ const Messages = ({
 
   useEffect(() => {
     if (id) {
+      setLoading(FETCHING_MESSAGES, true);
       readData(path + id, fetchMessages);
+      setLoading(FETCHING_MESSAGES, false);
     }
   }, [id, path]);
 

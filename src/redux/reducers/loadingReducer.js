@@ -5,6 +5,7 @@ import {
   UPLOADING_FILE,
   CREATING_CHANNEL,
   SEARCHING,
+  FETCHING_MESSAGES,
 } from '@types';
 
 const INITIAL_STATE = {
@@ -14,24 +15,27 @@ const INITIAL_STATE = {
   isUploading: false,
   isCreatingChannel: false,
   isSearching: false,
+  isFetchingMessages: false,
 };
 
 const loadingReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case SENDING_MESSAGE:
       return {
         ...state,
-        isSendingMessage: action.payload,
+        isSendingMessage: payload,
       };
     case CREATING_CHANNEL:
       return {
         ...state,
-        isCreatingChannel: action.payload,
+        isCreatingChannel: payload,
       };
     case AUTHENTICATING:
       return {
         ...state,
-        isAuthenticating: action.payload,
+        isAuthenticating: payload,
       };
     case APP_MOUNTED:
       return {
@@ -41,12 +45,17 @@ const loadingReducer = (state = INITIAL_STATE, action) => {
     case UPLOADING_FILE:
       return {
         ...state,
-        isUploading: action.payload,
+        isUploading: payload,
       };
     case SEARCHING:
       return {
         ...state,
-        isSearching: action.payload,
+        isSearching: payload,
+      };
+    case FETCHING_MESSAGES:
+      return {
+        ...state,
+        isFetchingMessages: payload,
       };
     default:
       return state;

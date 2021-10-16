@@ -24,6 +24,7 @@ export const APP_MOUNTED = 'APP_MOUNTED';
 export const UPLOADING_FILE = 'UPLOADING_FILE';
 export const CREATING_CHANNEL = 'CREATING_CHANNEL';
 export const SEARCHING = 'SEARCHING';
+export const FETCHING_MESSAGES = 'FETCHING_MESSAGES';
 
 // Uploading Reducer
 export const SET_PERCENT = 'SET_PERCENT';
